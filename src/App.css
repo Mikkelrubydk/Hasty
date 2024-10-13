@@ -10,6 +10,7 @@
   --blue: #213e60;
   --beige: #d8d1bd;
   --creme: #f4f2ef;
+  --sort: #2c2c2c;
 }
 
 body {
@@ -24,6 +25,7 @@ body {
   top: 0;
   height: 100%;
   width: 100%;
+  z-index: 999;
   transition: opacity 0.5s ease;
 }
 
@@ -44,16 +46,195 @@ body {
   width: 400px;
 }
 
+/* Styling af Login */
+
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+}
+
+.login-container img {
+  width: 100%;
+}
+
+.login-page {
+  width: 100%;
+}
+.form {
+  position: relative;
+  width: 100%;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+}
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+  border-radius: 10px;
+}
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: var(--sort);
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #ffffff;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.form button:hover,
+.form button:active,
+.form button:focus {
+  background: var(--sort);
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #5a5a5a;
+  font-size: 15px;
+}
+.form .message a {
+  color: var(--sort);
+  text-decoration: none;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  margin: 0 auto;
+}
+.container:before,
+.container:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.container .info {
+  margin: 50px auto;
+  text-align: center;
+}
+.container .info h1 {
+  margin: 0 0 15px;
+  padding: 0;
+  font-size: 36px;
+  font-weight: 300;
+  color: #1a1a1a;
+}
+.container .info span {
+  color: #4d4d4d;
+  font-size: 12px;
+}
+.container .info span a {
+  color: #000000;
+  text-decoration: none;
+}
+.container .info span .fa {
+  color: #ef3b3a;
+}
+
 /* Styling af NavBar */
 
 nav {
   position: fixed;
+  display: flex;
+  align-items: center;
   border-radius: 30px 30px 0 0;
   bottom: 0;
   left: 0;
   width: 100%;
+  height: 75px;
   background-color: var(--creme);
   box-shadow: 0px -1px 13px rgba(0, 0, 0, 0.3);
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  display: flex;
+  align-items: center;
+  position: relative;
+  flex-grow: 1;
+  justify-content: center;
+  transition: 1s ease-in-out;
+}
+
+nav ul li:not(:last-child):not(:first-child) {
+  position: relative;
+}
+
+nav ul li:not(:last-child)::after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  right: 0%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+nav img {
+  width: 30px;
+}
+
+nav img {
+  width: 30px;
+  transition: filter 0.3s ease;
+}
+
+nav li.active img {
+  filter: brightness(0) invert(1);
+}
+
+nav ul li.active::before {
+  content: "";
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: var(--orange);
+  border-radius: 50%;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+nav ul li:not(.active)::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  background-color: var(--orange);
+  border-radius: 50%;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  transition: width 0.3s ease, height 0.3s ease;
 }
 
 /* Styling af HomePage */
