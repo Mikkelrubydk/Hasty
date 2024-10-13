@@ -1,42 +1,59 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* Standard styling */
+
+* {
+  margin: 0;
+  box-sizing: border-box;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+:root {
+  --orange: #e68c3a;
+  --blue: #213e60;
+  --beige: #d8d1bd;
+  --creme: #f4f2ef;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+body {
+  background-color: var(--beige);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Styling af Loader */
+
+.loader {
+  position: absolute;
+  background-color: var(--beige);
+  top: 0;
+  height: 100%;
+  width: 100%;
+  transition: opacity 0.5s ease;
 }
 
-.card {
-  padding: 2em;
+.loader.fade-out {
+  opacity: 0;
+  pointer-events: none;
 }
 
-.read-the-docs {
-  color: #888;
+.loader figure {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 }
+
+.loader figure img {
+  width: 400px;
+}
+
+/* Styling af NavBar */
+
+nav {
+  position: fixed;
+  border-radius: 30px 30px 0 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--creme);
+  box-shadow: 0px -1px 13px rgba(0, 0, 0, 0.3);
+}
+
+/* Styling af HomePage */
