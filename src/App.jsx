@@ -6,19 +6,27 @@ import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import NavBar from "./components/NavBar";
 import "./App.css";
+import { useState } from "react";
 
 export default function App() {
   const location = useLocation();
+  const [activeClass, setActiveClass] = useState(0);
 
   return (
     <>
-      {location.pathname !== "/" && <NavBar />}
+      {/* NavBar skal være synlig på de Routes som IKKE er "/" */}
+      {location.pathname !== "/" && (
+        <NavBar activeClass={activeClass} setActiveClass={setActiveClass} />
+      )}
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/hjem" element={<HomePage />} />
+        <Route
+          path="/hjem"
+          element={<HomePage setActiveClass={setActiveClass} />}
+        />
         <Route path="/klaropgave" element={<CreateTask />} />
-        <Route Path="/opretopgave" element={<SolveTask />} />
-        <Route Path="/profil" element={<Profile />} />
+        <Route path="/opretopgave" element={<SolveTask />} />
+        <Route path="/profil" element={<Profile />} />
       </Routes>
     </>
   );
