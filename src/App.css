@@ -407,4 +407,19 @@ nav ul li:not(.active)::before {
 
 /* Styling af CreateTask */ 
 
+.step1h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.knapdiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.nextbtn {
+  color: #2C2C2C;
+}

@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 export default function StepOne() {
   return (
     <section>
@@ -5,3 +6,12 @@ export default function StepOne() {
     </section>
   );
 }
+=======
+export default function StepOne () {
+    return (
+        <section>
+            <h1 className="step1h1">Vælg Kategori</h1>
+        </section>
+    )
+}
+>>>>>>> Stashed changes
