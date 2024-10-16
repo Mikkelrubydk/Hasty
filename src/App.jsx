@@ -25,11 +25,11 @@ export default function App() {
           element={<HomePage setActiveClass={setActiveClass} />}
         />
         <Route
-          path="/klaropgave"
+          path="/opretopgave"
           element={<CreateTask setActiveClass={setActiveClass} />}
         />
         <Route
-          path="/opretopgave"
+          path="/klaropgave"
           element={<SolveTask setActiveClass={setActiveClass} />}
         />
         <Route

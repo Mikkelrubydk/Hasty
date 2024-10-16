@@ -1,10 +1,12 @@
 import { useState } from "react";
 import StepOne from "../components/StepOne";
+import StepTwo from "../components/StepTwo";
+import StepThree from "../components/StepThree";
+import StepFour from "../components/StepFour";
+import StepFive from "../components/StepFive";
 
 export default function CreateTask({ setActiveClass }) {
   const [step, setStep] = useState(1);
-
-  // Step by step CreateTask
 
   const renderStep = () => {
     switch (step) {
