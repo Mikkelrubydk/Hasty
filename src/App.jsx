@@ -24,9 +24,18 @@ export default function App() {
           path="/hjem"
           element={<HomePage setActiveClass={setActiveClass} />}
         />
-        <Route path="/klaropgave" element={<CreateTask />} />
-        <Route path="/opretopgave" element={<SolveTask />} />
-        <Route path="/profil" element={<Profile />} />
+        <Route
+          path="/klaropgave"
+          element={<CreateTask setActiveClass={setActiveClass} />}
+        />
+        <Route
+          path="/opretopgave"
+          element={<SolveTask setActiveClass={setActiveClass} />}
+        />
+        <Route
+          path="/profil"
+          element={<Profile setActiveClass={setActiveClass} />}
+        />
       </Routes>
     </>
   );
