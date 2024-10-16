@@ -23,7 +23,7 @@ export default function HomePage({ setActiveClass }) {
           <Link
             to="/klaropgave"
             className="textlink"
-            onClick={() => setActiveClass(2)} // Sæt aktiv klasse til 2, når linket klikkes
+            onClick={() => setActiveClass(2)}
           >
             <span>Vis alle</span>
           </Link>
@@ -62,7 +62,7 @@ export default function HomePage({ setActiveClass }) {
           <Link
             to="/opretopgave"
             className="textlink"
-            onClick={() => setActiveClass(1)} // Sæt aktiv klasse til 2, når linket klikkes
+            onClick={() => setActiveClass(1)}
           >
             <span>Vis alle</span>
           </Link>
