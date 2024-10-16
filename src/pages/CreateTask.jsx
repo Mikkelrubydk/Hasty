@@ -1,6 +1,8 @@
 export default function CreateTask() {
   const [step, setStep] = useState(1);
 
+  // Step by step CreateTask
+
   const renderStep = () => {
     switch (step) {
       case 1:
