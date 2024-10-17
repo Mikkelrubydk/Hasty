@@ -19,16 +19,16 @@ export default function StepOne() {
 
         <div>
           <div className="boks">
-            <img src="/spanner.webp" alt="Spanner" />
+            <img src="/pruning-shears.webp" alt="Havesaks" />
           </div>
-          <p className="undertekst">VVS</p>
+          <p className="undertekst">Havearbejde</p>
         </div>
 
         <div>
           <div className="boks">
-            <img src="/pruning-shears.webp" alt="Havesaks" />
+            <img src="/spanner.webp" alt="Spanner" />
           </div>
-          <p className="undertekst">Havearbejde</p>
+          <p className="undertekst">VVS</p>
         </div>
 
         <div>
@@ -91,7 +91,7 @@ export default function StepOne() {
           <div className="boks">
             <img src="/event.webp" alt="Begivenhed" />
           </div>
-          <p class="undertekst">Begivenheder</p>
+          <p class="undertekst">Begivenhed</p>
         </div>
 
         <div>
