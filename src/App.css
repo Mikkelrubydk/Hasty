@@ -253,6 +253,7 @@ nav ul li:not(.active)::before {
 
 .logo {
   width: 200px;
+  margin-bottom: 20px;
 }
 
 .notification {
@@ -448,6 +449,24 @@ nav ul li:not(.active)::before {
   justify-content: center;
   align-items: center;
   font-size: 18px;
+}
+
+.previousbtn {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 20px;
+  top: 20px;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  border: none;
+  background-color: var(--blue);
+}
+
+.previousbtn img {
+  width: 10px;
 }
 
 .stepbystep-boks {

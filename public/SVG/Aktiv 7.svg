@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Lag_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35.83 65.96">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #fff;
+        stroke-linecap: round;
+        stroke-miterlimit: 10;
+        stroke-width: 4px;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1">
+    <path class="cls-1" d="M33.79,2S6.97,28.82,2.83,32.96c.07.07.11.11.11.11l30.89,30.89"/>
+  </g>
+</svg>
