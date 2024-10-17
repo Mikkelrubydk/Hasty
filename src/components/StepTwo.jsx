@@ -11,7 +11,7 @@ export default function StepTwo() {
       </div>
 
       <h1 className="step1h1">Beskriv din opgave</h1>
-
+      <h3>Kort beskrivelse af opgaven</h3>
       <div className="beskriv-boks">
         <textarea class="tekst" placeholder="Beskriv her..."></textarea>
       </div>
