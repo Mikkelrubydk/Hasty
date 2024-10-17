@@ -93,38 +93,7 @@ export default function StepOne() {
           </div>
           <p class="undertekst">Havearbejde</p>
         </div>
-<<<<<<< Updated upstream
       </div>
     </section>
   );
-=======
-        <p class="undertekst">Havearbejde</p>
-    </div>
-
-    <div>
-        <div class="boks">
-        <img src="/laptop.webp" alt="Bærbar"/>
-        </div>
-        <p class="undertekst">Levering</p>
-    </div>
-
-    
-    <div>
-        <div class="boks">
-        <img src="/wire.webp" alt="Ledning"/>
-        </div>
-        <p class="undertekst">Vinduer</p>
-    </div>
-
-
-    <div>
-        <div class="boks">
-        <img src="/event.webp" alt="Begivenhed"/>
-        </div>
-        <p class="undertekst">Andet</p>
-    </div>
-    </div>
-        </section>
-    )
->>>>>>> Stashed changes
 }
