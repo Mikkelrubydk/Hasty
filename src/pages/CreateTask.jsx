@@ -31,6 +31,10 @@ export default function CreateTask({ setActiveClass }) {
       <button className="nextbtn" onClick={() => setStep(step + 1)}>
         Næste
       </button>
+
+      <button className="previousbtn" onClick={() => setStep(step - 1)}>
+        <img src="/tilbagepil.svg" alt="Tilbage Knap" />
+      </button>
     </div>
   );
 }
