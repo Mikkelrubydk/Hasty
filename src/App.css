@@ -532,6 +532,7 @@ nav ul li:not(.active)::before {
   background-color: #f4f2ef;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Skygge */
   box-sizing: border-box;
+  margin-top: 10px;
 }
 
 .tekst {
