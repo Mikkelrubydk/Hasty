@@ -721,3 +721,50 @@ input[type="text"] {
 input[type="text"]:focus {
   border: 0 solid transparent;
 }
+
+.dato-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-left: 50px;
+  margin-top: 30px;
+}
+
+.dato-div h4 {
+font-size: 18px;
+}
+
+.dato-boks {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.dato-boks img {
+  width: 50px;
+  height: 50px;
+}
+
+.date-input {
+  width: 250px;
+  background-color: var(--beige);
+  color: var(--blue);
+  font-size: 20px;
+  font-weight: 600;
+  border: none;
+  outline: none;
+}
+
+.date-input::placeholder {
+  width: 250px;
+  background-color: var(--beige);
+  color: var(--blue);
+  font-size: 20px;
+  font-weight: 600;
+  border: none;
+  outline: none;
+}
