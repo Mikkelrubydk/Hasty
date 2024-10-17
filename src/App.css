@@ -536,6 +536,17 @@ nav ul li:not(.active)::before {
 
 /* Styling af StepTwo */
 
+.step2section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  margin-left: 5%;
+  margin-right: 5%;
+  position: relative;
+}
+
 .filled2 {
   width: 40%;
   height: 100%;
