@@ -474,6 +474,24 @@ nav ul li:not(.active)::before {
   margin-top: 50px;
   margin-left: 5%;
   margin-right: 5%;
+  position: relative;
+}
+
+.step1section::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: rgb(216, 209, 189);
+  background: linear-gradient(
+    0deg,
+    rgba(216, 209, 189, 1) 0%,
+    rgba(0, 187, 255, 0) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
 }
 
 .boks-container {
