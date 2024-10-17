@@ -3,14 +3,10 @@ import { Link } from "react-router-dom";
 
 export default function StepThree() {
   const [activeIcon, setActiveIcon] = useState(null);
+  const [address, setAddress] = useState("Skriv her..."); // Tilføj state til adressen
 
   return (
     <section>
-      <div className="btn-boks">
-        <button className="image-button">
-          <img src="/wire.webp" className="button-image" alt="Button Image" />
-        </button>
-      </div>
       <div className="stepthree-container">
         <div className="stepbystep-boks">
           <div className="filled3"></div>
@@ -47,6 +43,20 @@ export default function StepThree() {
             <img src="/spanner.webp" alt="Spanner" />
           </div>
           <p className="undertekst-stepthree">Vælg dato</p>
+        </div>
+      </div>
+
+      {}
+      <div className="adresse-div">
+        <h4>Adresse</h4>
+        <div className="adresse-boks">
+          <img src="/box.webp" alt="Maps" />
+          {}
+          <input
+            type="text"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+          />
         </div>
       </div>
     </section>
