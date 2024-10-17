@@ -93,6 +93,27 @@ export default function StepOne() {
           </div>
           <p class="undertekst">Havearbejde</p>
         </div>
+
+        <div>
+          <div class="boks">
+            <img src="/laptop.webp" alt="Bærbar" />
+          </div>
+          <p class="undertekst">Håndværker</p>
+        </div>
+
+        <div>
+          <div class="boks">
+            <img src="/wire.webp" alt="Ledning" />
+          </div>
+          <p class="undertekst">VVS</p>
+        </div>
+
+        <div>
+          <div class="boks">
+            <img src="/event.webp" alt="Begivenhed" />
+          </div>
+          <p class="undertekst">Havearbejde</p>
+        </div>
       </div>
     </section>
   );
