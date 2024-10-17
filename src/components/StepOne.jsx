@@ -35,63 +35,63 @@ export default function StepOne() {
           <div className="boks">
             <img src="/box.webp" alt="boks" />
           </div>
-          <p class="undertekst">Flytning</p>
+          <p className="undertekst">Flytning</p>
         </div>
 
         <div>
           <div className="boks">
             <img src="/cleaning.webp" alt="Rengøring" />
           </div>
-          <p class="undertekst">Rengøring</p>
+          <p className="undertekst">Rengøring</p>
         </div>
 
         <div>
           <div className="boks">
             <img src="/serving-dish.webp" alt="Servering" />
           </div>
-          <p class="undertekst">Servering</p>
+          <p className="undertekst">Servering</p>
         </div>
 
         <div>
           <div className="boks">
             <img src="/gears.webp" alt="Gear" />
           </div>
-          <p class="undertekst">Mekaniker</p>
+          <p className="undertekst">Mekaniker</p>
         </div>
 
         <div>
           <div className="boks">
             <img src="/wheel.webp" alt="Hjul" />
           </div>
-          <p class="undertekst">Cykel</p>
+          <p className="undertekst">Cykel</p>
         </div>
 
         <div>
           <div className="boks">
             <img src="/paint-brush.webp" alt="Malerpensel" />
           </div>
-          <p class="undertekst">Maling</p>
+          <p className="undertekst">Maling</p>
         </div>
 
         <div>
           <div className="boks">
             <img src="/laptop.webp" alt="Bærbar" />
           </div>
-          <p class="undertekst">Tech</p>
+          <p className="undertekst">Tech</p>
         </div>
 
         <div>
           <div className="boks">
             <img src="/wire.webp" alt="Ledning" />
           </div>
-          <p class="undertekst">EL-arbejde</p>
+          <p className="undertekst">EL-arbejde</p>
         </div>
 
         <div>
           <div className="boks">
             <img src="/event.webp" alt="Begivenhed" />
           </div>
-          <p class="undertekst">Begivenhed</p>
+          <p className="undertekst">Begivenhed</p>
         </div>
 
         <div>
