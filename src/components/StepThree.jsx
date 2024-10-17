@@ -1,17 +1,17 @@
 import { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { Link } from "react-router-dom";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 export default function StepThree() {
   const [activeIcon, setActiveIcon] = useState(null);
   const [address, setAddress] = useState("Skriv her...");
-  const [startDate, setStartDate] = useState(null); // Start med null for at vise "Vælg Dato"
+  const [startDate, setStartDate] = useState(null); // Start med null
 
+  // Formatér datoen til "dag måned"
   const formatDate = (date) => {
-    if (!date) return "Vælg Dato"; // Hvis ingen dato er valgt, vis "Vælg Dato"
-    const options = { day: "numeric", month: "long" };
-    return new Intl.DateTimeFormat("da-DK", options).format(date);
+    if (!date) return "Vælg Dato"; // Standard tekst
+    const options = { day: 'numeric', month: 'long' }; // Format til dag og måned
+    return new Intl.DateTimeFormat('da-DK', options).format(date);
   };
 
   return (
@@ -73,14 +73,14 @@ export default function StepThree() {
           <img src="/box.webp" alt="Maps" />
           <DatePicker
             selected={startDate}
-            onChange={(date) => setStartDate(date)}
+            onChange={(date) => setStartDate(date)} // Opdater startDato
             dateFormat="dd/MM/yyyy"
             className="date-picker"
-            placeholderText="Vælg Dato"
+            placeholderText="Vælg en dato"
             customInput={
               <input
                 type="text"
-                value={formatDate(startDate)}
+                value={formatDate(startDate)} // Brug formatDate funktionen
                 readOnly
                 className="date-input"
               />
