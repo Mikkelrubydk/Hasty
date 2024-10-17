@@ -624,13 +624,7 @@ nav ul li:not(.active)::before {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.btn-boks {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 20px 20px 0 20px;
+  margin-top: 50px;
 }
 
 .stepthreeh1 {
@@ -645,10 +639,9 @@ nav ul li:not(.active)::before {
 }
 
 .boks-container-stepthree {
-  display: grid;
-  grid-template-columns: repeat(3, 100px);
-  justify-content: space-evenly;
-  width: 90%;
+  display: flex;
+  justify-content: center;
+  width: 100%;
   gap: 20px;
 }
 
@@ -661,10 +654,16 @@ nav ul li:not(.active)::before {
   justify-content: center;
   border-radius: 20px;
   transition: background-color 0.3s;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
-.boks-stepthree:hover {
-  background-color: #e68c3a;
+.boks-stepthree.active {
+  background-color: var(--orange);
+}
+
+.boks-stepthree.active img {
+  filter: brightness(0) invert(1);
 }
 
 .boks-stepthree img {
@@ -673,8 +672,54 @@ nav ul li:not(.active)::before {
 }
 
 .undertekst-stepthree {
-  color: #213e60;
+  color: var(--sort);
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 5px;
+}
+
+.adresse-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-left: 50px;
+  margin-top: 30px;
+}
+
+.adresse-div h4 {
+  font-size: 18px;
+}
+
+.adresse-boks {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.adresse-boks img {
+  width: 50px;
+  height: 50px;
+}
+
+.adresse-boks input {
+  width: 250px;
+  background-color: var(--beige);
+  color: var(--blue);
+  font-size: 20px;
+  font-weight: 600;
+  border: none;
+}
+
+input[type="text"] {
+  outline: none;
+  border: 1px solid transparent;
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+  border: 0 solid transparent;
 }
