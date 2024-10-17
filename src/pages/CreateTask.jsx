@@ -26,9 +26,11 @@ export default function CreateTask({ setActiveClass }) {
   };
 
   return (
-    <div btn-boks>
+    <div>
       {renderStep()}
-      <button className="nextbtn" onClick={() => setStep(step + 1)}>Næste</button>
+      <button className="nextbtn" onClick={() => setStep(step + 1)}>
+        Næste
+      </button>
     </div>
   );
 }

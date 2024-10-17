@@ -11,87 +11,87 @@ export default function StepOne() {
 
       <div className="boks-container">
         <div>
-          <div class="boks">
+          <div className="boks">
             <img src="/hammer.webp" alt="Hammer" />
           </div>
-          <p class="undertekst">Håndværker</p>
+          <p className="undertekst">Håndværker</p>
         </div>
 
         <div>
-          <div class="boks">
+          <div className="boks">
             <img src="/spanner.webp" alt="Spanner" />
           </div>
-          <p class="undertekst">VVS</p>
+          <p className="undertekst">VVS</p>
         </div>
 
         <div>
-          <div class="boks">
+          <div className="boks">
             <img src="/pruning-shears.webp" alt="Havesaks" />
           </div>
-          <p class="undertekst">Havearbejde</p>
+          <p className="undertekst">Havearbejde</p>
         </div>
 
         <div>
-          <div class="boks">
+          <div className="boks">
             <img src="/box.webp" alt="boks" />
           </div>
-          <p class="undertekst">Håndværker</p>
+          <p className="undertekst">Håndværker</p>
         </div>
 
         <div>
-          <div class="boks">
+          <div className="boks">
             <img src="/cleaning.webp" alt="Rengøring" />
           </div>
-          <p class="undertekst">VVS</p>
+          <p className="undertekst">VVS</p>
         </div>
 
         <div>
-          <div class="boks">
+          <div className="boks">
             <img src="/serving-dish.webp" alt="Servering" />
           </div>
-          <p class="undertekst">Havearbejde</p>
+          <p className="undertekst">Havearbejde</p>
         </div>
 
         <div>
-          <div class="boks">
+          <div className="boks">
             <img src="/gears.webp" alt="Gear" />
           </div>
-          <p class="undertekst">Håndværker</p>
+          <p className="undertekst">Håndværker</p>
         </div>
 
         <div>
-          <div class="boks">
+          <div className="boks">
             <img src="/wheel.webp" alt="Hjul" />
           </div>
-          <p class="undertekst">VVS</p>
+          <p className="undertekst">VVS</p>
         </div>
 
         <div>
-          <div class="boks">
+          <div className="boks">
             <img src="/paint-brush.webp" alt="Malerpensel" />
           </div>
-          <p class="undertekst">Havearbejde</p>
+          <p className="undertekst">Havearbejde</p>
         </div>
 
         <div>
-          <div class="boks">
+          <div className="boks">
             <img src="/laptop.webp" alt="Bærbar" />
           </div>
-          <p class="undertekst">Håndværker</p>
+          <p className="undertekst">Håndværker</p>
         </div>
 
         <div>
-          <div class="boks">
+          <div className="boks">
             <img src="/wire.webp" alt="Ledning" />
           </div>
-          <p class="undertekst">VVS</p>
+          <p className="undertekst">VVS</p>
         </div>
 
         <div>
-          <div class="boks">
+          <div className="boks">
             <img src="/event.webp" alt="Begivenhed" />
           </div>
-          <p class="undertekst">Havearbejde</p>
+          <p className="undertekst">Havearbejde</p>
         </div>
       </div>
     </section>
