@@ -251,8 +251,12 @@ nav ul li:not(.active)::before {
   padding: 20px;
 }
 
+.homepage-container h1 {
+  font-size: 25px;
+}
+
 .logo {
-  width: 200px;
+  width: 250px;
   margin-bottom: 20px;
 }
 
@@ -266,7 +270,7 @@ nav ul li:not(.active)::before {
 .category-container {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  margin-top: 50px;
 }
 
 .category-container h2 {
@@ -528,7 +532,7 @@ nav ul li:not(.active)::before {
 }
 
 .boks.active img {
-    filter: brightness(0) invert(1);
+  filter: brightness(0) invert(1);
 }
 
 .boks-container::-webkit-scrollbar {
@@ -606,9 +610,7 @@ nav ul li:not(.active)::before {
   border: 1px solid #213e60; /* Kantfarve ved fokus */
 }
 
-
-
-/* Styling af StepThree */ 
+/* Styling af StepThree */
 
 .filled3 {
   width: 60%;
@@ -645,7 +647,7 @@ nav ul li:not(.active)::before {
 .boks-container-stepthree {
   display: grid;
   grid-template-columns: repeat(3, 100px);
-  justify-content:space-evenly;
+  justify-content: space-evenly;
   width: 90%;
   gap: 20px;
 }
