@@ -504,6 +504,14 @@ nav ul li:not(.active)::before {
   padding: 0 0 20px 0;
 }
 
+.boks.active {
+  background-color: var(--orange);
+}
+
+.boks.active img {
+    filter: brightness(0) invert(1);
+}
+
 .boks-container::-webkit-scrollbar {
   display: none;
 }
@@ -517,10 +525,6 @@ nav ul li:not(.active)::before {
   justify-content: center;
   border-radius: 20px;
   transition: background-color 0.3s;
-}
-
-.boks:hover {
-  background-color: #e68c3a;
 }
 
 .boks img {

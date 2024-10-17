@@ -1,6 +1,10 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function StepThree() {
+
+  const [activeIcon, setActiveIcon] = useState(null);
+
   return (
     <section>
       <div className="btn-boks">
@@ -18,21 +22,24 @@ export default function StepThree() {
 
       <div className="boks-container-stepthree">
         <div>
-          <div className="boks-stepthree">
+        <div className={`boks-stepthree ${activeIcon === 0 ? "active" : ""}`}
+        onClick={()=> setActiveIcon(0)}>
             <img src="/hammer.webp" alt="Hammer" />
           </div>
           <p className="undertekst-stepthree">Haster</p>
         </div>
 
         <div>
-          <div className="boks-stepthree">
+        <div className={`boks-stepthree ${activeIcon === 1 ? "active" : ""}`}
+        onClick={()=> setActiveIcon(1)}>
             <img src="/pruning-shears.webp" alt="Havesaks" />
           </div>
           <p className="undertekst-stepthree">Fleksibel</p>
         </div>
 
         <div>
-          <div className="boks-stepthree">
+        <div className={`boks-stepthree ${activeIcon === 2 ? "active" : ""}`}
+        onClick={()=> setActiveIcon(2)}>
             <img src="/spanner.webp" alt="Spanner" />
           </div>
           <p className="undertekst-stepthree">Vælg dato</p>
