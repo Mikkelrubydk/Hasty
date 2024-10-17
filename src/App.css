@@ -143,17 +143,6 @@ h4 {
   font-weight: 400;
   color: #1a1a1a;
 }
-.container .info span {
-  color: #4d4d4d;
-  font-size: 12px;
-}
-.container .info span a {
-  color: #000000;
-  text-decoration: none;
-}
-.container .info span .fa {
-  color: #ef3b3a;
-}
 
 /* Styling af NavBar */
 
@@ -168,6 +157,7 @@ nav {
   height: 75px;
   background-color: var(--creme);
   box-shadow: 0px -1px 13px rgba(0, 0, 0, 0.3);
+  z-index: 999;
 }
 
 nav ul {
@@ -442,14 +432,18 @@ nav ul li:not(.active)::before {
 }
 
 .nextbtn {
+  margin: 0 auto;
+  position: fixed;
+  bottom: 150px;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 100;
+  width: 70%;
   background-color: #2c2c2c;
   color: #f4f2ef;
   border-radius: 10px;
-  width: 65%;
   height: 40px;
   display: flex;
-  margin: 20px auto;
   justify-content: center;
   align-items: center;
   font-size: 18px;

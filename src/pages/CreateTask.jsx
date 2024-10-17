@@ -28,13 +28,18 @@ export default function CreateTask({ setActiveClass }) {
   return (
     <div>
       {renderStep()}
+
+      {/* Næste knap */}
       <button className="nextbtn" onClick={() => setStep(step + 1)}>
         Næste
       </button>
 
-      <button className="previousbtn" onClick={() => setStep(step - 1)}>
-        <img src="/tilbagepil.svg" alt="Tilbage Knap" />
-      </button>
+      {/* Sørger for at previousbtn fremgår på alle sider undtagen stepOne */}
+      {step > 1 && (
+        <button className="previousbtn" onClick={() => setStep(step - 1)}>
+          <img src="/tilbagepil.svg" alt="Tilbage Knap" />
+        </button>
+      )}
     </div>
   );
 }
