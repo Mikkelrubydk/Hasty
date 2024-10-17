@@ -587,3 +587,14 @@ nav ul li:not(.active)::before {
   justify-content: flex-start;
   align-items: flex-start;
 }
+
+
+
+/* Styling af StepThree */ 
+
+.filled3 {
+  width: 60%;
+  height: 100%;
+  background-color: #e68c3a;
+  border-radius: 20px;
+}
