@@ -507,7 +507,7 @@ nav ul li:not(.active)::before {
   background: linear-gradient(
     0deg,
     rgba(216, 209, 189, 1) 0%,
-    rgba(0, 187, 255, 0) 100%
+    rgba(0, 187, 255, 0) 50%
   );
   z-index: 1;
   pointer-events: none;
@@ -520,6 +520,7 @@ nav ul li:not(.active)::before {
   justify-content: center;
   overflow-y: scroll;
   height: 500px;
+  padding: 0 0 20px 0;
 }
 
 .boks-container::-webkit-scrollbar {
@@ -601,8 +602,73 @@ nav ul li:not(.active)::before {
   border: 1px solid #213e60; /* Kantfarve ved fokus */
 }
 
-.image-button {
+
+
+/* Styling af StepThree */ 
+
+.filled3 {
+  width: 60%;
+  height: 100%;
+  background-color: #e68c3a;
+  border-radius: 20px;
+}
+
+.stepthree-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-boks {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+  padding: 20px 20px 0 20px;
+}
+
+.stepthreeh1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #213e60;
+  font-weight: 600;
+  font-size: 35px;
+  margin-top: 15px;
+  margin-bottom: 25px;
+}
+
+.boks-container-stepthree {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  justify-content:space-evenly;
+  width: 90%;
+  gap: 20px;
+}
+
+.boks-stepthree {
+  height: 120px;
+  width: 120px;
+  background-color: #f2f2f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  transition: background-color 0.3s;
+}
+
+.boks-stepthree:hover {
+  background-color: #e68c3a;
+}
+
+.boks-stepthree img {
+  width: 80%;
+  height: 80%;
+}
+
+.undertekst-stepthree {
+  color: #213e60;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
