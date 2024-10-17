@@ -1,6 +1,6 @@
 import { useState } from "react";
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
 
 export default function StepThree() {
@@ -10,8 +10,8 @@ export default function StepThree() {
 
   const formatDate = (date) => {
     if (!date) return "Vælg Dato"; // Hvis ingen dato er valgt, vis "Vælg Dato"
-    const options = { day: 'numeric', month: 'long' };
-    return new Intl.DateTimeFormat('da-DK', options).format(date);
+    const options = { day: "numeric", month: "long" };
+    return new Intl.DateTimeFormat("da-DK", options).format(date);
   };
 
   return (
