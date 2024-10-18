@@ -7,6 +7,10 @@ import StepFive from "../components/StepFive";
 
 export default function CreateTask({ setActiveClass }) {
   const [step, setStep] = useState(1);
+  const totalSteps = 5;
+
+  // Beregn bredden af processbaren baseret på det aktuelle trin
+  const progressWidth = (step / totalSteps) * 100;
 
   const renderStep = () => {
     switch (step) {
@@ -26,15 +30,26 @@ export default function CreateTask({ setActiveClass }) {
   };
 
   return (
-    <div>
+    <div className="create-task-container">
+      {/* Processbar */}
+      <div className="stepbystep-boks">
+        <div
+          className="filled"
+          style={{ width: `${progressWidth}%`, transition: "width 0.5s ease" }}
+        ></div>
+      </div>
+
+      {/* Rendering af aktuelt Step */}
       {renderStep()}
 
       {/* Næste knap */}
-      <button className="nextbtn" onClick={() => setStep(step + 1)}>
-        Næste
-      </button>
+      {step < totalSteps && (
+        <button className="nextbtn" onClick={() => setStep(step + 1)}>
+          Næste
+        </button>
+      )}
 
-      {/* Sørger for at previousbtn fremgår på alle sider undtagen stepOne */}
+      {/* Previous knap, der kun vises hvis step > 1 */}
       {step > 1 && (
         <button className="previousbtn" onClick={() => setStep(step - 1)}>
           <img src="/tilbagepil.svg" alt="Tilbage Knap" />

@@ -17,6 +17,11 @@ export default function HomePage({ setActiveClass }) {
           <h1>få opgaver løst hurtigt, eller tilbyd din hjælp på ingen tid!</h1>
         </article>
       </div>
+      <div className="search-bar">
+        <input type="text" placeholder="Søg her.."></input>
+        <img src="/search.webp" alt="Search icon" />
+        <img src="/filter.webp" alt="Filter icon" />
+      </div>
       <div className="category-container">
         <div className="category-text">
           <h2>Kategorier</h2>
