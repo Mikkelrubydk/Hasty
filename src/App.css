@@ -855,3 +855,13 @@ input[type="text"]:focus {
   font-size: 28px;
   font-weight: 600;
 }
+
+
+
+/* Styling af Profile */ 
+.profil-sektion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
