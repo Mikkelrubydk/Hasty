@@ -73,14 +73,14 @@ export default function StepThree() {
           <img src="/box.webp" alt="Maps" />
           <DatePicker
             selected={startDate}
-            onChange={(date) => setStartDate(date)} // Opdater startDato
+            onChange={(date) => setStartDate(date)}
             dateFormat="dd/MM/yyyy"
             className="date-picker"
             placeholderText="Vælg en dato"
             customInput={
               <input
                 type="text"
-                value={formatDate(startDate)} // Brug formatDate funktionen
+                value={formatDate(startDate)}
                 readOnly
                 className="date-input"
               />
