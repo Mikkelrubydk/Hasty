@@ -790,6 +790,19 @@ input[type="text"]:focus {
   border-radius: 20px;
 }
 
+.step4section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.tekst-step4 {
+  width: 70%;
+  margin-bottom: 20px;
+}
+
 
 /* Styling af StepFive */ 
 .filled5 {
@@ -801,9 +814,10 @@ input[type="text"]:focus {
 
 .prish2 {
   color: var(--blue);
-  font-size: 36px;
+  font-size: 34px;
   font-weight: 600;
   margin-top: 100px;
+  margin-bottom: 10px;
 }
 
 .pris-boks {
@@ -831,4 +845,5 @@ input[type="text"]:focus {
   font-size: 28px;
   font-weight: 600;
 }
+
 
