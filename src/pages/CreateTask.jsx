@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import StepOne from "../components/StepOne";
-import StepTwo from "../components/StepTwo";
-import StepThree from "../components/StepThree";
-import StepFour from "../components/StepFour";
-import StepFive from "../components/StepFive";
+import StepOne from "../components/StepOne"; // Category
+import StepTwo from "../components/StepTwo"; // Title
+import StepThree from "../components/StepThree"; // Date, Location, Type
+import StepFour from "../components/StepFour"; // Description
+import StepFive from "../components/StepFive"; // Picture & Price
 
 export default function CreateTask({ setActiveClass }) {
   const [step, setStep] = useState(1);
@@ -39,41 +39,9 @@ export default function CreateTask({ setActiveClass }) {
     setTaskData((prevData) => ({ ...prevData, picture: file }));
   };
 
-  // Håndter rendering af hvert trin
-  const renderStep = () => {
-    switch (step) {
-      case 1:
-        return (
-          <StepOne taskData={taskData} handleInputChange={handleInputChange} />
-        );
-      case 2:
-        return (
-          <StepTwo taskData={taskData} handleInputChange={handleInputChange} />
-        );
-      case 3:
-        return (
-          <StepThree
-            taskData={taskData}
-            handleInputChange={handleInputChange}
-          />
-        );
-      case 4:
-        return (
-          <StepFour taskData={taskData} handleInputChange={handleInputChange} />
-        );
-      case 5:
-        return (
-          <StepFive
-            taskData={taskData}
-            handleInputChange={handleInputChange}
-            handleImageChange={handleImageChange} // Tilføj billede-upload
-          />
-        );
-      default:
-        return (
-          <StepOne taskData={taskData} handleInputChange={handleInputChange} />
-        );
-    }
+  // Håndter kategori ændring fra StepOne
+  const handleCategoryChange = (category) => {
+    setTaskData((prevData) => ({ ...prevData, category }));
   };
 
   // Håndter indsendelse af opgave og naviger til SolveTask siden
@@ -81,6 +49,55 @@ export default function CreateTask({ setActiveClass }) {
     setActiveClass(1);
     navigate("/klaropgave", { state: { taskData } });
     console.log("Opgaven er indsendt:", taskData);
+  };
+
+  // Håndter rendering af hvert trin
+  const renderStep = () => {
+    switch (step) {
+      case 1:
+        return (
+          <StepOne
+            taskData={taskData}
+            handleCategoryChange={handleCategoryChange} // Passer kategoriændringsfunktion
+          />
+        );
+      case 2:
+        return (
+          <StepTwo
+            taskData={taskData}
+            handleInputChange={handleInputChange} // Håndter title
+          />
+        );
+      case 3:
+        return (
+          <StepThree
+            taskData={taskData}
+            handleInputChange={handleInputChange} // Håndter date, location, type
+          />
+        );
+      case 4:
+        return (
+          <StepFour
+            taskData={taskData}
+            handleInputChange={handleInputChange} // Håndter description
+          />
+        );
+      case 5:
+        return (
+          <StepFive
+            taskData={taskData}
+            handleInputChange={handleInputChange} // Håndter price
+            handleImageChange={handleImageChange} // Tilføj billede-upload
+          />
+        );
+      default:
+        return (
+          <StepOne
+            taskData={taskData}
+            handleCategoryChange={handleCategoryChange} // Passer kategoriændringsfunktion
+          />
+        );
+    }
   };
 
   return (

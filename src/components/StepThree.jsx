@@ -2,15 +2,26 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-export default function StepThree() {
-  const [activeIcon, setActiveIcon] = useState(null);
-  const [startDate, setStartDate] = useState(null); // Start med null for at vise "Vælg Dato"
+export default function StepThree({ taskData, handleInputChange }) {
+  const [activeIcon, setActiveIcon] = useState(taskData.type || null); // Init med eksisterende type
+  const [startDate, setStartDate] = useState(taskData.date || null); // Init med eksisterende dato
+  const [address, setAddress] = useState(taskData.location || ""); // Init med eksisterende adresse
 
   // Formatér datoen til "dag måned"
   const formatDate = (date) => {
     if (!date) return "Vælg Dato"; // Standard tekst
     const options = { day: "numeric", month: "long" }; // Format til dag og måned
     return new Intl.DateTimeFormat("da-DK", options).format(date);
+  };
+
+  // Håndterer opdatering af taskData
+  const handleNext = () => {
+    // Gem type
+    handleInputChange({ target: { name: "type", value: activeIcon } });
+    // Gem dato
+    handleInputChange({ target: { name: "date", value: startDate } });
+    // Gem adresse
+    handleInputChange({ target: { name: "location", value: address } });
   };
 
   return (
@@ -32,8 +43,8 @@ export default function StepThree() {
 
         <div>
           <div
-            className={`boks-stepthree ${activeIcon === 2 ? "active" : ""}`}
-            onClick={() => setActiveIcon(2)}
+            className={`boks-stepthree ${activeIcon === 1 ? "active" : ""}`}
+            onClick={() => setActiveIcon(1)}
           >
             <img src="/calender.webp" alt="Calender icon" />
           </div>
@@ -48,6 +59,7 @@ export default function StepThree() {
           <input
             type="text"
             placeholder="Skriv her"
+            value={address}
             onChange={(e) => setAddress(e.target.value)}
           />
         </div>
