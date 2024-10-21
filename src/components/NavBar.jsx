@@ -20,7 +20,7 @@ export default function NavBar({ activeClass, setActiveClass }) {
           </Link>
         </li>
         <li className={activeClass === 3 ? "active" : ""}>
-          <Link to="/profil" onClick={() => setActiveClass(3)}>
+          <Link to="/profile" onClick={() => setActiveClass(3)}>
             <img src="/user.webp" alt="Bruger icon" />
           </Link>
         </li>
