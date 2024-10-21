@@ -7,17 +7,17 @@ export default function StepFive({
 }) {
   return (
     <section className="step5section">
-      <h1 className="step1h1">Færdigørelse</h1>
+      <h1 className="step1h1">Tilføj billeder</h1>
 
       <div className="beskriv-boks">
         <input
           type="file"
-          accept="image/*" // Begræns til billedfiler
+          accept="image/*"
           onChange={handleImageChange} // Håndter billede-upload
         />
       </div>
 
-      <h2 className="prish2">Startpris</h2>
+      <h2 className="prish2">Sæt din pris</h2>
       <div className="pris-boks">
         <input
           type="text"

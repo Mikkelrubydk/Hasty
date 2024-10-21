@@ -19,7 +19,7 @@ export default function CreateTask({ setActiveClass }) {
     date: "",
     location: "",
     type: "",
-    picture: null, // For billede-upload i Step 5
+    picture: null,
   });
 
   const navigate = useNavigate();

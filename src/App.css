@@ -822,6 +822,12 @@ input[type="text"]:focus {
 
 /* Styling af StepFive */
 
+.step5section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .prish2 {
   color: var(--blue);
   font-size: 34px;
@@ -856,9 +862,7 @@ input[type="text"]:focus {
   font-weight: 600;
 }
 
-
-
-/* Styling af Profile */ 
+/* Styling af Profile */
 .profil-sektion {
   display: flex;
   justify-content: center;
