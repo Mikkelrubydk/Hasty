@@ -10,17 +10,26 @@ export default function ProfilePage() {
   const database = getDatabase();
 
   const [name, setName] = useState("");
-
   const [profileImage, setProfileImage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const [loading, setLoading] = useState(true); // Loader state
+  const [loading, setLoading] = useState(true);
   const [creationDate, setCreationDate] = useState("");
+  const [completedTasks, setCompletedTasks] = useState(12);
+  const [rank, setRank] = useState("");
+
+  const rankImages = {
+    Skilpadde: turtleImage,
+    Elefant: elephantImage,
+    Kat: catImage,
+    Hund: dogImage,
+    Hare: hareImage,
+  };
 
   useEffect(() => {
     if (user) {
       const fetchUserData = async () => {
-        setLoading(true); // Start loader
+        setLoading(true);
         const userRef = ref(database, "users/" + user.uid);
         try {
           const snapshot = await get(userRef);
@@ -29,6 +38,7 @@ export default function ProfilePage() {
             setName(userData.name || "");
             setProfileImage(userData.profileImage || "");
             setCreationDate(userData.creationDate || "");
+            setCompletedTasks(userData.completedTasks || 15);
           } else {
             console.log("Ingen bruger data fundet!");
           }
@@ -36,7 +46,7 @@ export default function ProfilePage() {
           console.error("Fejl ved hentning af brugerdata: ", error);
           setErrorMessage("Der opstod en fejl ved hentning af brugerdata.");
         } finally {
-          setLoading(false); // Stop loader, uanset hvad der sker
+          setLoading(false);
         }
       };
       fetchUserData();
@@ -46,24 +56,18 @@ export default function ProfilePage() {
   useEffect(() => {
     if (user) {
       const userRef = ref(database, "users/" + user.uid);
-
-      // Tjek om brugeren allerede har en oprettelsesdato
       const checkAndSetCreationDate = async () => {
         const snapshot = await get(userRef);
         const userData = snapshot.val();
 
-        // Hvis oprettelsesdato ikke findes, opret den
         if (!userData || !userData.creationDate) {
           const options = { year: "numeric", month: "long", day: "numeric" };
-          const newCreationDate = new Date().toLocaleDateString(
-            "da-DK",
-            options
-          ); // Få nuværende dato med måned som tekst
+          const newCreationDate = new Date().toLocaleDateString("da-DK", options);
           await set(userRef, {
             ...userData,
             creationDate: newCreationDate,
           });
-          setCreationDate(newCreationDate); // Sæt creationDate state
+          setCreationDate(newCreationDate);
         }
       };
 
@@ -73,7 +77,6 @@ export default function ProfilePage() {
 
   const handleUpdateProfile = async (event) => {
     event.preventDefault();
-
     if (name === "") {
       setErrorMessage("Alle felter skal udfyldes");
       return;
@@ -85,6 +88,7 @@ export default function ProfilePage() {
         name: name,
         profileImage: profileImage,
         creationDate: creationDate,
+        completedTasks: completedTasks,
       });
       setSuccessMessage("Profil opdateret!");
       setErrorMessage("");
@@ -119,10 +123,24 @@ export default function ProfilePage() {
     document.getElementById("file-input").click(); // Simuler klik på filinput
   };
 
+  useEffect(() => {
+    const calculateRank = (tasksCompleted) => {
+      if (tasksCompleted <= 5) return "Skilpadde";
+      if (tasksCompleted <= 10) return "Elefant";
+      if (tasksCompleted <= 15) return "Kat";
+      if (tasksCompleted <= 20) return "Hund";
+      return "Hare"; // 21 og over
+    };
+
+    const newRank = calculateRank(completedTasks);
+    setRank(newRank);
+    setProfileImage(rankImages[newRank]); // Opdater profilbillede baseret på rang
+  }, [completedTasks]);
+
   return (
     <section className="profile-wrapper">
       <div className="profile-page">
-        {loading ? ( // Hvis loading er true, vis spinner
+        {loading ? (
           <LoadingScreen />
         ) : (
           <form onSubmit={handleUpdateProfile}>
@@ -146,7 +164,6 @@ export default function ProfilePage() {
               onChange={(e) => setName(e.target.value)}
               placeholder="Navn"
             />
-
             <input
               id="file-input"
               type="file"
@@ -156,9 +173,6 @@ export default function ProfilePage() {
             />
             <p className="text-error">{errorMessage}</p>
             <p className="text-success">{successMessage}</p>
-            <button className="nextbtn btn2" type="submit">
-              Gem Ændringer
-            </button>
             <button className="nextbtn" type="button" onClick={handleLogout}>
               Log Ud
             </button>
@@ -177,9 +191,13 @@ export default function ProfilePage() {
             <span>Igangværende opgaver</span>
           </article>
           <article>
-            <h2>20</h2>
+            <h2>{completedTasks}</h2>
             <span>Udførte opgaver</span>
           </article>
+        </div>
+        <div className="profil-rang">
+          <h2>Rang: {rank}</h2>
+          <img src={rankImages[rank]} alt={rank} style={{ width: "50px", height: "50px" }} />
         </div>
       </div>
     </section>
