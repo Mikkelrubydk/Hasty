@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { getAuth, signOut } from "firebase/auth";
 import { getDatabase, ref, get, set } from "firebase/database";
 import placeholderImage from "/default-user.webp";
-import turtleImage from "/turtle.webp"; // Billede for Skilpadde
-import elephantImage from "/elephant.webp"; // Billede for Elefant
-import catImage from "/cat.webp"; // Billede for Kat
-import dogImage from "/dog.webp"; // Billede for Hund
-import hareImage from "/hare.webp"; // Billede for Hare
+import turtleImage from "/turtle.png"; // Billede for Skilpadde
+import elephantImage from "/elephant.png"; // Billede for Elefant
+import catImage from "/cat.png"; // Billede for Kat
+import dogImage from "/dog.png"; // Billede for Hund
+import hareImage from "/hare.png"; // Billede for Hare
 import LoadingScreen from "../components/LoadingScreen";
 
 export default function ProfilePage() {
@@ -22,6 +22,7 @@ export default function ProfilePage() {
   const [creationDate, setCreationDate] = useState("");
   const [completedTasks, setCompletedTasks] = useState(12);
   const [rank, setRank] = useState("");
+  const [RankImage, setRankImage] = useState("");
 
   const rankImages = {
     Skilpadde: turtleImage,
@@ -43,7 +44,7 @@ export default function ProfilePage() {
             setName(userData.name || "");
             setProfileImage(userData.profileImage || "");
             setCreationDate(userData.creationDate || "");
-            setCompletedTasks(userData.completedTasks || 15);
+            setCompletedTasks(userData.completedTasks || 5);
           } else {
             console.log("Ingen bruger data fundet!");
           }
@@ -139,7 +140,7 @@ export default function ProfilePage() {
 
     const newRank = calculateRank(completedTasks);
     setRank(newRank);
-    setProfileImage(rankImages[newRank]); // Opdater profilbillede baseret på rang
+    setRankImage(rankImages[newRank]); // Opdater rank-billede baseret på rang
   }, [completedTasks]);
 
   return (
@@ -178,6 +179,9 @@ export default function ProfilePage() {
             />
             <p className="text-error">{errorMessage}</p>
             <p className="text-success">{successMessage}</p>
+            <button className="nextbtn btn2" type="submit">
+              Gem Ændringer
+            </button>
             <button className="nextbtn" type="button" onClick={handleLogout}>
               Log Ud
             </button>
