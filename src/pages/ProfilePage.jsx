@@ -255,26 +255,47 @@ export default function ProfilePage() {
           ></textarea>
         </div>
         <div className="profil-rang">
-    <img
-        src={rankImage}
-        alt={rank}
-        onClick={toggleRankDescription}
-        style={{ cursor: "pointer" }}
-    />
-    </div>
-    {rankDescriptionVisible && (
-      <div className="rankcontainer">
-        <p>Rank System</p>
-          <div className="rankdescription">
-          <div className={completedTasks <= 5 ? "active" : ""}><img  src={turtleImage} alt="Skilpadde" /> </div>
-          <div className={completedTasks <= 10 ? "active" : ""}><img src={elephantImage} alt="Elefant" /> </div>
-          <div className={completedTasks <= 15 ? "active" : ""}><img src={catImage} alt="Kat" /> </div>
-          <div className={completedTasks <= 20 ? "active" : ""}><img src={dogImage} alt="Hund" /> </div>
-          <div className={completedTasks >= 21 ? "active" : ""}><img src={hareImage} alt="Hare" /> </div>
+          <img
+            src={rankImage}
+            alt={rank}
+            onClick={toggleRankDescription}
+            style={{ cursor: "pointer" }}
+          />
+        </div>
+        {rankDescriptionVisible && (
+          <div className="rankcontainer">
+            <p>Rank System</p>
+            <div className="rankdescription">
+              <div className={completedTasks <= 5 ? "active" : ""}>
+                <img src={turtleImage} alt="Skilpadde" />
+              </div>
+              <div
+                className={
+                  completedTasks > 5 && completedTasks <= 10 ? "active" : ""
+                }
+              >
+                <img src={elephantImage} alt="Elefant" />
+              </div>
+              <div
+                className={
+                  completedTasks > 10 && completedTasks <= 15 ? "active" : ""
+                }
+              >
+                <img src={catImage} alt="Kat" />
+              </div>
+              <div
+                className={
+                  completedTasks > 15 && completedTasks <= 20 ? "active" : ""
+                }
+              >
+                <img src={dogImage} alt="Hund" />
+              </div>
+              <div className={completedTasks > 20 ? "active" : ""}>
+                <img src={hareImage} alt="Hare" />
+              </div>
+            </div>
           </div>
-      </div>
-    )}
-
+        )}
       </div>
     </section>
   );
