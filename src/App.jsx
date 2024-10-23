@@ -13,25 +13,28 @@ import "../firebase-config";
 
 export default function App() {
   const auth = getAuth();
-  const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth")); // default value comes from localStorage
-  const location = useLocation();
-  const [activeClass, setActiveClass] = useState(0);
+  const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
+  const [activeClass, setActiveClass] = useState(
+    parseInt(localStorage.getItem("activeClass"), 10) || 0
+  );
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        //user is authenticated / signed in
-        setIsAuth(true); // set isAuth to true
-        localStorage.setItem("isAuth", true); // also, save isAuth in localStorage
+        setIsAuth(true);
+        localStorage.setItem("isAuth", true);
       } else {
-        // user is not authenticated / not signed in
-        setIsAuth(false); // set isAuth to false
-        localStorage.removeItem("isAuth"); // remove isAuth from localStorage
+        setIsAuth(false);
+        localStorage.removeItem("isAuth");
       }
     });
   }, []);
 
-  // variable holding all private routes including the nav bar
+  useEffect(() => {
+    localStorage.setItem("activeClass", activeClass);
+  }, [activeClass]);
+
+  // Definering af private og offentlige routes
   const privateRoutes = (
     <>
       <NavBar activeClass={activeClass} setActiveClass={setActiveClass} />
@@ -57,7 +60,6 @@ export default function App() {
     </>
   );
 
-  // variable holding all public routes without nav bar
   const publicRoutes = (
     <Routes>
       <Route path="/sign-in" element={<SignInPage />} />
@@ -66,6 +68,6 @@ export default function App() {
     </Routes>
   );
 
-  // if user is authenticated, show privateRoutes, else show publicRoutes
+  // Rendering af routes baseret på om de er logget ind
   return <main>{isAuth ? privateRoutes : publicRoutes}</main>;
 }

@@ -8,20 +8,20 @@ export default function SignInPage() {
 
   function signIn(event) {
     event.preventDefault();
-    const mail = event.target.mail.value; // mail value from input field in sign-in form
-    const password = event.target.password.value; // password value from input field in sign-in form
+    const mail = event.target.mail.value; // mail-værdi fra inputfeltet i login-formularen
+    const password = event.target.password.value; // adgangskode-værdi fra inputfeltet i login-formularen
 
-    // Firebase sign in with email and password
+    // Firebase login med e-mail og adgangskode
     signInWithEmailAndPassword(auth, mail, password)
       .then((userCredential) => {
-        // Signed in
+        // Logget ind
         const user = userCredential.user;
-        console.log(user); // For test purposes: logging the authenticated user
+        console.log(user); // For testformål: logger den autentificerede bruger
       })
       .catch((error) => {
-        let code = error.code; // Error code from Firebase
+        let code = error.code; // Fejlkode fra Firebase
         console.log(code);
-        // Replace error code format for better readability
+        // Erstat fejlkodeformatet for bedre læsbarhed
         code = code.replace(/-/g, " ").replace("auth/", "");
         switch (code) {
           case "invalid credential":
@@ -30,7 +30,7 @@ export default function SignInPage() {
           case "too many attempts":
             setErrorMessage("For mange forsøg");
             break;
-        } // Display user-friendly error message
+        } // Vis brugervenlig fejloplysning
       });
   }
 

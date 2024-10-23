@@ -65,7 +65,7 @@ export default function HomePage({ setActiveClass }) {
         <div className="task-text">
           <h2>Nyligt oprettede opgaver</h2>
           <Link
-            to="/opretopgave"
+            to="/klaropgave"
             className="textlink"
             onClick={() => setActiveClass(1)}
           >

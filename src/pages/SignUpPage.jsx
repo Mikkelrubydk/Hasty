@@ -8,14 +8,14 @@ import { Link } from "react-router-dom";
 
 export default function SignUpPage() {
   const [name, setName] = useState("");
+  const [mail, setMail] = useState("");
+  const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const auth = getAuth();
 
   function handleSignUp(event) {
     event.preventDefault();
-    const mail = event.target.mail.value; // mail value from input field
-    const password = event.target.password.value; // password value from input field
 
     if (name === "" || mail === "" || password === "") {
       setErrorMessage("Alle felter skal udfyldes");
@@ -24,27 +24,31 @@ export default function SignUpPage() {
 
     // Firebase sign-up logic
     createUserWithEmailAndPassword(auth, mail, password)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         const user = userCredential.user;
         console.log(user);
 
         // Update Firebase profile with name
-        updateProfile(user, { displayName: name }).then(() => {
+        try {
+          await updateProfile(user, { displayName: name });
           console.log("User profile updated with name");
-        });
+        } catch (updateError) {
+          console.error("Error updating profile: ", updateError);
+          setErrorMessage("Kunne ikke opdatere profil");
+        }
 
-        createUser(user.uid, mail);
+        await createUser(user.uid, mail);
       })
       .catch((error) => {
-        let code = error.code; // Save error code in variable
+        let code = error.code.replace(/-/g, " ").replace("auth/", "");
         console.log(code);
-        code = code.replaceAll("-", " "); // String formatting for better readability
-        code = code.replaceAll("auth/", "");
-        setErrorMessage(code);
 
         switch (code) {
           case "email already in use":
-            setErrorMessage("email allerede i brug");
+            setErrorMessage("Email allerede i brug");
+            break;
+          default:
+            setErrorMessage(code);
             break;
         }
       });
@@ -55,7 +59,11 @@ export default function SignUpPage() {
     const response = await fetch(url, {
       method: "PUT",
       body: JSON.stringify({ name, mail }),
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
+
     if (response.ok) {
       const data = await response.json();
       console.log("New user created: ", data);
@@ -72,11 +80,20 @@ export default function SignUpPage() {
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          name="name"
           placeholder="Navn"
         />
-        <input type="email" name="mail" placeholder="Mail" />
-        <input type="password" name="password" placeholder="Kodeord" />
+        <input
+          type="email"
+          value={mail}
+          onChange={(e) => setMail(e.target.value)}
+          placeholder="Mail"
+        />
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Kodeord"
+        />
         <p className="text-error">{errorMessage}</p>
         <button>Opret Konto</button>
         <p className="text-center">

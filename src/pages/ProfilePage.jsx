@@ -1,148 +1,152 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getAuth, signOut } from "firebase/auth";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage"; // Firebase storage functions
+import { getDatabase, ref, get, set } from "firebase/database";
+import placeholderImage from "/default-user.webp";
+import LoadingScreen from "../components/LoadingScreen";
 
 export default function ProfilePage() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [title, setTitle] = useState("");
-  const [image, setImage] = useState(null); // For displaying uploaded image
-  const [imageFile, setImageFile] = useState(null); // Store the uploaded image file
-  const [imagePreview, setImagePreview] = useState(null); // For showing the image preview
-  const imgPlaceholder = "/default-user.webp"; // Placeholder image path
   const auth = getAuth();
-  const storage = getStorage(); // Firebase storage reference
-  const url = `https://hasty-f0e75-default-rtdb.firebaseio.com/users/${auth.currentUser?.uid}.json`;
+  const user = auth.currentUser;
+  const database = getDatabase();
+
+  const [name, setName] = useState("");
+
+  const [profileImage, setProfileImage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [loading, setLoading] = useState(true); // Loader state
 
   useEffect(() => {
-    if (!auth.currentUser) {
-      console.error("No user is authenticated.");
+    if (user) {
+      const fetchUserData = async () => {
+        setLoading(true); // Start loader
+        const userRef = ref(database, "users/" + user.uid);
+        try {
+          const snapshot = await get(userRef);
+          if (snapshot.exists()) {
+            const userData = snapshot.val();
+            setName(userData.name || "");
+            setProfileImage(userData.profileImage || "");
+          } else {
+            console.log("Ingen bruger data fundet!");
+          }
+        } catch (error) {
+          console.error("Fejl ved hentning af brugerdata: ", error);
+          setErrorMessage("Der opstod en fejl ved hentning af brugerdata.");
+        } finally {
+          setLoading(false); // Stop loader, uanset hvad der sker
+        }
+      };
+      fetchUserData();
+    }
+  }, [user, database]);
+
+  const handleUpdateProfile = async (event) => {
+    event.preventDefault();
+
+    if (name === "") {
+      setErrorMessage("Alle felter skal udfyldes");
       return;
     }
 
-    async function getUser() {
-      try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error("Failed to fetch user data");
-        }
-        const userData = await response.json();
-        console.log("Fetched user data: ", userData);
-        if (userData) {
-          setName(userData.name || "");
-          setEmail(auth.currentUser.email); // Get email from auth
-          setTitle(userData.title || "");
-          setImage(userData.image || imgPlaceholder); // Set the image (existing or placeholder)
-        }
-      } catch (error) {
-        console.error("Error fetching user data: ", error);
-      }
-    }
-    getUser();
-  }, [auth.currentUser, url]);
-
-  async function handleImageUpload() {
-    if (imageFile) {
-      const storageRef = ref(storage, `profileImages/${auth.currentUser.uid}`);
-      try {
-        const snapshot = await uploadBytes(storageRef, imageFile);
-        const downloadURL = await getDownloadURL(snapshot.ref);
-        return downloadURL; // Return image download URL after upload
-      } catch (error) {
-        console.error("Error uploading image: ", error);
-      }
-    }
-    return null;
-  }
-
-  async function handleSubmit(event) {
-    event.preventDefault();
-
-    console.log("Current user ID: ", auth.currentUser?.uid);
-
-    const imageUrl = await handleImageUpload(); // Upload image and get the URL
-
-    const userToUpdate = {
-      name,
-      mail: email,
-      title,
-      image: imageUrl || image, // Update image if a new one was uploaded
-    };
-
-    console.log("Data to update: ", userToUpdate);
-
     try {
-      const response = await fetch(url, {
-        method: "PUT",
-        body: JSON.stringify(userToUpdate),
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const userRef = ref(database, "users/" + user.uid);
+      await set(userRef, {
+        name: name,
+        profileImage: profileImage,
       });
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log("User updated: ", data);
-        setImage(imageUrl || image); // Update the image on the page after the update
-      } else {
-        const errorData = await response.json();
-        console.log("Failed to update user: ", errorData);
-      }
+      setSuccessMessage("Profil opdateret!");
+      setErrorMessage("");
     } catch (error) {
-      console.error("Error updating user: ", error);
+      console.error("Fejl ved opdatering af profil: ", error);
+      setErrorMessage("Kunne ikke opdatere profil: " + error.message);
     }
-  }
+  };
 
-  function handleImageChange(e) {
-    const file = e.target.files[0];
-    setImageFile(file);
-    if (file) {
-      const previewURL = URL.createObjectURL(file);
-      setImagePreview(previewURL); // Update the image preview URL
-    }
-  }
-
-  function handleSignOut() {
+  const handleLogout = () => {
     signOut(auth)
       .then(() => {
-        console.log("User signed out successfully");
+        console.log("Bruger logget ud!");
       })
       .catch((error) => {
-        console.error("Error signing out: ", error);
+        console.error("Fejl ved logout: ", error);
       });
-  }
+  };
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfileImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleImageClick = () => {
+    document.getElementById("file-input").click(); // Simuler klik på filinput
+  };
 
   return (
-    <section className="page">
-      <h1>Profile</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Name"
-        />
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Title"
-        />
-        <input type="file" onChange={handleImageChange} accept="image/*" />
-        <button type="submit" className="btn-outline">
-          Update Profile
-        </button>
-        <button className="btn-outline" onClick={handleSignOut}>
-          Sign Out
-        </button>
-      </form>
+    <section className="profile-wrapper">
+      <div className="profile-page">
+        {loading ? ( // Hvis loading er true, vis spinner
+          <LoadingScreen />
+        ) : (
+          <form onSubmit={handleUpdateProfile}>
+            <div onClick={handleImageClick} style={{ cursor: "pointer" }}>
+              <img
+                src={profileImage || placeholderImage}
+                alt="Profilbillede"
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  borderRadius: "50%",
+                  marginTop: "-100px",
+                  objectFit: "cover",
+                  boxShadow: "0px 2px 16.5px rgba(0, 0, 0, 0.25)",
+                }}
+              />
+            </div>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Navn"
+            />
 
-      <div className="profile-image-container">
-        <img
-          src={imagePreview || image || imgPlaceholder}
-          alt="Profile"
-          style={{ width: "150px", height: "150px", borderRadius: "50%" }}
-        />
+            <input
+              id="file-input"
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              style={{ display: "none" }} // Skjul filinput
+            />
+            <p className="text-error">{errorMessage}</p>
+            <p className="text-success">{successMessage}</p>
+            <button className="nextbtn btn2" type="submit">
+              Gem Ændringer
+            </button>
+            <button className="nextbtn" type="button" onClick={handleLogout}>
+              Log Ud
+            </button>
+          </form>
+        )}
+        <div className="profilopgaver">
+          <article>
+            <h2>13</h2>
+            <span>Opgaver oprettet</span>
+          </article>
+          <article>
+            <h2>2</h2>
+            <span>Opgaver i gang</span>
+          </article>
+          <article>
+            <h2>20</h2>
+            <span>Udførte opgaver</span>
+          </article>
+        </div>
       </div>
     </section>
   );
