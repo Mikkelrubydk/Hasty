@@ -48,7 +48,8 @@ export default function ProfilePage() {
             setName(userData.name || "");
             setProfileImage(userData.profileImage || "");
             setCreationDate(userData.creationDate || "");
-            setCompletedTasks(userData.completedTasks || 0);
+            setCompletedTasks(userData.completedTasks || 21);
+            setProfileDescription(userData.profileDescription || "");
           } else {
             console.log("Ingen bruger data fundet!");
           }
@@ -221,7 +222,7 @@ export default function ProfilePage() {
             </button>
           </form>
         )}
-        <StarRating rating={4} reviews={34} />
+        <StarRating rating={3} reviews={34} />
         <div className="oprettelsesdato">
           <h2>Medlem siden: {creationDate}</h2>
         </div>
@@ -247,7 +248,13 @@ export default function ProfilePage() {
             onChange={(e) => setProfileDescription(e.target.value)}
             name="description"
             placeholder="Tilføj en kort tekst om dig selv og dine kompetencer"
-          />
+            style={{
+              background: isEditing
+                ? "rgba(255, 255, 255, 0.5)"
+                : "transparent",
+            }}
+            disabled={!isEditing}
+          ></textarea>
         </div>
         <div className="profil-rang">
           <img
