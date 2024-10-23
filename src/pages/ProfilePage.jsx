@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { getAuth, signOut } from "firebase/auth";
 import { getDatabase, ref, get, set } from "firebase/database";
 import placeholderImage from "/default-user.webp";
-import turtleImage from "/turtle.png"; // Billede for Skilpadde
-import elephantImage from "/elephant.png"; // Billede for Elefant
-import catImage from "/cat.png"; // Billede for Kat
-import dogImage from "/dog.png"; // Billede for Hund
-import hareImage from "/hare.png"; // Billede for Hare
+import turtleImage from "/turtle.png"; // Image for Turtle
+import elephantImage from "/elephant.png"; // Image for Elephant
+import catImage from "/cat.png"; // Image for Cat
+import dogImage from "/dog.png"; // Image for Dog
+import hareImage from "/hare.png"; // Image for Hare
 import LoadingScreen from "../components/LoadingScreen";
 import StarRating from "../components/StarRating";
 
@@ -25,7 +25,7 @@ export default function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false); // State for editing mode
   const [completedTasks, setCompletedTasks] = useState(12);
   const [rank, setRank] = useState("");
-  const [RankImage, setRankImage] = useState("");
+  const [rankImage, setRankImage] = useState("");
 
   const rankImages = {
     Skilpadde: turtleImage,
@@ -160,7 +160,7 @@ export default function ProfilePage() {
     setRank(newRank);
     setRankImage(rankImages[newRank]); // Opdater rank-billede baseret på rang
   }, [completedTasks]);
-}
+
   return (
     <section className="profile-wrapper">
       <div className="profile-page">
@@ -249,10 +249,16 @@ export default function ProfilePage() {
             }}
             disabled={!isEditing} // Disable when not editing
           ></textarea>
+        </div>
         <div className="profil-rang">
           <h2>Rang: {rank}</h2>
-          <img src={rankImages[rank]} alt={rank} style={{ width: "50px", height: "50px" }} />
+          <img
+            src={rankImage}
+            alt={rank}
+            style={{ width: "50px", height: "50px" }}
+          />
         </div>
       </div>
     </section>
-
+  );
+}
