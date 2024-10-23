@@ -3,6 +3,7 @@ import { getAuth, signOut } from "firebase/auth";
 import { getDatabase, ref, get, set } from "firebase/database";
 import placeholderImage from "/default-user.webp";
 import LoadingScreen from "../components/LoadingScreen";
+import StarRating from "../components/StarRating";
 
 export default function ProfilePage() {
   const auth = getAuth();
@@ -10,17 +11,18 @@ export default function ProfilePage() {
   const database = getDatabase();
 
   const [name, setName] = useState("");
-
   const [profileImage, setProfileImage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const [loading, setLoading] = useState(true); // Loader state
+  const [loading, setLoading] = useState(true);
   const [creationDate, setCreationDate] = useState("");
+  const [profileDescription, setProfileDescription] = useState("");
+  const [isEditing, setIsEditing] = useState(false); // State for editing mode
 
   useEffect(() => {
     if (user) {
       const fetchUserData = async () => {
-        setLoading(true); // Start loader
+        setLoading(true);
         const userRef = ref(database, "users/" + user.uid);
         try {
           const snapshot = await get(userRef);
@@ -29,6 +31,7 @@ export default function ProfilePage() {
             setName(userData.name || "");
             setProfileImage(userData.profileImage || "");
             setCreationDate(userData.creationDate || "");
+            setProfileDescription(userData.profileDescription || "");
           } else {
             console.log("Ingen bruger data fundet!");
           }
@@ -36,7 +39,7 @@ export default function ProfilePage() {
           console.error("Fejl ved hentning af brugerdata: ", error);
           setErrorMessage("Der opstod en fejl ved hentning af brugerdata.");
         } finally {
-          setLoading(false); // Stop loader, uanset hvad der sker
+          setLoading(false);
         }
       };
       fetchUserData();
@@ -46,24 +49,21 @@ export default function ProfilePage() {
   useEffect(() => {
     if (user) {
       const userRef = ref(database, "users/" + user.uid);
-
-      // Tjek om brugeren allerede har en oprettelsesdato
       const checkAndSetCreationDate = async () => {
         const snapshot = await get(userRef);
         const userData = snapshot.val();
 
-        // Hvis oprettelsesdato ikke findes, opret den
         if (!userData || !userData.creationDate) {
           const options = { year: "numeric", month: "long", day: "numeric" };
           const newCreationDate = new Date().toLocaleDateString(
             "da-DK",
             options
-          ); // Få nuværende dato med måned som tekst
+          );
           await set(userRef, {
             ...userData,
             creationDate: newCreationDate,
           });
-          setCreationDate(newCreationDate); // Sæt creationDate state
+          setCreationDate(newCreationDate);
         }
       };
 
@@ -85,9 +85,16 @@ export default function ProfilePage() {
         name: name,
         profileImage: profileImage,
         creationDate: creationDate,
+        profileDescription: profileDescription,
       });
       setSuccessMessage("Profil opdateret!");
       setErrorMessage("");
+      setIsEditing(false); // Set to view mode after update
+
+      // Hide success message after 3 seconds
+      setTimeout(() => {
+        setSuccessMessage("");
+      }, 3000);
     } catch (error) {
       console.error("Fejl ved opdatering af profil: ", error);
       setErrorMessage("Kunne ikke opdatere profil: " + error.message);
@@ -116,16 +123,20 @@ export default function ProfilePage() {
   };
 
   const handleImageClick = () => {
-    document.getElementById("file-input").click(); // Simuler klik på filinput
+    document.getElementById("file-input").click();
+  };
+
+  const handleEditProfile = () => {
+    setIsEditing(true); // Enable editing mode
   };
 
   return (
     <section className="profile-wrapper">
       <div className="profile-page">
-        {loading ? ( // Hvis loading er true, vis spinner
+        {loading ? (
           <LoadingScreen />
         ) : (
-          <form onSubmit={handleUpdateProfile}>
+          <form onSubmit={handleUpdateProfile} className="profilelementer">
             <div onClick={handleImageClick} style={{ cursor: "pointer" }}>
               <img
                 src={profileImage || placeholderImage}
@@ -145,6 +156,13 @@ export default function ProfilePage() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Navn"
+              style={{
+                background: isEditing
+                  ? "rgba(255, 255, 255, 0.5)"
+                  : "transparent",
+                border: isEditing ? "1px solid #ccc" : "none",
+              }}
+              disabled={!isEditing} // Disable when not editing
             />
 
             <input
@@ -156,14 +174,19 @@ export default function ProfilePage() {
             />
             <p className="text-error">{errorMessage}</p>
             <p className="text-success">{successMessage}</p>
-            <button className="nextbtn btn2" type="submit">
-              Gem Ændringer
+            <button
+              className="nextbtn btn2"
+              type="button"
+              onClick={isEditing ? handleUpdateProfile : handleEditProfile}
+            >
+              {isEditing ? "Gem Ændringer" : "Rediger Profil"}
             </button>
             <button className="nextbtn" type="button" onClick={handleLogout}>
               Log Ud
             </button>
           </form>
         )}
+        <StarRating rating={4} reviews={34} />
         <div className="oprettelsesdato">
           <h2>Medlem siden: {creationDate}</h2>
         </div>
@@ -180,6 +203,22 @@ export default function ProfilePage() {
             <h2>20</h2>
             <span>Udførte opgaver</span>
           </article>
+        </div>
+        <div className="profiledescription">
+          <textarea
+            type="text"
+            id="description"
+            value={profileDescription}
+            onChange={(e) => setProfileDescription(e.target.value)}
+            name="description"
+            placeholder="Tilføj en kort tekst om dig selv og dine kompetencer"
+            style={{
+              background: isEditing
+                ? "rgba(255, 255, 255, 0.5)"
+                : "transparent",
+            }}
+            disabled={!isEditing} // Disable when not editing
+          ></textarea>
         </div>
       </div>
     </section>

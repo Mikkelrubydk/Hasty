@@ -867,7 +867,7 @@ input[type="text"]:focus {
 }
 
 .profile-page {
-  height: 80vh;
+  height: 85vh;
   background-color: var(--beige);
   z-index: 2;
   border-radius: 20px;
@@ -884,17 +884,40 @@ input[type="text"]:focus {
   align-items: center;
 }
 
-.profile-page input {
+.profilelementer input {
   text-align: center;
-  background-color: transparent;
   color: var(--blue);
   font-weight: 600;
   margin-top: 10px;
 }
 
-.profile-page input[type="text"] {
+.profilelementer input[type="text"] {
   font-size: 40px;
   width: 80%;
+}
+
+.star-rating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.rating-number {
+  font-size: 30px;
+  font-weight: 600;
+  opacity: 0.5;
+}
+
+.reviews {
+  font-size: 20px;
+  font-weight: 600;
+  opacity: 0.5;
+}
+
+.star {
+  display: flex;
+  padding: 0px 3px;
 }
 
 .oprettelsesdato {
@@ -933,4 +956,15 @@ input[type="text"]:focus {
 .profilopgaver span {
   font-size: 13px;
   opacity: 0.3;
+}
+
+.profiledescription {
+  display: flex;
+  justify-content: center;
+}
+
+.profiledescription textarea {
+  width: 80%;
+  height: 125px;
+  border: none;
 }
