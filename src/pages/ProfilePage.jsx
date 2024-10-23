@@ -107,9 +107,8 @@ export default function ProfilePage() {
       });
       setSuccessMessage("Profil opdateret!");
       setErrorMessage("");
-      setIsEditing(false); 
+      setIsEditing(false);
 
-  
       setTimeout(() => {
         setSuccessMessage("");
       }, 2000);
@@ -145,7 +144,7 @@ export default function ProfilePage() {
   };
 
   const handleEditProfile = () => {
-    setIsEditing(true); 
+    setIsEditing(true);
   };
 
   useEffect(() => {
@@ -161,7 +160,6 @@ export default function ProfilePage() {
     setRank(newRank);
     setRankImage(rankImages[newRank]); // Opdater rank-billede baseret på rang
   }, [completedTasks]);
-
 
   const toggleRankDescription = () => {
     setRankDescriptionVisible(!rankDescriptionVisible);
@@ -199,7 +197,7 @@ export default function ProfilePage() {
                   : "transparent",
                 border: isEditing ? "1px solid #ccc" : "none",
               }}
-              disabled={!isEditing} 
+              disabled={!isEditing}
             />
             <input
               id="file-input"
