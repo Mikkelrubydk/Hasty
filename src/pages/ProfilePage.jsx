@@ -15,6 +15,7 @@ export default function ProfilePage() {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [loading, setLoading] = useState(true); // Loader state
+  const [creationDate, setCreationDate] = useState("");
 
   useEffect(() => {
     if (user) {
@@ -27,6 +28,7 @@ export default function ProfilePage() {
             const userData = snapshot.val();
             setName(userData.name || "");
             setProfileImage(userData.profileImage || "");
+            setCreationDate(userData.creationDate || "");
           } else {
             console.log("Ingen bruger data fundet!");
           }
@@ -38,6 +40,34 @@ export default function ProfilePage() {
         }
       };
       fetchUserData();
+    }
+  }, [user, database]);
+
+  useEffect(() => {
+    if (user) {
+      const userRef = ref(database, "users/" + user.uid);
+
+      // Tjek om brugeren allerede har en oprettelsesdato
+      const checkAndSetCreationDate = async () => {
+        const snapshot = await get(userRef);
+        const userData = snapshot.val();
+
+        // Hvis oprettelsesdato ikke findes, opret den
+        if (!userData || !userData.creationDate) {
+          const options = { year: "numeric", month: "long", day: "numeric" };
+          const newCreationDate = new Date().toLocaleDateString(
+            "da-DK",
+            options
+          ); // Få nuværende dato med måned som tekst
+          await set(userRef, {
+            ...userData,
+            creationDate: newCreationDate,
+          });
+          setCreationDate(newCreationDate); // Sæt creationDate state
+        }
+      };
+
+      checkAndSetCreationDate();
     }
   }, [user, database]);
 
@@ -54,6 +84,7 @@ export default function ProfilePage() {
       await set(userRef, {
         name: name,
         profileImage: profileImage,
+        creationDate: creationDate,
       });
       setSuccessMessage("Profil opdateret!");
       setErrorMessage("");
@@ -133,6 +164,9 @@ export default function ProfilePage() {
             </button>
           </form>
         )}
+        <div className="oprettelsesdato">
+          <h2>Medlem siden: {creationDate}</h2>
+        </div>
         <div className="profilopgaver">
           <article>
             <h2>13</h2>
@@ -140,7 +174,7 @@ export default function ProfilePage() {
           </article>
           <article>
             <h2>2</h2>
-            <span>Opgaver i gang</span>
+            <span>Igangværende opgaver</span>
           </article>
           <article>
             <h2>20</h2>

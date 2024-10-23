@@ -893,17 +893,44 @@ input[type="text"]:focus {
 }
 
 .profile-page input[type="text"] {
-  font-size: 35px;
+  font-size: 40px;
   width: 80%;
+}
+
+.oprettelsesdato {
+  display: flex;
+  justify-content: center;
+}
+
+.oprettelsesdato h2 {
+  font-size: 20px;
+  font-weight: 500;
+  opacity: 0.3;
 }
 
 .profilopgaver {
   display: flex;
   justify-content: center;
   gap: 20px;
+  width: 90%;
+  margin: 20px auto;
 }
 
 .profilopgaver article {
   background-color: var(--creme);
   border-radius: 20px;
+  flex: 1;
+  padding: 15px 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.profilopgaver h2 {
+  font-size: 35px;
+  font-weight: 600;
+  opacity: 0.5;
+}
+
+.profilopgaver span {
+  font-size: 13px;
+  opacity: 0.3;
 }
