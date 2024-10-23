@@ -2,6 +2,11 @@ import React, { useEffect, useState } from "react";
 import { getAuth, signOut } from "firebase/auth";
 import { getDatabase, ref, get, set } from "firebase/database";
 import placeholderImage from "/default-user.webp";
+import turtleImage from "/turtle.webp"; // Billede for Skilpadde
+import elephantImage from "/elephant.webp"; // Billede for Elefant
+import catImage from "/cat.webp"; // Billede for Kat
+import dogImage from "/dog.webp"; // Billede for Hund
+import hareImage from "/hare.webp"; // Billede for Hare
 import LoadingScreen from "../components/LoadingScreen";
 
 export default function ProfilePage() {
