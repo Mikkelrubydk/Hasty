@@ -47,8 +47,7 @@ export default function ProfilePage() {
             setName(userData.name || "");
             setProfileImage(userData.profileImage || "");
             setCreationDate(userData.creationDate || "");
-            setProfileDescription(userData.profileDescription || "");
-            setCompletedTasks(userData.completedTasks || 5);
+            setCompletedTasks(userData.completedTasks || 21);
           } else {
             console.log("Ingen bruger data fundet!");
           }
