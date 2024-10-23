@@ -48,7 +48,7 @@ export default function ProfilePage() {
             setName(userData.name || "");
             setProfileImage(userData.profileImage || "");
             setCreationDate(userData.creationDate || "");
-            setCompletedTasks(userData.completedTasks || 21);
+            setCompletedTasks(userData.completedTasks || 0);
             setProfileDescription(userData.profileDescription || "");
           } else {
             console.log("Ingen bruger data fundet!");
@@ -257,18 +257,26 @@ export default function ProfilePage() {
           ></textarea>
         </div>
         <div className="profil-rang">
-          <img
-            src={rankImage}
-            alt={rank}
-            onClick={toggleRankDescription} 
-            style={{ cursor: "pointer" }} 
-          />
-          {rankDescriptionVisible && ( 
-            <div className="rankdescription">
-              <p>Beskrivelse af rang: {`Dette er en beskrivelse for ${rank}.`}</p>
-            </div>
-          )}
-        </div>
+    <img
+        src={rankImage}
+        alt={rank}
+        onClick={toggleRankDescription}
+        style={{ cursor: "pointer" }}
+    />
+    </div>
+    {rankDescriptionVisible && (
+      <div className="rankcontainer">
+        <p>Rank System</p>
+          <div className="rankdescription">
+          <div className={completedTasks <= 5 ? "active" : ""}><img  src={turtleImage} alt="Skilpadde" /> </div>
+          <div className={completedTasks <= 10 ? "active" : ""}><img src={elephantImage} alt="Elefant" /> </div>
+          <div className={completedTasks <= 15 ? "active" : ""}><img src={catImage} alt="Kat" /> </div>
+          <div className={completedTasks <= 20 ? "active" : ""}><img src={dogImage} alt="Hund" /> </div>
+          <div className={completedTasks >= 21 ? "active" : ""}><img src={hareImage} alt="Hare" /> </div>
+          </div>
+      </div>
+    )}
+
       </div>
     </section>
   );
