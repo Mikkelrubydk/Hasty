@@ -2,6 +2,11 @@ import React, { useEffect, useState } from "react";
 import { getAuth, signOut } from "firebase/auth";
 import { getDatabase, ref, get, set } from "firebase/database";
 import placeholderImage from "/default-user.webp";
+import turtleImage from "/turtle.png"; // Billede for Skilpadde
+import elephantImage from "/elephant.png"; // Billede for Elefant
+import catImage from "/cat.png"; // Billede for Kat
+import dogImage from "/dog.png"; // Billede for Hund
+import hareImage from "/hare.png"; // Billede for Hare
 import LoadingScreen from "../components/LoadingScreen";
 import StarRating from "../components/StarRating";
 
@@ -18,6 +23,17 @@ export default function ProfilePage() {
   const [creationDate, setCreationDate] = useState("");
   const [profileDescription, setProfileDescription] = useState("");
   const [isEditing, setIsEditing] = useState(false); // State for editing mode
+  const [completedTasks, setCompletedTasks] = useState(12);
+  const [rank, setRank] = useState("");
+  const [RankImage, setRankImage] = useState("");
+
+  const rankImages = {
+    Skilpadde: turtleImage,
+    Elefant: elephantImage,
+    Kat: catImage,
+    Hund: dogImage,
+    Hare: hareImage,
+  };
 
   useEffect(() => {
     if (user) {
@@ -32,6 +48,7 @@ export default function ProfilePage() {
             setProfileImage(userData.profileImage || "");
             setCreationDate(userData.creationDate || "");
             setProfileDescription(userData.profileDescription || "");
+            setCompletedTasks(userData.completedTasks || 5);
           } else {
             console.log("Ingen bruger data fundet!");
           }
@@ -73,7 +90,6 @@ export default function ProfilePage() {
 
   const handleUpdateProfile = async (event) => {
     event.preventDefault();
-
     if (name === "") {
       setErrorMessage("Alle felter skal udfyldes");
       return;
@@ -86,6 +102,7 @@ export default function ProfilePage() {
         profileImage: profileImage,
         creationDate: creationDate,
         profileDescription: profileDescription,
+        completedTasks: completedTasks,
       });
       setSuccessMessage("Profil opdateret!");
       setErrorMessage("");
@@ -130,6 +147,20 @@ export default function ProfilePage() {
     setIsEditing(true); // Enable editing mode
   };
 
+  useEffect(() => {
+    const calculateRank = (tasksCompleted) => {
+      if (tasksCompleted <= 5) return "Skilpadde";
+      if (tasksCompleted <= 10) return "Elefant";
+      if (tasksCompleted <= 15) return "Kat";
+      if (tasksCompleted <= 20) return "Hund";
+      return "Hare"; // 21 og over
+    };
+
+    const newRank = calculateRank(completedTasks);
+    setRank(newRank);
+    setRankImage(rankImages[newRank]); // Opdater rank-billede baseret på rang
+  }, [completedTasks]);
+}
   return (
     <section className="profile-wrapper">
       <div className="profile-page">
@@ -164,7 +195,6 @@ export default function ProfilePage() {
               }}
               disabled={!isEditing} // Disable when not editing
             />
-
             <input
               id="file-input"
               type="file"
@@ -200,7 +230,7 @@ export default function ProfilePage() {
             <span>Igangværende opgaver</span>
           </article>
           <article>
-            <h2>20</h2>
+            <h2>{completedTasks}</h2>
             <span>Udførte opgaver</span>
           </article>
         </div>
@@ -219,8 +249,10 @@ export default function ProfilePage() {
             }}
             disabled={!isEditing} // Disable when not editing
           ></textarea>
+        <div className="profil-rang">
+          <h2>Rang: {rank}</h2>
+          <img src={rankImages[rank]} alt={rank} style={{ width: "50px", height: "50px" }} />
         </div>
       </div>
     </section>
-  );
-}
+
