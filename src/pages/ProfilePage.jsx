@@ -23,9 +23,10 @@ export default function ProfilePage() {
   const [creationDate, setCreationDate] = useState("");
   const [profileDescription, setProfileDescription] = useState("");
   const [isEditing, setIsEditing] = useState(false); // State for editing mode
-  const [completedTasks, setCompletedTasks] = useState(12);
+  const [completedTasks, setCompletedTasks] = useState(0);
   const [rank, setRank] = useState("");
   const [rankImage, setRankImage] = useState("");
+  const [rankDescriptionVisible, setRankDescriptionVisible] = useState(false); // New state for rank description visibility
 
   const rankImages = {
     Skilpadde: turtleImage,
@@ -47,7 +48,7 @@ export default function ProfilePage() {
             setName(userData.name || "");
             setProfileImage(userData.profileImage || "");
             setCreationDate(userData.creationDate || "");
-            setCompletedTasks(userData.completedTasks || 21);
+            setCompletedTasks(userData.completedTasks || 0);
           } else {
             console.log("Ingen bruger data fundet!");
           }
@@ -105,12 +106,12 @@ export default function ProfilePage() {
       });
       setSuccessMessage("Profil opdateret!");
       setErrorMessage("");
-      setIsEditing(false); // Set to view mode after update
+      setIsEditing(false); 
 
-      // Hide success message after 3 seconds
+  
       setTimeout(() => {
         setSuccessMessage("");
-      }, 3000);
+      }, 2000);
     } catch (error) {
       console.error("Fejl ved opdatering af profil: ", error);
       setErrorMessage("Kunne ikke opdatere profil: " + error.message);
@@ -143,7 +144,7 @@ export default function ProfilePage() {
   };
 
   const handleEditProfile = () => {
-    setIsEditing(true); // Enable editing mode
+    setIsEditing(true); 
   };
 
   useEffect(() => {
@@ -152,13 +153,18 @@ export default function ProfilePage() {
       if (tasksCompleted <= 10) return "Elefant";
       if (tasksCompleted <= 15) return "Kat";
       if (tasksCompleted <= 20) return "Hund";
-      return "Hare"; // 21 og over
+      else return "Hare"; // 21 og over
     };
 
     const newRank = calculateRank(completedTasks);
     setRank(newRank);
     setRankImage(rankImages[newRank]); // Opdater rank-billede baseret på rang
   }, [completedTasks]);
+
+
+  const toggleRankDescription = () => {
+    setRankDescriptionVisible(!rankDescriptionVisible);
+  };
 
   return (
     <section className="profile-wrapper">
@@ -192,7 +198,7 @@ export default function ProfilePage() {
                   : "transparent",
                 border: isEditing ? "1px solid #ccc" : "none",
               }}
-              disabled={!isEditing} // Disable when not editing
+              disabled={!isEditing} 
             />
             <input
               id="file-input"
@@ -241,21 +247,20 @@ export default function ProfilePage() {
             onChange={(e) => setProfileDescription(e.target.value)}
             name="description"
             placeholder="Tilføj en kort tekst om dig selv og dine kompetencer"
-            style={{
-              background: isEditing
-                ? "rgba(255, 255, 255, 0.5)"
-                : "transparent",
-            }}
-            disabled={!isEditing} // Disable when not editing
-          ></textarea>
+          />
         </div>
         <div className="profil-rang">
-          <h2>Rang: {rank}</h2>
           <img
             src={rankImage}
             alt={rank}
-            style={{ width: "50px", height: "50px" }}
+            onClick={toggleRankDescription} 
+            style={{ cursor: "pointer" }} 
           />
+          {rankDescriptionVisible && ( 
+            <div className="rankdescription">
+              <p>Beskrivelse af rang: {`Dette er en beskrivelse for ${rank}.`}</p>
+            </div>
+          )}
         </div>
       </div>
     </section>
