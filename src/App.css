@@ -1021,16 +1021,15 @@ input[type="text"]:focus {
   justify-content: center;
 }
 
-.rankdescription div.active img{
+.rankdescription div.active img {
   filter: brightness(0) invert(1);
 }
-
 
 .rankdescription div.active::before {
   content: "";
   position: absolute;
-  width: 55px;
-  height: 55px;
+  width: 60px;
+  height: 60px;
   background-color: var(--orange);
   border-radius: 50%;
   z-index: -1;
