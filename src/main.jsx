@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 import "./index.css";
 
-const basename = import.meta.env.MODE === "development" ? "/" : "/";
+const basename = import.meta.env.MODE === "development" ? "/" : "/Hasty/";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
