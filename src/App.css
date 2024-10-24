@@ -1044,3 +1044,65 @@ input[type="text"]:focus {
   padding: 5px;
   font-weight: 400;
 }
+
+
+
+
+/* Styling af SolveTask */ 
+
+.udfør-opgaver {
+  margin: 20px 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.udfør-opgaver {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  display: inline-block;
+  width: calc(85%);
+  margin-right: 7.5%;
+  margin-left: 7.5%;
+  text-align: center;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  overflow: hidden;
+  background-color: var(--creme);
+}
+
+.udfør-opgaver img {
+  width: 100%;
+  height: 250px;
+  object-fit: fit;
+}
+
+.udfør-opgaver div {
+  text-align: left;
+}
+
+.titel-pris {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+  font-weight: 600;
+}
+
+.titel-pris h4 {
+  color: var(--orange);
+  font-weight: 600;
+}
+
+.titel-pris h2 {
+  color: var(--blue);
+  font-weight: 600;
+}
+
+.kategori {
+  padding: 10px;
+  opacity: 0,7;
+}

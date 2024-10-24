@@ -10,21 +10,19 @@ export default function SolveTask() {
   }
 
   return (
-    <section>
-      <h1>Opgave Detaljer</h1>
-      <h2>Titel: {taskData.title}</h2>
-      <h3>Kategori: {taskData.category}</h3>
-      <h4>Beskrivelse: {taskData.description}</h4>
-      <h4>Pris: {taskData.price}</h4>
-      <h4>Dato: {taskData.date}</h4>
-      <h4>Lokation: {taskData.location}</h4>
-      <h4>Type: {taskData.type}</h4>
-      {taskData.picture && (
-        <div>
-          <h4>Billede:</h4>
-          <img src={URL.createObjectURL(taskData.picture)} alt="Uploaded" />
+  <section className="udfør-opgaver">
+    <div>
+      <img src={URL.createObjectURL(taskData.picture)} alt="Uploaded" />
+    </div>
+      <div>
+        <div className="titel-pris">
+          <h2>Titel: {taskData.title}</h2>
+          <span><h4>{taskData.price}kr.</h4></span>
         </div>
-      )}
-    </section>
+        <div className="kategori">
+          <span><h3>Kategori: {taskData.category}</h3></span>
+        </div>
+      </div>
+  </section>
   );
 }
