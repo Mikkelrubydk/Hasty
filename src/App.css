@@ -1013,7 +1013,7 @@ input[type="text"]:focus {
   align-items: center;
   justify-content: center;
   gap: 25px;
-  margin-top: 35px;
+  margin-top: 25px;
 }
 
 .rankdescription div {
@@ -1035,4 +1035,10 @@ input[type="text"]:focus {
   border-radius: 50%;
   z-index: -1;
   transition: width 0.3s ease, height 0.3s ease;
+}
+
+.rank-beskrivelse {
+  font-size: 18px;
+  margin-top: 5px;
+  padding: 5px;
 }

@@ -38,11 +38,11 @@ export default function ProfilePage() {
   };
 
   const rankDescriptions = {
-    Skilpadde: "1",
-    Elefant: "2",
-    Kat: "3",
-    Hund: "4",
-    Hare: "5",
+    Skilpadde: "Du er skilpadde rank, stadig begynder. Udfør flere opgaver for at stige i rank",
+    Elefant: "Du på vej opad, nu elefant rank! Udfør flere opgaver for at stige i rank",
+    Kat: "Du er rank kat!  Fortsæt med at udføre opgaver for at nå næste niveau",
+    Hund: "Du er rank hund, du er der næsten! Udfør flere opgaver for at komme i højeste rank",
+    Hare: "Tillykke du er nu en ægte Hasty-Hare",
   };
   
 
@@ -300,7 +300,9 @@ export default function ProfilePage() {
         <img src={hareImage} alt="Hare" />
       </div>
     </div>
+    <div className="rank-beskrivelse">
     <p>{rankDescription}</p> {/* Vis rangbeskrivelsen her */}
+    </div>
   </div>
 )}
       </div>
