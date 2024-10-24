@@ -6,7 +6,7 @@ export default function HomePage({ setActiveClass }) {
     <section className="homepage-container">
       <div>
         <figure>
-          <img src="/Logo.svg" alt="Hasty logo" className="logo" />
+          <img src="/logo.svg" alt="Hasty logo" className="logo" />
           <img
             src="/notifikation.svg"
             alt="Notification icon"
