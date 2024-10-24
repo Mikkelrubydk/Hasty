@@ -4,11 +4,11 @@ import react from "@vitejs/plugin-react-swc";
 export default defineConfig(({ command }) => {
   const config = {
     plugins: [react()],
-    base: "/Hasty/", // Sæt base til /Hasty/ i produktion
+    base: "/",
   };
 
-  if (command === "serve") {
-    config.base = "/"; // Brug root for udvikling
+  if (command !== "serve") {
+    config.base = "/";
   }
 
   return config;
