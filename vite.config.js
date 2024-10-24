@@ -8,7 +8,7 @@ export default defineConfig(({ command }) => {
   };
 
   if (command !== "serve") {
-    config.base = "/";
+    config.base = "/Hasty/"; // Change this based on your actual GitHub repo name
   }
 
   return config;
