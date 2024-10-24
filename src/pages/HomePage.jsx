@@ -6,7 +6,7 @@ export default function HomePage({ setActiveClass }) {
     <section className="homepage-container">
       <div>
         <figure>
-          <img src="./logo.svg" alt="Hasty logo" className="logo" />
+          <img src="/logo.svg" alt="Hasty logo" className="logo" />
           <img
             src="/notifikation.svg"
             alt="Notification icon"
@@ -19,8 +19,8 @@ export default function HomePage({ setActiveClass }) {
       </div>
       <div className="search-bar">
         <input type="text" placeholder="Søg her.."></input>
-        <img src="./search.webp" alt="Search icon" />
-        <img src="./filter.webp" alt="Filter icon" />
+        <img src="/search.webp" alt="Search icon" />
+        <img src="/filter.webp" alt="Filter icon" />
       </div>
       <div className="category-container">
         <div className="category-text">
@@ -36,25 +36,25 @@ export default function HomePage({ setActiveClass }) {
         <div className="category-wrapper">
           <figure>
             <div className="shadow">
-              <img src="./hammer.webp" alt="Hammer icon" />
+              <img src="/hammer.webp" alt="Hammer icon" />
             </div>
             <figcaption>Håndværker</figcaption>
           </figure>
           <figure>
             <div className="shadow">
-              <img src="./spanner.webp" alt="VVS icon" />
+              <img src="/spanner.webp" alt="VVS icon" />
             </div>
             <figcaption>VVS</figcaption>
           </figure>
           <figure>
             <div className="shadow">
-              <img src="./pruning-shears.webp" alt="Havearbejde icon" />
+              <img src="/pruning-shears.webp" alt="Havearbejde icon" />
             </div>
             <figcaption>Havearbejde</figcaption>
           </figure>
           <figure>
             <div className="shadow">
-              <img src="./box.webp" alt="Flyning icon" />
+              <img src="/box.webp" alt="Flyning icon" />
             </div>
             <figcaption>Flytning</figcaption>
           </figure>
@@ -75,7 +75,7 @@ export default function HomePage({ setActiveClass }) {
         <div className="task-wrapper">
           <section>
             <figure>
-              <img src="./brokensink.webp" alt="Ødelagt Håndvask" />
+              <img src="/brokensink.webp" alt="Ødelagt Håndvask" />
             </figure>
             <article>
               <div>
@@ -90,7 +90,7 @@ export default function HomePage({ setActiveClass }) {
 
           <section>
             <figure>
-              <img src="./fladcykel.webp" alt="Punkteret cykeldæk" />
+              <img src="/fladcykel.webp" alt="Punkteret cykeldæk" />
             </figure>
             <article>
               <div>
@@ -105,7 +105,7 @@ export default function HomePage({ setActiveClass }) {
 
           <section>
             <figure>
-              <img src="./brokensink.webp" alt="Ødelagt Håndvask" />
+              <img src="/brokensink.webp" alt="Ødelagt Håndvask" />
             </figure>
             <article>
               <div>

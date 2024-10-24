@@ -5,7 +5,7 @@ export default function LoadingScreen() {
   return (
     <section className="loader">
       <figure>
-        <img src="./loader.gif" alt="loader" />
+        <img src="/loader.gif" alt="loader" />
       </figure>
     </section>
   );
