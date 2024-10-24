@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import HomePage from "./pages/HomePage";
 import CreateTask from "./pages/CreateTask";
@@ -9,27 +9,32 @@ import SignUpPage from "./pages/SignUpPage";
 import SignInPage from "./pages/SignInPage";
 import NavBar from "./components/NavBar";
 import "./App.css";
-import "../firebase-config";
+import "../firebase-config"; // Sørg for, at denne fil er korrekt og importeres
 
 export default function App() {
   const auth = getAuth();
-  const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
+  const [isAuth, setIsAuth] = useState(
+    () => localStorage.getItem("isAuth") === "true"
+  );
   const [activeClass, setActiveClass] = useState(
     parseInt(localStorage.getItem("activeClass"), 10) || 0
   );
 
+  // Håndterer autentificering
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setIsAuth(true);
-        localStorage.setItem("isAuth", true);
+        localStorage.setItem("isAuth", "true"); // Gem som string
       } else {
         setIsAuth(false);
         localStorage.removeItem("isAuth");
       }
     });
-  }, []);
+    return () => unsubscribe();
+  }, [auth]);
 
+  // Opdaterer activeClass i localStorage
   useEffect(() => {
     localStorage.setItem("activeClass", activeClass);
   }, [activeClass]);
