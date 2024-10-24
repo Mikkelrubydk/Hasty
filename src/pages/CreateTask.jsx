@@ -123,7 +123,7 @@ export default function CreateTask({ setActiveClass }) {
       {/* Previous knap, der kun vises hvis step > 1 */}
       {step > 1 && (
         <button className="previousbtn" onClick={() => setStep(step - 1)}>
-          <img src="/tilbagepil.svg" alt="Tilbage Knap" />
+          <img src="./tilbagepil.svg" alt="Tilbage Knap" />
         </button>
       )}
 
