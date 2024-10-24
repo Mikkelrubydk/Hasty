@@ -4,10 +4,11 @@ import react from "@vitejs/plugin-react-swc";
 export default defineConfig(({ command }) => {
   const config = {
     plugins: [react()],
-    base: "/",
+    base: "/Hasty/", // Angiv din GitHub repository navn som base path
   };
 
-  if (command !== "serve") {
+  // Hvis du kører i development mode, så vil base være /
+  if (command === "serve") {
     config.base = "/";
   }
 
