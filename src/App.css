@@ -985,7 +985,7 @@ input[type="text"]:focus {
 }
 
 .rankcontainer {
-  height: 200px;
+  height: 250px;
   width: 90%;
   top: 45%;
   left: 50%;
@@ -1001,6 +1001,7 @@ input[type="text"]:focus {
   align-items: center;
   flex-direction: column;
   font-size: 22px;
+  font-weight: bold;
 }
 
 .rankdescription img {
@@ -1013,7 +1014,7 @@ input[type="text"]:focus {
   align-items: center;
   justify-content: center;
   gap: 25px;
-  margin-top: 25px;
+  margin-top: 35px;
 }
 
 .rankdescription div {
@@ -1039,6 +1040,7 @@ input[type="text"]:focus {
 
 .rank-beskrivelse {
   font-size: 18px;
-  margin-top: 5px;
+  margin-top: 35px;
   padding: 5px;
+  font-weight: 400;
 }
