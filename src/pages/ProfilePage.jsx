@@ -27,6 +27,7 @@ export default function ProfilePage() {
   const [rank, setRank] = useState("");
   const [rankImage, setRankImage] = useState("");
   const [rankDescriptionVisible, setRankDescriptionVisible] = useState(false); // New state for rank description visibility
+  const [rankDescription, setRankDescription] = useState("");
 
   const rankImages = {
     Skilpadde: turtleImage,
@@ -35,6 +36,15 @@ export default function ProfilePage() {
     Hund: dogImage,
     Hare: hareImage,
   };
+
+  const rankDescriptions = {
+    Skilpadde: "1",
+    Elefant: "2",
+    Kat: "3",
+    Hund: "4",
+    Hare: "5",
+  };
+  
 
   useEffect(() => {
     if (user) {
@@ -155,11 +165,13 @@ export default function ProfilePage() {
       if (tasksCompleted <= 20) return "Hund";
       else return "Hare"; // 21 og over
     };
-
+  
     const newRank = calculateRank(completedTasks);
     setRank(newRank);
     setRankImage(rankImages[newRank]); // Opdater rank-billede baseret på rang
+    setRankDescription(rankDescriptions[newRank]); // Opdater rangbeskrivelse
   }, [completedTasks]);
+  
 
   const toggleRankDescription = () => {
     setRankDescriptionVisible(!rankDescriptionVisible);
@@ -263,39 +275,34 @@ export default function ProfilePage() {
           />
         </div>
         {rankDescriptionVisible && (
-          <div className="rankcontainer">
-            <p>Rank System</p>
-            <div className="rankdescription">
-              <div className={completedTasks <= 5 ? "active" : ""}>
-                <img src={turtleImage} alt="Skilpadde" />
-              </div>
-              <div
-                className={
-                  completedTasks > 5 && completedTasks <= 10 ? "active" : ""
-                }
-              >
-                <img src={elephantImage} alt="Elefant" />
-              </div>
-              <div
-                className={
-                  completedTasks > 10 && completedTasks <= 15 ? "active" : ""
-                }
-              >
-                <img src={catImage} alt="Kat" />
-              </div>
-              <div
-                className={
-                  completedTasks > 15 && completedTasks <= 20 ? "active" : ""
-                }
-              >
-                <img src={dogImage} alt="Hund" />
-              </div>
-              <div className={completedTasks > 20 ? "active" : ""}>
-                <img src={hareImage} alt="Hare" />
-              </div>
-            </div>
-          </div>
-        )}
+  <div className="rankcontainer">
+    <p>Rank System</p>
+    <div className="rankdescription">
+      <div className={completedTasks <= 5 ? "active" : ""}>
+        <img src={turtleImage} alt="Skilpadde" />
+      </div>
+      <div
+        className={completedTasks > 5 && completedTasks <= 10 ? "active" : ""}
+      >
+        <img src={elephantImage} alt="Elefant" />
+      </div>
+      <div
+        className={completedTasks > 10 && completedTasks <= 15 ? "active" : ""}
+      >
+        <img src={catImage} alt="Kat" />
+      </div>
+      <div
+        className={completedTasks > 15 && completedTasks <= 20 ? "active" : ""}
+      >
+        <img src={dogImage} alt="Hund" />
+      </div>
+      <div className={completedTasks > 20 ? "active" : ""}>
+        <img src={hareImage} alt="Hare" />
+      </div>
+    </div>
+    <p>{rankDescription}</p> {/* Vis rangbeskrivelsen her */}
+  </div>
+)}
       </div>
     </section>
   );
