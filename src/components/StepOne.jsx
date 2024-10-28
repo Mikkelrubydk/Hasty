@@ -14,9 +14,9 @@ const categories = [
   { name: "Tech", image: "/laptop.webp" },
   { name: "EL-arbejde", image: "/wire.webp" },
   { name: "Begivenhed", image: "/event.webp" },
-  { name: "Levering", image: "/laptop.webp" },
-  { name: "Vinduer", image: "/wire.webp" },
-  { name: "Andet", image: "/event.webp" },
+  { name: "Levering", image: "/shipped.webp" },
+  { name: "Vinduer", image: "/window.webp" },
+  { name: "Andet", image: "/question.webp" },
 ];
 
 export default function StepOne({ handleCategoryChange }) {

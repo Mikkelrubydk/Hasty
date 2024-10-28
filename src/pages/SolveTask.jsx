@@ -33,6 +33,7 @@ export default function SolveTask() {
     <section className="udfør-opgaver">
       <h1 className="step1h1">Opgaveoversigt</h1>
       {tasks.map((task) => (
+        <Link className="link" to={`/tasks/${task.id}`}>
         <div key={task.id} className="task-item">
           <div>
             {task.picture ? (
@@ -57,6 +58,7 @@ export default function SolveTask() {
             </div>
           </div>
         </div>
+        </Link>
       ))}
     </section>
   );
