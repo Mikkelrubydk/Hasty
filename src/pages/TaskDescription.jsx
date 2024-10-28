@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getDatabase, ref, get } from "firebase/database";
 
 export default function TaskDescription() {
   const { taskId } = useParams();
   const [task, setTask] = useState(null);
+  const navigate = useNavigate();
   const database = getDatabase();
 
   useEffect(() => {
@@ -23,35 +24,39 @@ export default function TaskDescription() {
 
   return (
     <div>
-            <div className="task-detail">
-            <h4 className="task-dato">{task.date}</h4>
-              {task.picture && <img src={task.picture} alt="Uploaded" />}
-              <h1>{task.title || "Ingen titel angivet"}</h1>
-              <p>{task.description || "Ingen beskrivelse tilgængelig"}</p>
-              </div>
-              <hr class="black-line" />
-              <div className="three-boxes-container">
-            <div className="box">
-              <h2>Åben</h2>
-            </div>
-            <div className="box">
-              <h2>Tildelt</h2>
-            </div>
-            <div className="box">
-              <h2>Færdig</h2>
-            </div>
-          </div>
-          <div className="pris-dato">
-            <div className="pris-dato1">
-            <img src="/location.webp" alt="" />
-            <h3>{task.price ? `${task.price} kr.` : "Ingen pris angivet"}</h3>
-            </div>
-            <div className="pris-dato2">
-            <img src="/location.webp" alt="" />
-            <h3>{task.location}</h3>
-            </div>
-          </div>
-        
+      <div className="back-button" onClick={() => navigate(-1)}>
+        <img src="/tilbagepil.svg" alt="" className="back-button-image" />
+      </div>
+      <div className="task-detail">
+        {task.picture && <img src={task.picture} alt="Uploaded" />}
+        <h1>{task.title || "Ingen titel angivet"}</h1>
+        <p>{task.description || "Ingen beskrivelse tilgængelig"}</p>
+      </div>
+      <h4 className="task-dato">{task.date}</h4>
+      <hr className="black-line" />
+
+      <div className="three-boxes-container">
+        <div className="box1">
+          <h2>Åben</h2>
+        </div>
+        <div className="box">
+          <h2>Tildelt</h2>
+        </div>
+        <div className="box">
+          <h2>Færdig</h2>
+        </div>
+      </div>
+
+      <div className="pris-dato">
+        <div className="pris-dato1">
+          <img src="/location.webp" alt="" />
+          <h3>{task.price ? `${task.price} kr.` : "Ingen pris angivet"}</h3>
+        </div>
+        <div className="pris-dato2">
+          <img src="/location.webp" alt="" />
+          <h3>{task.location}</h3>
+        </div>
+      </div>
 
       <div className="task-buttons">
         <button onClick={() => alert("Du har budt på denne opgave")}>
@@ -61,6 +66,7 @@ export default function TaskDescription() {
           Send besked
         </button>
       </div>
+
       <div className="user-opgave">
         <img src="/default-user.webp" alt="" />
         <div className="user-opgave1">
