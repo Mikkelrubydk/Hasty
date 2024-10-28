@@ -1106,6 +1106,7 @@ input[type="text"]:focus {
 .titel-pris h4 {
   color: var(--orange);
   font-weight: 600;
+  font-size: 24px;
 }
 
 .titel-pris h2 {
@@ -1114,8 +1115,8 @@ input[type="text"]:focus {
 }
 
 .kategori {
-  padding: 10px;
   opacity: 0, 7;
+  padding: 0 10px 10px 10px;
 }
 
 .search-bar2 {
