@@ -352,14 +352,13 @@ nav ul li:not(.active)::before {
 }
 
 .task-wrapper {
-  margin: 20px 0;
   overflow-x: auto;
-  overflow-y: hidden;
   white-space: nowrap;
   width: 100%;
+  margin-top: -25px;
 }
 
-.task-wrapper section {
+.task-wrapper .task-item {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -379,40 +378,20 @@ nav ul li:not(.active)::before {
   display: none;
 }
 
-.task-wrapper figure img {
+.task-wrapper .task-item img {
   width: 100%;
-  height: 250px;
+  height: 200px;
   object-fit: cover;
 }
 
 .task-text {
   display: flex;
   justify-content: space-between;
-}
-
-.task-text Link h2 {
-  color: var(--orange);
-  text-decoration: none;
-}
-
-.task-wrapper article {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
+  z-index: 99;
 }
 
 .task-wrapper div {
   text-align: left;
-}
-
-.task-wrapper div span:nth-child(2) {
-  opacity: 0.4;
-}
-
-.task-wrapper .pris {
-  color: var(--orange);
-  font-weight: 500;
 }
 
 /* Styling af CreateTask */
@@ -1099,7 +1078,7 @@ input[type="text"]:focus {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 10px;
+  padding: 10px 10px 0 10px;
   font-weight: 600;
 }
 
@@ -1115,7 +1094,7 @@ input[type="text"]:focus {
 }
 
 .kategori {
-  opacity: 0, 7;
+  opacity: 0.5;
   padding: 0 10px 10px 10px;
 }
 
