@@ -57,5 +57,7 @@ export default function SolveTask() {
             </div>
           </div>
         </div>
-        </section>;
-
+      ))}
+    </section>
+  );
+}
