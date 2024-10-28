@@ -1032,6 +1032,11 @@ input[type="text"]:focus {
 
 /* Styling af SolveTask */
 
+.link {
+  text-decoration: none;
+  list-style: none;
+}
+
 .udfør-opgaver {
   margin: 20px 0;
   overflow-x: auto;
@@ -1136,4 +1141,132 @@ input[type="text"]:focus {
 
 .åben-opgaver {
   margin-left: 10%;
+}
+
+
+/* Styling af TaskDescription */ 
+
+.task-detail {
+  width: 100%;
+}
+
+.task-detail img {
+  width: 100%;
+}
+
+.task-detail h1 {
+  color: var(--blue);
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: -20px;
+  font-size: 40px;
+}
+
+.task-detail p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.pris-dato {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+  color: var(--blue);
+  gap: 20px;
+}
+
+.pris-dato1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.pris-dato2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.pris-dato h3 {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.pris-dato img {
+  width: 30px;
+  height: auto;
+}
+
+.task-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 18px;
+}
+
+.task-buttons button {
+  width: 300px;
+  height: 40px;
+}
+
+.three-boxes-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  opacity: 0.7;
+}
+ .box {
+  border: 1px solid var(--sort);
+  border-radius: 20px;
+  width: 75px;
+  height: 40px;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ }
+
+ .user-opgave {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  gap: 20px;
+ }
+
+ .user-opgave img {
+  width: 50px;
+ }
+
+ .user-opgave1 {
+  opacity: 0.5;
+ }
+
+.task-dato {
+  position: absolute;
+  margin-left: 75vw;
+  padding-top: 10px;
+  font-size: 20px;
+  color: var(--blue);
+  font-weight: 600;
+}
+
+.black-line {
+  border: none;
+  border-top: 0.5px solid var(--sort); 
+  width: 90%;
+  margin-left: 5%;
+  margin-bottom: 20px;
+  opacity: 0.5;
 }
