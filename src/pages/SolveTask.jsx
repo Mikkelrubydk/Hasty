@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getDatabase, ref, onValue } from "firebase/database"; // Import Firebase functions
+import { Link, useLocation } from "react-router-dom";
 
 export default function SolveTask() {
   const [tasks, setTasks] = useState([]);
@@ -56,7 +57,5 @@ export default function SolveTask() {
             </div>
           </div>
         </div>
-      ))}
-    </section>
-  );
-}
+        </section>;
+
