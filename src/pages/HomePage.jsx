@@ -1,34 +1,65 @@
 import { Link } from "react-router-dom";
-import TaskDescription from "./TaskDescription";
 import { useEffect, useState } from "react";
-import { getDatabase, ref, onValue } from "firebase/database"; // Import Firebase functions
+import { getDatabase, ref, onValue } from "firebase/database";
 
 export default function HomePage({ setActiveClass }) {
   const [tasks, setTasks] = useState([]);
-  const database = getDatabase(); // Firebase database reference
+  const database = getDatabase();
+  const [activeIcon, setActiveIcon] = useState(null);
+  const [filteredTasks, setFilteredTasks] = useState([]);
 
   useEffect(() => {
-    const tasksRef = ref(database, "tasks"); // Reference til tasks i Firebase
+    const tasksRef = ref(database, "tasks");
 
-    // Lyt til ændringer i Firebase-databasen
     onValue(tasksRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
         const tasksArray = Object.keys(data).map((key) => ({
           ...data[key],
-          id: key, // Gem ID for at kunne bruge det som key i render
+          id: key,
         }));
-        setTasks(tasksArray); // Opdater state med de hentede opgaver
+        setTasks(tasksArray);
+        setFilteredTasks(tasksArray); // Set filtered tasks to all tasks initially
       } else {
-        setTasks([]); // Ingen opgaver fundet
+        setTasks([]);
+        setFilteredTasks([]);
       }
     });
 
-    // Cleanup function for at undgå memory leaks
     return () => {
-      setTasks([]); // Ryd op, når komponenten unmountes
+      setTasks([]);
+      setFilteredTasks([]);
     };
-  }, [database]); // Afhængighed for useEffect
+  }, [database]);
+
+  const categories = [
+    { name: "Håndværker", image: "/hammer.webp" },
+    { name: "Havearbejde", image: "/pruning-shears.webp" },
+    { name: "VVS", image: "/spanner.webp" },
+    { name: "Flytning", image: "/box.webp" },
+    { name: "Rengøring", image: "/cleaning.webp" },
+    { name: "Servering", image: "/serving-dish.webp" },
+    { name: "Mekaniker", image: "/gears.webp" },
+    { name: "Cykel", image: "/wheel.webp" },
+    { name: "Maling", image: "/paint-brush.webp" },
+    { name: "Tech", image: "/laptop.webp" },
+    { name: "EL-arbejde", image: "/wire.webp" },
+    { name: "Begivenhed", image: "/event.webp" },
+    { name: "Levering", image: "/laptop.webp" },
+    { name: "Vinduer", image: "/wire.webp" },
+    { name: "Andet", image: "/event.webp" },
+  ];
+
+  const handleClick = (index) => {
+    setActiveIcon(index);
+
+    // Filter tasks based on the selected category
+    const selectedCategory = categories[index].name;
+    const newFilteredTasks = tasks.filter(
+      (task) => task.category === selectedCategory
+    );
+    setFilteredTasks(newFilteredTasks);
+  };
 
   return (
     <section className="homepage-container">
@@ -50,48 +81,10 @@ export default function HomePage({ setActiveClass }) {
         <img src="/search.webp" alt="Search icon" />
         <img src="/filter.webp" alt="Filter icon" />
       </div>
-      <div className="category-container">
-        <div className="category-text">
-          <h2>Kategorier</h2>
-          <Link
-            to="/klaropgave"
-            className="textlink"
-            onClick={() => setActiveClass(1)}
-          >
-            <span>Vis alle</span>
-          </Link>
-        </div>
-        <div className="category-wrapper">
-          <figure>
-            <div className="shadow">
-              <img src="/hammer.webp" alt="Hammer icon" />
-            </div>
-            <figcaption>Håndværker</figcaption>
-          </figure>
-          <figure>
-            <div className="shadow">
-              <img src="/spanner.webp" alt="VVS icon" />
-            </div>
-            <figcaption>VVS</figcaption>
-          </figure>
-          <figure>
-            <div className="shadow">
-              <img src="/pruning-shears.webp" alt="Havearbejde icon" />
-            </div>
-            <figcaption>Havearbejde</figcaption>
-          </figure>
-          <figure>
-            <div className="shadow">
-              <img src="/box.webp" alt="Flyning icon" />
-            </div>
-            <figcaption>Flytning</figcaption>
-          </figure>
-        </div>
-      </div>
 
       <div className="task-container">
         <div className="task-text">
-          <h2>Nyligt oprettede opgaver</h2>
+          <h2 className="overskrifter">Nyligt oprettede opgaver</h2>
           <Link
             to="/klaropgave"
             className="textlink"
@@ -101,7 +94,7 @@ export default function HomePage({ setActiveClass }) {
           </Link>
         </div>
         <div className="task-wrapper">
-          {tasks.map((task) => (
+          {tasks.slice(0, 4).map((task) => (
             <div key={task.id} className="task-item">
               <div>
                 {task.picture ? (
@@ -127,6 +120,59 @@ export default function HomePage({ setActiveClass }) {
               </div>
             </div>
           ))}
+        </div>
+        <article>
+          <h2 className="overskrifter">
+            Find opgaver, der matcher dine kompetencer
+          </h2>
+          <div className="category-container">
+            {categories.map((category, index) => (
+              <div key={index} className="category-wrapper">
+                <div
+                  className={`boks ${activeIcon === index ? "active" : ""}`}
+                  onClick={() => handleClick(index)}
+                >
+                  <img src={category.image} alt={category.name} />
+                  <div>
+                    <p className="undertekst">{category.name}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </article>
+
+        <div className="filtered-tasks">
+          <div className="task-wrapper">
+            {filteredTasks.map((task) => (
+              <div key={task.id} className="task-item">
+                <div>
+                  {task.picture ? (
+                    <img src={task.picture} alt="Uploaded" />
+                  ) : (
+                    <p>Intet billede uploadet</p>
+                  )}
+                </div>
+                <div>
+                  <div className="titel-pris">
+                    <h2>{task.title || "Ingen titel angivet"}</h2>
+                    <span>
+                      <h4>
+                        {task.price
+                          ? `${task.price} kr.`
+                          : "Ingen pris angivet"}
+                      </h4>
+                    </span>
+                  </div>
+                  <div className="kategori">
+                    <span>
+                      <h3>{task.category || "Ingen kategori angivet"}</h3>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

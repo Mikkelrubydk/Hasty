@@ -238,6 +238,10 @@ nav ul li:not(.active)::before {
   font-size: 25px;
 }
 
+.overskrifter {
+  font-size: 18px;
+}
+
 .logo {
   width: 250px;
   margin-bottom: 20px;
@@ -275,54 +279,11 @@ nav ul li:not(.active)::before {
   right: 30px;
 }
 
-.category-container {
-  display: flex;
-  flex-direction: column;
-  margin-top: 50px;
-}
-
-.category-container h2 {
-  font-size: 20px;
-}
-
-.category-text {
-  display: flex;
-  justify-content: space-between;
-}
-
 .textlink {
   text-decoration: none;
   color: var(--orange);
   font-size: 20px;
   font-weight: 500;
-}
-
-.category-wrapper {
-  margin: 20px 0;
-  overflow-x: auto;
-  overflow-y: hidden;
-  white-space: nowrap;
-  width: 100%;
-}
-
-.category-wrapper::-webkit-scrollbar {
-  display: none;
-}
-
-.category-wrapper figure {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  display: inline-block;
-  width: calc(50% - 50px);
-  margin-right: 20px;
-  margin-left: 10px;
-  text-align: center;
-}
-
-.category-container figure img {
-  width: 80%;
 }
 
 .shadow {
@@ -337,18 +298,10 @@ nav ul li:not(.active)::before {
   background-color: var(--creme);
 }
 
-.category-wrapper img {
-  width: 50px;
-}
-
 .task-container {
   display: flex;
   flex-direction: column;
   margin: 50px 0;
-}
-
-.task-container h2 {
-  font-size: 20px;
 }
 
 .task-wrapper {
@@ -392,6 +345,69 @@ nav ul li:not(.active)::before {
 
 .task-wrapper div {
   text-align: left;
+}
+
+.category-container {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto; /* Horisontal scroll */
+  scroll-snap-type: x mandatory;
+  margin-top: 20px;
+}
+
+.category-wrapper {
+  flex: 0 0 calc(100% / 3.5); /* Viser 3.5 ikoner ad gangen */
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+}
+
+.category-container .boks {
+  width: 100%;
+  height: max-content;
+  padding: 10px;
+  display: flex;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: transform 0.3s;
+  background-color: transparent;
+}
+
+.category-container .boks.active {
+  border: none;
+}
+
+.category-container .boks img {
+  width: 30px;
+  height: 30px;
+}
+
+.category-container .undertekst {
+  margin: 0;
+  white-space: nowrap;
+  text-align: center;
+  color: var(--sort);
+}
+
+.category-container .boks.active .undertekst {
+  color: white;
+}
+
+.filtered-tasks .task-wrapper .task-item {
+  width: calc(80%);
+}
+
+.filtered-tasks .task-wrapper .task-item img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.category-container::-webkit-scrollbar {
+  display: none;
 }
 
 /* Styling af CreateTask */
@@ -1033,28 +1049,17 @@ input[type="text"]:focus {
 /* Styling af SolveTask */
 
 .udfør-opgaver {
-  margin: 20px 0;
+  margin: 20px auto;
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
-  width: 100%;
-}
-
-.udfør-opgaver {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  display: inline-block;
-  width: calc(85%);
-  margin-right: 7.5%;
-  margin-left: 7.5%;
-  text-align: center;
+  width: 90%;
 }
 
 .udfør-opgaver img {
   width: 100%;
-  height: 250px;
-  object-fit: fit;
+  height: 200px;
+  object-fit: cover;
 }
 
 .udfør-opgaver div {
@@ -1091,11 +1096,12 @@ input[type="text"]:focus {
 .titel-pris h2 {
   color: var(--blue);
   font-weight: 600;
+  font-size: 20px;
 }
 
 .kategori {
   opacity: 0.5;
-  padding: 0 10px 10px 10px;
+  padding: 5px 10px 10px 10px;
 }
 
 .search-bar2 {

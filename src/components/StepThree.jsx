@@ -15,13 +15,24 @@ export default function StepThree({ taskData, handleInputChange }) {
     return new Intl.DateTimeFormat("da-DK", options).format(date);
   };
 
+  // Custom date formatting for dd/MM/yyyy
+  const formatDateForStorage = (date) => {
+    return date
+      ? date.toLocaleDateString("da-DK", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+        })
+      : null;
+  };
+
   useEffect(() => {
     handleInputChange({ target: { name: "type", value: activeIcon } });
     handleInputChange({
       target: {
         name: "date",
-        value: startDate ? startDate.toISOString() : null,
-      }, // Ensures date is in ISO string format
+        value: formatDateForStorage(startDate),
+      },
     });
     handleInputChange({ target: { name: "location", value: address } });
   }, [activeIcon, startDate, address, handleInputChange]);
