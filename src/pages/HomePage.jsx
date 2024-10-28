@@ -1,7 +1,35 @@
 import { Link } from "react-router-dom";
 import TaskDescription from "./TaskDescription";
+import { useEffect, useState } from "react";
+import { getDatabase, ref, onValue } from "firebase/database"; // Import Firebase functions
 
 export default function HomePage({ setActiveClass }) {
+  const [tasks, setTasks] = useState([]);
+  const database = getDatabase(); // Firebase database reference
+
+  useEffect(() => {
+    const tasksRef = ref(database, "tasks"); // Reference til tasks i Firebase
+
+    // Lyt til ændringer i Firebase-databasen
+    onValue(tasksRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        const tasksArray = Object.keys(data).map((key) => ({
+          ...data[key],
+          id: key, // Gem ID for at kunne bruge det som key i render
+        }));
+        setTasks(tasksArray); // Opdater state med de hentede opgaver
+      } else {
+        setTasks([]); // Ingen opgaver fundet
+      }
+    });
+
+    // Cleanup function for at undgå memory leaks
+    return () => {
+      setTasks([]); // Ryd op, når komponenten unmountes
+    };
+  }, [database]); // Afhængighed for useEffect
+
   return (
     <section className="homepage-container">
       <div>
@@ -73,50 +101,32 @@ export default function HomePage({ setActiveClass }) {
           </Link>
         </div>
         <div className="task-wrapper">
-          <section>
-            <figure>
-              <img src="/brokensink.webp" alt="Ødelagt Håndvask" />
-            </figure>
-            <article>
+          {tasks.map((task) => (
+            <div key={task.id} className="task-item">
               <div>
-                <h3>Ødelagt håndvask</h3>
-                <span>VVS</span>
+                {task.picture ? (
+                  <img src={task.picture} alt="Uploaded" />
+                ) : (
+                  <p>Intet billede uploadet</p>
+                )}
               </div>
               <div>
-                <span className="pris">500KR</span>
+                <div className="titel-pris">
+                  <h2>{task.title || "Ingen titel angivet"}</h2>
+                  <span>
+                    <h4>
+                      {task.price ? `${task.price} kr.` : "Ingen pris angivet"}
+                    </h4>
+                  </span>
+                </div>
+                <div className="kategori">
+                  <span>
+                    <h3>{task.category || "Ingen kategori angivet"}</h3>
+                  </span>
+                </div>
               </div>
-            </article>
-          </section>
-
-          <section>
-            <figure>
-              <img src="/fladcykel.webp" alt="Punkteret cykeldæk" />
-            </figure>
-            <article>
-              <div>
-                <h3>Punkteret cykel</h3>
-                <span>Cykel</span>
-              </div>
-              <div>
-                <span className="pris">200KR</span>
-              </div>
-            </article>
-          </section>
-
-          <section>
-            <figure>
-              <img src="/brokensink.webp" alt="Ødelagt Håndvask" />
-            </figure>
-            <article>
-              <div>
-                <h3>Ødelagt håndvask</h3>
-                <span>VVS</span>
-              </div>
-              <div>
-                <span className="pris">500KR</span>
-              </div>
-            </article>
-          </section>
+            </div>
+          ))}
         </div>
       </div>
     </section>
