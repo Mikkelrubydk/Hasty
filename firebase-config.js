@@ -1,9 +1,9 @@
+// firebaseConfig.js
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore"; // Import Firestore
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyD3NJ3xo4evhf8c7RRpf39ZXOXqvsZdBtg",
   authDomain: "hasty-f0e75.firebaseapp.com",
@@ -21,4 +21,4 @@ const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const db = getFirestore(app); // Initialize Firestore
 
-export { auth, db }; // Export auth and db for use in other files
+export { auth, db, collection, addDoc }; // Export relevant Firebase modules

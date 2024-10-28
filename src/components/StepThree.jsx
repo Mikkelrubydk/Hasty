@@ -4,7 +4,9 @@ import "react-datepicker/dist/react-datepicker.css";
 
 export default function StepThree({ taskData, handleInputChange }) {
   const [activeIcon, setActiveIcon] = useState(taskData.type || null); // Init med eksisterende type
-  const [startDate, setStartDate] = useState(taskData.date || null); // Init med eksisterende dato
+  const [startDate, setStartDate] = useState(
+    taskData.date ? new Date(taskData.date) : null
+  ); // Init med eksisterende dato
   const [address, setAddress] = useState(taskData.location || ""); // Init med eksisterende adresse
 
   // Formatér datoen til "dag måned"
@@ -15,12 +17,11 @@ export default function StepThree({ taskData, handleInputChange }) {
   };
 
   // Håndterer opdatering af taskData
-  const handleNext = () => {
-    // Gem type
+  const handleDataUpdate = () => {
     handleInputChange({ target: { name: "type", value: activeIcon } });
-    // Gem dato
-    handleInputChange({ target: { name: "date", value: startDate } });
-    // Gem adresse
+    handleInputChange({
+      target: { name: "date", value: startDate ? startDate.getTime() : null },
+    });
     handleInputChange({ target: { name: "location", value: address } });
   };
 
@@ -34,9 +35,12 @@ export default function StepThree({ taskData, handleInputChange }) {
         <div>
           <div
             className={`boks-stepthree ${activeIcon === 0 ? "active" : ""}`}
-            onClick={() => setActiveIcon(0)}
+            onClick={() => {
+              setActiveIcon(0);
+              handleDataUpdate(); // Opdaterer data ved klik
+            }}
           >
-            <img src="./haster.webp" alt="Fast clock icon" />
+            <img src="/haster.webp" alt="Fast clock icon" />
           </div>
           <p className="undertekst-stepthree">Hurtigst muligt</p>
         </div>
@@ -44,9 +48,12 @@ export default function StepThree({ taskData, handleInputChange }) {
         <div>
           <div
             className={`boks-stepthree ${activeIcon === 1 ? "active" : ""}`}
-            onClick={() => setActiveIcon(1)}
+            onClick={() => {
+              setActiveIcon(1);
+              handleDataUpdate(); // Opdaterer data ved klik
+            }}
           >
-            <img src="./calender.webp" alt="Calender icon" />
+            <img src="/calender.webp" alt="Calender icon" />
           </div>
           <p className="undertekst-stepthree">Specifik dato</p>
         </div>
@@ -55,12 +62,15 @@ export default function StepThree({ taskData, handleInputChange }) {
       <div className="adresse-div">
         <h4>Adresse</h4>
         <div className="adresse-boks">
-          <img src="./location.webp" alt="Location pin icon" />
+          <img src="/location.webp" alt="Location pin icon" />
           <input
             type="text"
             placeholder="Skriv her"
             value={address}
-            onChange={(e) => setAddress(e.target.value)}
+            onChange={(e) => {
+              setAddress(e.target.value);
+              handleDataUpdate(); // Opdaterer data ved ændring
+            }}
           />
         </div>
       </div>
@@ -68,12 +78,16 @@ export default function StepThree({ taskData, handleInputChange }) {
       <div className="dato-div">
         <h4>Vælg Dato</h4>
         <div className="dato-boks">
-          <img src="./calender.webp" alt="Calender icon" />
+          <img src="/calender.webp" alt="Calender icon" />
           <DatePicker
             selected={startDate}
-            onChange={(date) => setStartDate(date)}
+            onChange={(date) => {
+              setStartDate(date);
+              handleDataUpdate(); // Opdaterer data ved datoændring
+            }}
             dateFormat="dd/MM/yyyy"
             className="date-picker"
+            minDate={new Date()}
             placeholderText="Vælg en dato"
             customInput={
               <input

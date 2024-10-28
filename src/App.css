@@ -455,7 +455,7 @@ nav ul li:not(.active)::before {
   bottom: 100px;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 100;
+  z-index: 5;
   width: 70%;
   background-color: #2c2c2c;
   color: #f4f2ef;
@@ -772,6 +772,11 @@ input[type="text"]:focus {
   height: 50px;
 }
 
+.date-picker {
+  position: relative;
+  z-index: 50;
+}
+
 .date-input {
   width: 250px;
   background-color: var(--beige);
@@ -780,6 +785,7 @@ input[type="text"]:focus {
   font-weight: 600;
   border: none;
   outline: none;
+  z-index: 50;
 }
 
 .date-input::placeholder {
@@ -1045,10 +1051,7 @@ input[type="text"]:focus {
   font-weight: 400;
 }
 
-
-
-
-/* Styling af SolveTask */ 
+/* Styling af SolveTask */
 
 .udfør-opgaver {
   margin: 20px 0;
@@ -1062,16 +1065,11 @@ input[type="text"]:focus {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
   display: inline-block;
   width: calc(85%);
   margin-right: 7.5%;
   margin-left: 7.5%;
   text-align: center;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-  overflow: hidden;
-  background-color: var(--creme);
 }
 
 .udfør-opgaver img {
@@ -1082,6 +1080,19 @@ input[type="text"]:focus {
 
 .udfør-opgaver div {
   text-align: left;
+}
+
+.task-item {
+  margin: 50px 0;
+  background-color: var(--creme);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.task-item img {
+  object-fit: cover;
 }
 
 .titel-pris {
@@ -1104,5 +1115,5 @@ input[type="text"]:focus {
 
 .kategori {
   padding: 10px;
-  opacity: 0,7;
+  opacity: 0, 7;
 }

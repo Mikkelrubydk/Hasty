@@ -38,13 +38,14 @@ export default function ProfilePage() {
   };
 
   const rankDescriptions = {
-    Skilpadde: "Du er skilpadde rank, stadig begynder. Udfør flere opgaver for at stige i rank",
-    Elefant: "Du på vej opad, nu elefant rank! Udfør flere opgaver for at stige i rank",
+    Skilpadde:
+      "Du er skilpadde rank, stadig begynder. Udfør flere opgaver for at stige i rank",
+    Elefant:
+      "Du på vej opad, nu elefant rank! Udfør flere opgaver for at stige i rank",
     Kat: "Du er rank kat!  Fortsæt med at udføre opgaver for at nå næste niveau",
     Hund: "Du er rank hund, du er der næsten! Udfør flere opgaver for at komme i højeste rank",
     Hare: "Tillykke du er nu en ægte Hasty-Hare",
   };
-  
 
   useEffect(() => {
     if (user) {
@@ -165,13 +166,12 @@ export default function ProfilePage() {
       if (tasksCompleted <= 20) return "Hund";
       else return "Hare"; // 21 og over
     };
-  
+
     const newRank = calculateRank(completedTasks);
     setRank(newRank);
     setRankImage(rankImages[newRank]); // Opdater rank-billede baseret på rang
     setRankDescription(rankDescriptions[newRank]); // Opdater rangbeskrivelse
   }, [completedTasks]);
-  
 
   const toggleRankDescription = () => {
     setRankDescriptionVisible(!rankDescriptionVisible);
@@ -232,7 +232,7 @@ export default function ProfilePage() {
             </button>
           </form>
         )}
-        <StarRating rating={3} reviews={34} />
+        <StarRating rating={4} reviews={34} />
         <div className="oprettelsesdato">
           <h2>Medlem siden: {creationDate}</h2>
         </div>
@@ -275,36 +275,42 @@ export default function ProfilePage() {
           />
         </div>
         {rankDescriptionVisible && (
-  <div className="rankcontainer">
-    <p>Rank System</p>
-    <div className="rankdescription">
-      <div className={completedTasks <= 5 ? "active" : ""}>
-        <img src={turtleImage} alt="Skilpadde" />
-      </div>
-      <div
-        className={completedTasks > 5 && completedTasks <= 10 ? "active" : ""}
-      >
-        <img src={elephantImage} alt="Elefant" />
-      </div>
-      <div
-        className={completedTasks > 10 && completedTasks <= 15 ? "active" : ""}
-      >
-        <img src={catImage} alt="Kat" />
-      </div>
-      <div
-        className={completedTasks > 15 && completedTasks <= 20 ? "active" : ""}
-      >
-        <img src={dogImage} alt="Hund" />
-      </div>
-      <div className={completedTasks > 20 ? "active" : ""}>
-        <img src={hareImage} alt="Hare" />
-      </div>
-    </div>
-    <div className="rank-beskrivelse">
-    <p>{rankDescription}</p> {/* Vis rangbeskrivelsen her */}
-    </div>
-  </div>
-)}
+          <div className="rankcontainer">
+            <p>Rank System</p>
+            <div className="rankdescription">
+              <div className={completedTasks <= 5 ? "active" : ""}>
+                <img src={turtleImage} alt="Skilpadde" />
+              </div>
+              <div
+                className={
+                  completedTasks > 5 && completedTasks <= 10 ? "active" : ""
+                }
+              >
+                <img src={elephantImage} alt="Elefant" />
+              </div>
+              <div
+                className={
+                  completedTasks > 10 && completedTasks <= 15 ? "active" : ""
+                }
+              >
+                <img src={catImage} alt="Kat" />
+              </div>
+              <div
+                className={
+                  completedTasks > 15 && completedTasks <= 20 ? "active" : ""
+                }
+              >
+                <img src={dogImage} alt="Hund" />
+              </div>
+              <div className={completedTasks > 20 ? "active" : ""}>
+                <img src={hareImage} alt="Hare" />
+              </div>
+            </div>
+            <div className="rank-beskrivelse">
+              <p>{rankDescription}</p> {/* Vis rangbeskrivelsen her */}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

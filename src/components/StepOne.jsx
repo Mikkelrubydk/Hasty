@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+// Kategorier med ikoner
 const categories = [
   { name: "Håndværker", image: "/hammer.webp" },
   { name: "Havearbejde", image: "/pruning-shears.webp" },
@@ -18,12 +19,13 @@ const categories = [
   { name: "Andet", image: "/event.webp" },
 ];
 
-export default function StepOne() {
+export default function StepOne({ handleCategoryChange }) {
   const [activeIcon, setActiveIcon] = useState(null);
 
+  // Håndter klik og gem kategoriens navn i taskData via handleCategoryChange
   const handleClick = (index) => {
     setActiveIcon(index);
-    console.log(index);
+    handleCategoryChange(categories[index].name); // Send valgt kategorinavn tilbage
   };
 
   return (
