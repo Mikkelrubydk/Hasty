@@ -1107,6 +1107,7 @@ input[type="text"]:focus {
 .kategori {
   opacity: 0.5;
   padding: 5px 10px 10px 10px;
+  color: var(--sort);
 }
 
 .search-bar2 {
@@ -1149,8 +1150,11 @@ input[type="text"]:focus {
   margin-left: 10%;
 }
 
+/* Styling af TaskDescription */
 
-/* Styling af TaskDescription */ 
+.taskdescription {
+  margin-bottom: 100px;
+}
 
 .task-detail {
   width: 100%;
@@ -1158,33 +1162,32 @@ input[type="text"]:focus {
 
 .task-detail img {
   width: 100%;
+  max-height: 30vh;
+  object-fit: cover;
 }
 
 .task-detail h1 {
   color: var(--blue);
   font-weight: 600;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 15px;
-  margin-bottom: -20px;
-  font-size: 32px;
+  text-align: center;
+  margin-top: 30px;
+  font-size: 40px;
+  margin-bottom: 15px;
 }
 
 .task-detail p {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px;
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 15px;
 }
 
 .pris-dato {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  width: 80%;
+  margin: 40px auto;
   color: var(--blue);
-  gap: 20px;
 }
 
 .pris-dato1 {
@@ -1213,15 +1216,23 @@ input[type="text"]:focus {
 
 .task-buttons {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
   font-size: 18px;
 }
 
 .task-buttons button {
-  width: 300px;
-  height: 40px;
+  z-index: 100;
+  width: 70%;
+  background-color: #2c2c2c;
+  color: #f4f2ef;
+  border-radius: 10px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  margin: 0 auto;
+  margin-bottom: 20px;
 }
 
 .three-boxes-container {
@@ -1230,9 +1241,10 @@ input[type="text"]:focus {
   justify-content: center;
   align-items: center;
   gap: 10px;
-  opacity: 0.7;
+  margin: 40px auto;
 }
- .box {
+.box {
+  opacity: 0.3;
   border: 1px solid var(--sort);
   border-radius: 20px;
   width: 75px;
@@ -1241,9 +1253,9 @@ input[type="text"]:focus {
   display: flex;
   align-items: center;
   justify-content: center;
- }
+}
 
- .box1 {
+.box1 {
   border: none;
   border-radius: 20px;
   width: 75px;
@@ -1254,43 +1266,44 @@ input[type="text"]:focus {
   justify-content: center;
   background-color: var(--orange);
   color: var(--creme);
- }
+}
 
- .user-opgave {
+.user-opgave {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 40px;
   gap: 20px;
- }
+}
 
- .user-opgave img {
-  width: 50px;
- }
+.user-opgave img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+}
 
- .user-opgave1 {
+.user-opgave1 {
   opacity: 0.5;
- }
+}
 
 .task-dato {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
+  text-align: right;
+  font-size: 12px;
   color: var(--blue);
   font-weight: 600;
-  opacity: 0.5;
+  opacity: 0.3;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .black-line {
   border: none;
-  border-top: 0.5px solid var(--sort); 
+  border-top: 0.5px solid var(--sort);
   width: 90%;
-  margin-left: 5%;
-  margin-bottom: 20px;
+  margin: 0 auto;
   opacity: 0.5;
 }
-
 
 .back-button {
   position: absolute;

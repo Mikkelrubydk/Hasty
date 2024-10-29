@@ -1,15 +1,20 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getDatabase, ref, onValue } from "firebase/database";
+import LoadingScreen from "../components/LoadingScreen";
 
 export default function HomePage({ setActiveClass }) {
   const [tasks, setTasks] = useState([]);
   const database = getDatabase();
-  const [activeIcon, setActiveIcon] = useState(null);
+  const [activeIcon, setActiveIcon] = useState(0); // Set the default active icon to the first category
   const [filteredTasks, setFilteredTasks] = useState([]);
+  const [loading, setLoading] = useState(true); // Loading state
 
   useEffect(() => {
     const tasksRef = ref(database, "tasks");
+
+    // Set loading to true before fetching data
+    setLoading(true);
 
     onValue(tasksRef, (snapshot) => {
       const data = snapshot.val();
@@ -19,11 +24,20 @@ export default function HomePage({ setActiveClass }) {
           id: key,
         }));
         setTasks(tasksArray);
-        setFilteredTasks(tasksArray); // Set filtered tasks to all tasks initially
+
+        // Filter tasks for the "Håndværker" category
+        const initialCategory = categories[0].name; // "Håndværker"
+        const initialFilteredTasks = tasksArray.filter(
+          (task) => task.category === initialCategory
+        );
+        setFilteredTasks(initialFilteredTasks);
       } else {
         setTasks([]);
         setFilteredTasks([]);
       }
+
+      // Set loading to false after data is fetched
+      setLoading(false);
     });
 
     return () => {
@@ -61,6 +75,10 @@ export default function HomePage({ setActiveClass }) {
     setFilteredTasks(newFilteredTasks);
   };
 
+  if (loading) {
+    return <LoadingScreen />; // Loading screen
+  }
+
   return (
     <section className="homepage-container">
       <div>
@@ -95,30 +113,34 @@ export default function HomePage({ setActiveClass }) {
         </div>
         <div className="task-wrapper">
           {tasks.slice(0, 4).map((task) => (
-            <div key={task.id} className="task-item">
-              <div>
-                {task.picture ? (
-                  <img src={task.picture} alt="Uploaded" />
-                ) : (
-                  <p>Intet billede uploadet</p>
-                )}
-              </div>
-              <div>
-                <div className="titel-pris">
-                  <h2>{task.title || "Ingen titel angivet"}</h2>
-                  <span>
-                    <h4>
-                      {task.price ? `${task.price} kr.` : "Ingen pris angivet"}
-                    </h4>
-                  </span>
+            <Link to={`/tasks/${task.id}`} className="link" key={task.id}>
+              <div className="task-item">
+                <div>
+                  {task.picture ? (
+                    <img src={task.picture} alt="Uploaded" />
+                  ) : (
+                    <p>Intet billede uploadet</p>
+                  )}
                 </div>
-                <div className="kategori">
-                  <span>
-                    <h3>{task.category || "Ingen kategori angivet"}</h3>
-                  </span>
+                <div>
+                  <div className="titel-pris">
+                    <h2>{task.title || "Ingen titel angivet"}</h2>
+                    <span>
+                      <h4>
+                        {task.price
+                          ? `${task.price} kr.`
+                          : "Ingen pris angivet"}
+                      </h4>
+                    </span>
+                  </div>
+                  <div className="kategori">
+                    <span>
+                      <h3>{task.category || "Ingen kategori angivet"}</h3>
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
         <article>
@@ -145,32 +167,34 @@ export default function HomePage({ setActiveClass }) {
         <div className="filtered-tasks">
           <div className="task-wrapper">
             {filteredTasks.map((task) => (
-              <div key={task.id} className="task-item">
-                <div>
-                  {task.picture ? (
-                    <img src={task.picture} alt="Uploaded" />
-                  ) : (
-                    <p>Intet billede uploadet</p>
-                  )}
-                </div>
-                <div>
-                  <div className="titel-pris">
-                    <h2>{task.title || "Ingen titel angivet"}</h2>
-                    <span>
-                      <h4>
-                        {task.price
-                          ? `${task.price} kr.`
-                          : "Ingen pris angivet"}
-                      </h4>
-                    </span>
+              <Link to={`/tasks/${task.id}`} className="link" key={task.id}>
+                <div className="task-item">
+                  <div>
+                    {task.picture ? (
+                      <img src={task.picture} alt="Uploaded" />
+                    ) : (
+                      <p>Intet billede uploadet</p>
+                    )}
                   </div>
-                  <div className="kategori">
-                    <span>
-                      <h3>{task.category || "Ingen kategori angivet"}</h3>
-                    </span>
+                  <div>
+                    <div className="titel-pris">
+                      <h2>{task.title || "Ingen titel angivet"}</h2>
+                      <span>
+                        <h4>
+                          {task.price
+                            ? `${task.price} kr.`
+                            : "Ingen pris angivet"}
+                        </h4>
+                      </span>
+                    </div>
+                    <div className="kategori">
+                      <span>
+                        <h3>{task.category || "Ingen kategori angivet"}</h3>
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
