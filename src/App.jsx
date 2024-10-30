@@ -11,6 +11,7 @@ import NavBar from "./components/NavBar";
 import "./App.css";
 import "../firebase-config"; // Sørg for, at denne fil er korrekt og importeres
 import TaskDescription from "./pages/TaskDescription";
+import OtherProfilePage from "./pages/OtherProfilePage";
 
 export default function App() {
   const auth = getAuth();
@@ -58,6 +59,7 @@ export default function App() {
           element={<SolveTask setActiveClass={setActiveClass} />}
         />
         <Route path="/tasks/:taskId" element={<TaskDescription/>} />
+        <Route path="/task/:taskId/userprofile" element={<OtherProfilePage userId="loggedInUserId" />} />
         <Route
           path="/profile"
           element={<ProfilePage setActiveClass={setActiveClass} />}
