@@ -61,11 +61,9 @@ export default function Chat({ userId }) {
     const unsubscribe = onValue(messagesRef, (snapshot) => {
       if (snapshot.exists()) {
         const allMessages = Object.values(snapshot.val());
-        // Filtrer beskeder mellem userId og taskOwnerId
+        // Filtrer beskeder, så de vises uanset sender
         const filteredMessages = allMessages.filter(
-          (msg) =>
-            (msg.senderId === userId && msg.receiverId === taskOwnerId) ||
-            (msg.senderId === taskOwnerId && msg.receiverId === userId)
+          (msg) => msg.receiverId === userId || msg.senderId === userId
         );
         // Sæt beskederne og tilføj billeder
         const messagesWithImages = filteredMessages.map((msg) => ({
@@ -87,7 +85,6 @@ export default function Chat({ userId }) {
     database,
     taskId,
     userId,
-    taskOwnerId,
     profileImage,
     taskOwnerImage,
     userName,

@@ -866,6 +866,23 @@ input[type="text"]:focus {
   z-index: 1;
 }
 
+.chat-button {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 20px;
+  top: 20px;
+  border-radius: 50%;
+  padding: 10px;
+  border: none;
+  background-color: var(--beige);
+}
+
+.chat-button img {
+  width: 30px;
+}
+
 .profile-page {
   height: 85vh;
   background-color: var(--beige);
@@ -1351,10 +1368,14 @@ input[type="text"]:focus {
   display: flex;
   flex-direction: column;
   margin: 50px 0;
+  gap: 20px;
 }
 
 .chat-messages img {
-  width: 40px;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .my-messages {
@@ -1379,7 +1400,6 @@ input[type="text"]:focus {
   color: #f4f2ef;
   border-radius: 10px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   font-size: 18px;
   padding: 10px 10px;
@@ -1387,6 +1407,8 @@ input[type="text"]:focus {
 
 .chat-input input {
   background-color: transparent;
+  width: 100%;
+  padding-right: 10px;
 }
 
 .chat-input button {

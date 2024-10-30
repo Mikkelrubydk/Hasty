@@ -9,6 +9,7 @@ import dogImage from "/dog.png"; // Image for Dog
 import hareImage from "/hare.png"; // Image for Hare
 import LoadingScreen from "../components/LoadingScreen";
 import StarRating from "../components/StarRating";
+import { Link, Navigate } from "react-router-dom";
 
 export default function ProfilePage() {
   const auth = getAuth();
@@ -179,6 +180,11 @@ export default function ProfilePage() {
 
   return (
     <section className="profile-wrapper">
+      <Link to="/tasks/messages">
+        <div className="chat-button">
+          <img src="/chat.webp" alt="Chat ikon" />
+        </div>
+      </Link>
       <div className="profile-page">
         {loading ? (
           <LoadingScreen />

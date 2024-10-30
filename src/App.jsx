@@ -13,6 +13,7 @@ import "../firebase-config"; // Sørg for, at denne fil er korrekt og importeres
 import TaskDescription from "./pages/TaskDescription";
 import Chat from "./pages/Chat";
 import OtherProfilePage from "./pages/OtherProfilePage";
+import TaskMessages from "./pages/TaskMessages";
 
 export default function App() {
   const auth = getAuth();
@@ -60,6 +61,11 @@ export default function App() {
           element={<SolveTask setActiveClass={setActiveClass} />}
         />
         <Route path="/tasks/:taskId/chat" element={<Chat userId={userId} />} />
+        <Route
+          path="/tasks/messages"
+          element={<TaskMessages userId={userId} />}
+        />{" "}
+        {/* Tilføj TaskMessages */}
         <Route path="/tasks/:taskId" element={<TaskDescription />} />
         <Route
           path="/task/:taskId/userprofile"
