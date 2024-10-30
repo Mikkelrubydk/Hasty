@@ -232,6 +232,7 @@ nav ul li:not(.active)::before {
 
 .homepage-container {
   padding: 20px;
+  margin-bottom: 100px;
 }
 
 .homepage-container h1 {
@@ -1320,4 +1321,80 @@ input[type="text"]:focus {
 
 .back-button-image {
   width: 10px;
+}
+
+/* STYLING AF CHAT.JSX */
+
+.chat {
+  width: 90%;
+  margin: 0 auto;
+  padding-top: 100px;
+}
+
+.chat h1,
+.chat h2 {
+  text-align: center;
+}
+
+.chat h1 {
+  color: var(--blue);
+  font-weight: 600;
+  font-size: 40px;
+  margin-bottom: 5px;
+}
+
+.chat h2 {
+  font-size: 20px;
+}
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  margin: 50px 0;
+}
+
+.chat-messages img {
+  width: 40px;
+}
+
+.my-messages {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.their-messages {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.chat-input {
+  margin: 0 auto;
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  width: 80%;
+  background-color: var(--creme);
+  color: #f4f2ef;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  padding: 10px 10px;
+}
+
+.chat-input input {
+  background-color: transparent;
+}
+
+.chat-input button {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+}
+
+.chat-input img {
+  width: 30px;
 }
