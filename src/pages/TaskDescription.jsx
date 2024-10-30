@@ -6,8 +6,8 @@ import LoadingScreen from "../components/LoadingScreen"; // Sørg for, at denne 
 export default function TaskDescription() {
   const { taskId } = useParams();
   const [task, setTask] = useState(null);
-  const [profileImage, setProfileImage] = useState(null);
-  const [userName, setUserName] = useState(null);
+  const [profileImage, setProfileImage] = useState("/default-user.webp"); // Sæt en standard værdi
+  const [userName, setUserName] = useState("Ukendt bruger"); // Sæt en standard værdi
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const database = getDatabase();
@@ -26,8 +26,7 @@ export default function TaskDescription() {
           if (taskData.userId) {
             const userRef = ref(database, `users/${taskData.userId}`);
 
-            // Hent brugerens profilbillede og navn
-            get(userRef).then((userSnapshot) => {
+            return get(userRef).then((userSnapshot) => {
               if (userSnapshot.exists()) {
                 const userData = userSnapshot.val();
                 setProfileImage(userData.profileImage || "/default-user.webp");
@@ -40,6 +39,9 @@ export default function TaskDescription() {
         } else {
           console.log("Ingen data tilgængelig for denne opgave");
         }
+      })
+      .catch((error) => {
+        console.error("Fejl ved hentning af data:", error);
       })
       .finally(() => {
         setLoading(false); // Indstil loading til false, når data er indlæst
@@ -75,7 +77,7 @@ export default function TaskDescription() {
 
       <div className="pris-dato">
         <div className="pris-dato1">
-          <img src="/location.webp" alt="Placering ikon" />
+          <img src="/money.webp" alt="Pris ikon" />
           <h3>{task.price ? `${task.price} kr.` : "Ingen pris angivet"}</h3>
         </div>
         <div className="pris-dato2">
@@ -94,7 +96,7 @@ export default function TaskDescription() {
       </div>
 
       <div className="user-opgave">
-        <img src={profileImage} alt="Brugerbillede" />
+        <img src={profileImage} alt="Brugerprofil" />
         <div className="user-opgave1">
           <p>Denne opgave er oprettet af</p>
           <h5>{userName}</h5>

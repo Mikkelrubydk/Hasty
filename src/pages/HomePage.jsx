@@ -60,8 +60,8 @@ export default function HomePage({ setActiveClass }) {
     { name: "EL-arbejde", image: "/wire.webp" },
     { name: "Begivenhed", image: "/event.webp" },
     { name: "Levering", image: "/laptop.webp" },
-    { name: "Vinduer", image: "/wire.webp" },
-    { name: "Andet", image: "/event.webp" },
+    { name: "Vinduer", image: "/window.webp" },
+    { name: "Andet", image: "/question.webp" },
   ];
 
   const handleClick = (index) => {
