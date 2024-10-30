@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { getDatabase, ref, get } from "firebase/database";
 import LoadingScreen from "../components/LoadingScreen"; // Sørg for, at denne komponent er korrekt placeret
 
@@ -90,9 +90,9 @@ export default function TaskDescription() {
         <button onClick={() => alert("Du har budt på denne opgave")}>
           Byd på opgaven
         </button>
-        <button onClick={() => alert("Besked sendt til opgaveudbyderen")}>
-          Send besked
-        </button>
+        <Link to={`/tasks/${taskId}/chat`}>
+          <button>Send besked</button>
+        </Link>
       </div>
 
       <div className="user-opgave">
