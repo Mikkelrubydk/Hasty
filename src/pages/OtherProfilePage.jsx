@@ -15,13 +15,13 @@ export default function OtherProfilePage() {
   const user = auth.currentUser;
   const database = getDatabase();
 
-  const [name, setName] = useState("");
-  const [profileImage, setProfileImage] = useState("");
+  const [profileImage, setProfileImage] = useState("/default-user.webp"); // Sæt en standard værdi
+  const [name, setUserName] = useState("Ukendt bruger"); // Sæt en standard værdi
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [loading, setLoading] = useState(true);
   const [creationDate, setCreationDate] = useState("");
-  const [profileDescription, setProfileDescription] = useState("");
+  const [profileDescription, setProfileDescription] = useState("Denne bruger har ingen beskrivelse");
   const [isEditing, setIsEditing] = useState(false); // State for editing mode
   const [completedTasks, setCompletedTasks] = useState(0);
   const [rank, setRank] = useState("");
@@ -57,7 +57,7 @@ export default function OtherProfilePage() {
           if (snapshot.exists()) {
             const userData = snapshot.val();
             setName(userData.name || "");
-            setProfileImage(userData.profileImage || "");
+            setProfileImage(userData.profileImage || "/default-user.webp");
             setCreationDate(userData.creationDate || "");
             setCompletedTasks(userData.completedTasks || 0);
             setProfileDescription(userData.profileDescription || "");
@@ -128,17 +128,6 @@ export default function OtherProfilePage() {
       setErrorMessage("Kunne ikke opdatere profil: " + error.message);
     }
   };
-
-  const handleLogout = () => {
-    signOut(auth)
-      .then(() => {
-        console.log("Bruger logget ud!");
-      })
-      .catch((error) => {
-        console.error("Fejl ved logout: ", error);
-      });
-  };
-
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -302,9 +291,9 @@ export default function OtherProfilePage() {
           </div>
           
         )}
-            <div className="tidligere-opgaver">
-                <h4>Tidligere Opgaver</h4>
-            </div>
+        <div>
+        <h4>Tidligere Opgaver</h4>
+      </div>
       </div>
     </section>
   );
