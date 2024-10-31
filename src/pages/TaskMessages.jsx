@@ -5,8 +5,8 @@ import LoadingScreen from "../components/LoadingScreen";
 
 export default function TaskMessages({ userId }) {
   const [tasks, setTasks] = useState([]);
-  const [loading, setLoading] = useState(true); // Loader state
-  const [error, setError] = useState(null); // Error state
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const database = getDatabase();
 
   useEffect(() => {
@@ -15,53 +15,61 @@ export default function TaskMessages({ userId }) {
     const unsubscribe = onValue(
       tasksRef,
       (snapshot) => {
-        setLoading(false); // Stop loading
+        setLoading(false);
         if (snapshot.exists()) {
-          const allTasks = Object.keys(snapshot.val())
-            .map((taskId) => {
-              const taskData = snapshot.val()[taskId];
+          const allTasks = Object.keys(snapshot.val()).map((taskId) => {
+            const taskData = snapshot.val()[taskId];
+            const chatId = taskData.chatId; // Hent chatId fra opgaven
+            const messagesRef = ref(database, `chats/${chatId}`); // Reference til chatten
 
-              // Find chat data for each task
-              const chatRef = ref(database, `chats/${taskId}`);
-              const messagesSnapshot = snapshot.val()[taskId].messages || {};
+            return new Promise((resolve) => {
+              onValue(messagesRef, (messagesSnapshot) => {
+                const messages = messagesSnapshot.val() || {};
 
-              // Find last message
-              const lastMessageData =
-                Object.values(messagesSnapshot).pop() || {};
-              const lastMessage = lastMessageData.message || "Ingen beskeder";
+                // Filtrer relevante beskeder
+                const relevantMessages = Object.values(messages).filter(
+                  (msg) => msg.senderId === userId || msg.receiverId === userId
+                );
 
-              // Return task data if user is involved
-              if (taskData.userId === userId || taskData.partnerId === userId) {
-                return {
-                  taskId,
-                  title: taskData.title,
-                  partnerId:
-                    taskData.userId === userId
-                      ? taskData.partnerId
-                      : taskData.userId,
-                  lastMessage,
-                };
-              }
-              return null;
-            })
-            .filter((task) => task !== null);
+                // Ingen lastMessage, vi udelader det helt som ønsket
 
-          setTasks(allTasks);
+                // Returner opgavedata, hvis brugeren er involveret
+                if (
+                  taskData.userId === userId ||
+                  taskData.receiverId === userId
+                ) {
+                  resolve({
+                    taskId,
+                    title: taskData.title,
+                    receiverId: taskData.receiverId, // Bruger receiverId
+                    // Vi fjerner lastMessage her
+                  });
+                } else {
+                  resolve(null);
+                }
+              });
+            });
+          });
+
+          // Vent på alle opgaver og beskeder
+          Promise.all(allTasks).then((resolvedTasks) => {
+            setTasks(resolvedTasks.filter((task) => task !== null));
+          });
         } else {
-          setTasks([]); // Ingen opgaver
+          setTasks([]);
         }
       },
       (error) => {
-        setLoading(false); // Stop loading
-        setError(error.message); // Sæt fejlmeddelelse
+        setLoading(false);
+        setError(error.message);
       }
     );
 
     return () => unsubscribe();
   }, [database, userId]);
 
-  if (loading) return <LoadingScreen />; // Loader-tilstand
-  if (error) return <p>Fejl: {error}</p>; // Fejlmeddelelse
+  if (loading) return <LoadingScreen />;
+  if (error) return <p>Fejl: {error}</p>;
 
   return (
     <main>
@@ -71,8 +79,7 @@ export default function TaskMessages({ userId }) {
           <div key={task.taskId}>
             <Link to={`/tasks/${task.taskId}/chat`}>
               <h2>{task.title}</h2>
-              <p>Chat med: {task.partnerId}</p>
-              <p>Seneste besked: {task.lastMessage}</p>
+              <p>Chat med: {task.receiverId}</p>
             </Link>
           </div>
         ))}

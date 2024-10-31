@@ -101,7 +101,7 @@ export default function TaskDescription() {
         </Link>
         <div className="user-opgave1">
           <p>Denne opgave er oprettet af</p>
-          <Link to={`/task/${taskId}/userprofile`}>
+          <Link to={`/task/${taskId}/userprofile`} className="link">
             <h5>{userName}</h5>
           </Link>
         </div>
