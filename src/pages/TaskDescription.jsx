@@ -90,9 +90,9 @@ export default function TaskDescription() {
         <button onClick={() => alert("Du har budt på denne opgave")}>
           Byd på opgaven
         </button>
-        <Link to={`/tasks/${taskId}/chat`}>
-          <button>Send besked</button>
-        </Link>
+        <button onClick={() => alert("Besked sendt til opgaveudbyderen")}>
+          Send besked
+        </button>
       </div>
 
       <div className="user-opgave">
