@@ -10,12 +10,15 @@ export default function HomePage({ setActiveClass }) {
   const [filteredTasks, setFilteredTasks] = useState([]);
   const [loading, setLoading] = useState(true); // Loading state
 
+    // Loading task from database when the component is loading
   useEffect(() => {
     const tasksRef = ref(database, "tasks");
 
     // Set loading to true before fetching data
     setLoading(true);
 
+    // Retrieves data from Firebase 
+     // Map data to an array with unique IDs for each task
     onValue(tasksRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
@@ -40,6 +43,7 @@ export default function HomePage({ setActiveClass }) {
       setLoading(false);
     });
 
+    // Cleanup function to reset tasks and filtered tasks on unmount
     return () => {
       setTasks([]);
       setFilteredTasks([]);
@@ -47,6 +51,7 @@ export default function HomePage({ setActiveClass }) {
   }, [database]);
 
   const categories = [
+    // List of categories with fitting image. 
     { name: "Håndværker", image: "/hammer.webp" },
     { name: "Havearbejde", image: "/pruning-shears.webp" },
     { name: "VVS", image: "/spanner.webp" },
