@@ -1,66 +1,86 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { getDatabase, ref, get } from "firebase/database";
-import LoadingScreen from "../components/LoadingScreen"; // Sørg for, at denne komponent er korrekt placeret
+import LoadingScreen from "../components/LoadingScreen";
 
 export default function TaskDescription() {
   const { taskId } = useParams();
   const [task, setTask] = useState(null);
-  const [profileImage, setProfileImage] = useState("/default-user.webp"); // Sæt en standard værdi
-  const [userName, setUserName] = useState("Ukendt bruger"); // Sæt en standard værdi
+  const [profileImage, setProfileImage] = useState("/default-user.webp");
+  const [userName, setUserName] = useState("Ukendt bruger");
+  const [userId, setUserId] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const database = getDatabase();
 
   useEffect(() => {
-    const taskRef = ref(database, `tasks/${taskId}`);
-
-    // Hent opgavedata
-    get(taskRef)
-      .then((snapshot) => {
+    const fetchTaskData = async () => {
+      const taskRef = ref(database, `tasks/${taskId}`);
+      try {
+        const snapshot = await get(taskRef);
         if (snapshot.exists()) {
           const taskData = snapshot.val();
           setTask(taskData);
-
-          // Hent brugerens profilbillede og navn baseret på userId, hvis den findes
           if (taskData.userId) {
-            const userRef = ref(database, `users/${taskData.userId}`);
-
-            return get(userRef).then((userSnapshot) => {
-              if (userSnapshot.exists()) {
-                const userData = userSnapshot.val();
-                setProfileImage(userData.profileImage || "/default-user.webp");
-                setUserName(userData.name || "Ukendt bruger");
-              } else {
-                console.log("Ingen data fundet for denne bruger");
-              }
-            });
+            await fetchUserData(taskData.userId);
           }
         } else {
-          console.log("Ingen data tilgængelig for denne opgave");
+          throw new Error("Opgaven blev ikke fundet.");
         }
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Fejl ved hentning af data:", error);
-      })
-      .finally(() => {
-        setLoading(false); // Indstil loading til false, når data er indlæst
-      });
+        alert("Der skete en fejl under hentning af opgave. Prøv igen senere.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    const fetchUserData = async (userId) => {
+      const userRef = ref(database, `users/${userId}`);
+      const userSnapshot = await get(userRef);
+      if (userSnapshot.exists()) {
+        const userData = userSnapshot.val();
+        setProfileImage(userData.profileImage || "/default-user.webp");
+        setUserName(userData.name || "Ukendt bruger");
+        setUserId(userId);
+      }
+    };
+
+    fetchTaskData();
   }, [database, taskId]);
 
-  if (loading) return <LoadingScreen />; // Vis loading skærm
+  if (loading) return <LoadingScreen />;
+
+  if (!task) {
+    return (
+      <div>
+        <h2>Opgaven blev ikke fundet.</h2>
+        <button onClick={() => navigate("/")}>Gå tilbage til startsiden</button>
+      </div>
+    );
+  }
 
   return (
     <main className="taskdescription">
       <div className="back-button" onClick={() => navigate(-1)}>
-        <img src="/tilbagepil.svg" alt="" className="back-button-image" />
+        <img
+          src="/tilbagepil.svg"
+          alt="Tilbage"
+          className="back-button-image"
+        />
       </div>
       <div className="task-detail">
-        {task.picture && <img src={task.picture} alt="Billede uploadet" />}
+        {task.picture && (
+          <img
+            src={task.picture}
+            alt="Billede uploadet af opgaven"
+            style={{ width: "100%", height: "auto" }} // Tilføjet stil for at sikre responsivitet
+          />
+        )}
         <h1>{task.title || "Ingen titel angivet"}</h1>
         <p>{task.description || "Ingen beskrivelse tilgængelig"}</p>
       </div>
-      <h4 className="task-dato">{task.date}</h4>
+      <h4 className="task-dato">{task.date || "Ingen dato angivet"}</h4>
       <hr className="black-line" />
 
       <div className="three-boxes-container">
@@ -82,7 +102,7 @@ export default function TaskDescription() {
         </div>
         <div className="pris-dato2">
           <img src="/location.webp" alt="Placering ikon" />
-          <h3>{task.location}</h3>
+          <h3>{task.location || "Ingen placering angivet"}</h3>
         </div>
       </div>
 
@@ -90,20 +110,26 @@ export default function TaskDescription() {
         <button onClick={() => alert("Du har budt på denne opgave")}>
           Byd på opgaven
         </button>
-        <button onClick={() => alert("Besked sendt til opgaveudbyderen")}>
-          Send besked
-        </button>
+        <Link to={`/tasks/${taskId}/chat`}>
+          <button>Send besked</button>
+        </Link>
       </div>
 
       <div className="user-opgave">
-        <Link to={`/task/${taskId}/userprofile`}>
-          <img src={profileImage} alt="Brugerprofil" />
-        </Link>
+        {userId && (
+          <Link to={`/task/${taskId}/userprofile/${userId}`}>
+            <img src={profileImage} alt="Brugerprofil" />
+          </Link>
+        )}
         <div className="user-opgave1">
           <p>Denne opgave er oprettet af</p>
-          <Link to={`/task/${taskId}/userprofile`} className="link">
+          {userId ? (
+            <Link to={`/task/${taskId}/userprofile/${userId}`} className="link">
+              <h5>{userName}</h5>
+            </Link>
+          ) : (
             <h5>{userName}</h5>
-          </Link>
+          )}
         </div>
       </div>
     </main>

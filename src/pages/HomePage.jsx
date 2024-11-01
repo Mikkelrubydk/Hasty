@@ -84,11 +84,13 @@ export default function HomePage({ setActiveClass }) {
       <div>
         <figure>
           <img src="/logo.svg" alt="Hasty logo" className="logo" />
-          <img
-            src="/notifikation.svg"
-            alt="Notification icon"
-            className="notification"
-          />
+          <Link to="/messages">
+            <img
+              src="/notifikation.svg"
+              alt="Notification icon"
+              className="notification"
+            />
+          </Link>
         </figure>
         <article>
           <h1>få opgaver løst hurtigt, eller tilbyd din hjælp på ingen tid!</h1>

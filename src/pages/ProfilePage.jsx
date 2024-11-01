@@ -180,7 +180,7 @@ export default function ProfilePage() {
 
   return (
     <section className="profile-wrapper">
-      <Link to="/tasks/messages">
+      <Link to="/messages">
         <div className="chat-button">
           <img src="/chat.webp" alt="Chat ikon" />
         </div>

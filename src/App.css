@@ -236,7 +236,7 @@ nav ul li:not(.active)::before {
 }
 
 .homepage-container h1 {
-  font-size: 25px;
+  font-size: 20px;
 }
 
 .overskrifter {
@@ -244,14 +244,14 @@ nav ul li:not(.active)::before {
 }
 
 .logo {
-  width: 250px;
+  width: 220px;
   margin-bottom: 20px;
 }
 
 .notification {
   position: absolute;
-  right: 30px;
-  top: 30px;
+  right: 20px;
+  top: 20px;
   width: 30px;
 }
 
@@ -901,6 +901,20 @@ input[type="text"]:focus {
   align-items: center;
 }
 
+.profileimage {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.profileimage p {
+  text-align: center;
+  color: var(--blue);
+  font-weight: 600;
+  margin-top: 10px;
+  font-size: 40px;
+}
+
 .profilelementer input {
   text-align: center;
   color: var(--blue);
@@ -978,6 +992,12 @@ input[type="text"]:focus {
 .profiledescription {
   display: flex;
   justify-content: center;
+}
+
+.profiledescription p {
+  width: 80%;
+  height: 125px;
+  border: none;
 }
 
 .profiledescription textarea {
@@ -1388,9 +1408,6 @@ input[type="text"]:focus {
   text-align: right;
 }
 
-.their-message {
-}
-
 .chat-input {
   margin: 0 auto;
   position: fixed;
@@ -1423,4 +1440,55 @@ input[type="text"]:focus {
 .chat-input img {
   width: 40px;
   height: 40px;
+}
+
+/* Styling af TaskMessages */
+
+.chatoversigt {
+  padding-top: 100px;
+}
+
+.chatoversigt h1 {
+  color: var(--blue);
+  font-weight: 600;
+  font-size: 40px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.chatbeskeder {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 0 auto;
+  gap: 50px;
+}
+
+.chatbeskeder div {
+  display: flex;
+  align-items: center;
+}
+
+.chatbeskeder div::before {
+  height: 10px;
+  width: 10px;
+  content: "";
+  position: absolute;
+  background-color: var(--orange);
+  left: 20px;
+  border-radius: 50%;
+}
+
+.chatbeskeder h2,
+.chatbeskeder p {
+  text-decoration: none;
+  color: var(--sort);
+}
+
+.chatbeskeder h2 {
+  font-weight: 500;
+}
+
+.chatbeskeder p {
+  font-size: 12px;
 }

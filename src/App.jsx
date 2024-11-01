@@ -9,18 +9,18 @@ import SignUpPage from "./pages/SignUpPage";
 import SignInPage from "./pages/SignInPage";
 import NavBar from "./components/NavBar";
 import "./App.css";
-import "../firebase-config"; // Sørg for, at denne fil er korrekt og importeres
+import "../firebase-config";
 import TaskDescription from "./pages/TaskDescription";
 import Chat from "./pages/Chat";
 import OtherProfilePage from "./pages/OtherProfilePage";
-import TaskMessages from "./pages/TaskMessages";
+import TaskMessages from "./pages/TaskMessages"; // Import TaskMessages
 
 export default function App() {
   const auth = getAuth();
   const [isAuth, setIsAuth] = useState(
     () => localStorage.getItem("isAuth") === "true"
   );
-  const [userId, setUserId] = useState(null); // Opretter state til bruger-ID
+  const [userId, setUserId] = useState(null);
   const [activeClass, setActiveClass] = useState(
     parseInt(localStorage.getItem("activeClass"), 10) || 0
   );
@@ -29,7 +29,7 @@ export default function App() {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setIsAuth(true);
-        setUserId(user.uid); // Gemmer brugerens ID, når de er logget ind
+        setUserId(user.uid);
         localStorage.setItem("isAuth", "true");
       } else {
         setIsAuth(false);
@@ -37,6 +37,7 @@ export default function App() {
         localStorage.removeItem("isAuth");
       }
     });
+
     return () => unsubscribe();
   }, [auth]);
 
@@ -61,15 +62,12 @@ export default function App() {
           element={<SolveTask setActiveClass={setActiveClass} />}
         />
         <Route path="/tasks/:taskId/chat" element={<Chat userId={userId} />} />
-        <Route
-          path="/tasks/messages"
-          element={<TaskMessages userId={userId} />}
-        />{" "}
-        {/* Tilføj TaskMessages */}
         <Route path="/tasks/:taskId" element={<TaskDescription />} />
+        <Route path="/messages" element={<TaskMessages userId={userId} />} />
+
         <Route
-          path="/task/:taskId/userprofile"
-          element={<OtherProfilePage userId="loggedInUserId" />}
+          path="/task/:taskId/userprofile/:userId"
+          element={<OtherProfilePage />}
         />
         <Route
           path="/profile"
