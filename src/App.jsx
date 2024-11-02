@@ -13,7 +13,7 @@ import "../firebase-config";
 import TaskDescription from "./pages/TaskDescription";
 import Chat from "./pages/Chat";
 import OtherProfilePage from "./pages/OtherProfilePage";
-import TaskMessages from "./pages/TaskMessages"; // Import TaskMessages
+import TaskMessages from "./pages/TaskMessages";
 
 export default function App() {
   const auth = getAuth();
@@ -63,8 +63,7 @@ export default function App() {
         />
         <Route path="/tasks/:taskId/chat" element={<Chat userId={userId} />} />
         <Route path="/tasks/:taskId" element={<TaskDescription />} />
-        <Route path="/messages" element={<TaskMessages userId={userId} />} />
-
+        <Route path="/messages" element={<TaskMessages />} />
         <Route
           path="/task/:taskId/userprofile/:userId"
           element={<OtherProfilePage />}
@@ -73,7 +72,7 @@ export default function App() {
           path="/profile"
           element={<ProfilePage setActiveClass={setActiveClass} />}
         />
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="*" element="/" />
       </Routes>
     </>
   );

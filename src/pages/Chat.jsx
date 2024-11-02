@@ -4,12 +4,15 @@ import { useParams, useNavigate } from "react-router-dom";
 import LoadingScreen from "../components/LoadingScreen";
 
 export default function Chat({ userId }) {
-  const { taskId, taskOwnerId } = useParams(); // Hent taskId og taskOwnerId fra URL'en
+  const { taskId } = useParams();
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const [taskOwnerId, setTaskOwnerId] = useState(null);
   const [taskOwnerName, setTaskOwnerName] = useState("Ukendt bruger");
   const [taskTitle, setTaskTitle] = useState("Opgave");
   const [profileImage, setProfileImage] = useState("/default-user.webp");
+  const [taskOwnerProfileImage, setTaskOwnerProfileImage] =
+    useState("/default-user.webp");
   const [userName, setUserName] = useState("Ukendt bruger");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -17,7 +20,7 @@ export default function Chat({ userId }) {
   const database = getDatabase();
   const navigate = useNavigate();
 
-  // Fetch task and user data
+  // Hent opgave- og brugerdata
   useEffect(() => {
     const fetchTaskData = async () => {
       try {
@@ -26,15 +29,19 @@ export default function Chat({ userId }) {
 
         if (taskSnapshot.exists()) {
           const taskData = taskSnapshot.val();
+          setTaskOwnerId(taskData.userId);
           setTaskTitle(taskData.title);
 
-          // Fetch user data of task owner
+          // Hent brugerdata for opgaveejeren
           const userSnapshot = await get(
             ref(database, `users/${taskData.userId}`)
           );
           if (userSnapshot.exists()) {
             const userData = userSnapshot.val();
             setTaskOwnerName(userData.name);
+            setTaskOwnerProfileImage(
+              userData.profileImage || "/default-user.webp"
+            ); // Sæt opgaveejers profilbillede
           } else {
             setError("Opgaveejer findes ikke.");
           }
@@ -59,7 +66,7 @@ export default function Chat({ userId }) {
         if (userSnapshot.exists()) {
           const userData = userSnapshot.val();
           setUserName(userData.name);
-          setProfileImage(userData.profileImage || "/default-user.webp");
+          setProfileImage(userData.profileImage || "/default-user.webp"); // Sæt dit profilbillede
         } else {
           setError("Brugeren findes ikke.");
         }
@@ -67,7 +74,7 @@ export default function Chat({ userId }) {
         setError("Fejl ved hentning af brugerens data.");
         console.error(error);
       } finally {
-        setLoading(false); // Ensure loading is set to false after attempts to fetch user data
+        setLoading(false); // Sørg for at loading er false efter forsøg på at hente brugerdata
       }
     };
 
@@ -75,51 +82,48 @@ export default function Chat({ userId }) {
     fetchUserData();
   }, [database, taskId, userId]);
 
-  // Listen to messages
+  // Lyt til beskeder for opgaven
   useEffect(() => {
-    if (userId && taskOwnerId) {
-      const chatId = `${taskId}_${taskOwnerId}_${userId}`; // Generer chat ID baseret på taskId og taskOwnerId
-      const messagesRef = ref(database, `chats/${chatId}`);
+    const messagesRef = ref(database, `tasks/${taskId}/messages`);
 
-      const unsubscribe = onValue(messagesRef, (snapshot) => {
+    const unsubscribe = onValue(
+      messagesRef,
+      (snapshot) => {
         if (snapshot.exists()) {
           const allMessages = Object.values(snapshot.val());
-          const filteredMessages = allMessages.filter(
-            (msg) => msg.senderId === userId || msg.receiverId === userId
-          );
-          setMessages(filteredMessages); // Opdaterer med beskeder fra den rigtige chat
+          setMessages(allMessages); // Opdater med alle beskeder for opgaven
         } else {
           setMessages([]); // Ingen beskeder
         }
-      });
+      },
+      (error) => {
+        console.error("Fejl ved hentning af beskeder:", error);
+        setError("Fejl ved hentning af beskeder.");
+      }
+    );
 
-      return () => unsubscribe(); // Ryd op ved komponent unmount
-    }
-  }, [database, userId, taskOwnerId, taskId]);
+    return () => unsubscribe(); // Ryd op ved komponent unmount
+  }, [database, taskId]);
 
-  // Handle sending messages
+  // Håndter afsendelse af beskeder
   const handleSendMessage = async () => {
-    if (newMessage.trim() !== "" && taskOwnerId && userId) {
-      const chatId = `${taskId}_${taskOwnerId}_${userId}`; // Generer chat ID baseret på taskId og taskOwnerId
-      const messageRef = ref(database, `chats/${chatId}`);
+    if (newMessage.trim() !== "") {
+      const messageRef = ref(database, `tasks/${taskId}/messages`);
       const newMessageObj = {
         senderId: userId,
-        receiverId: taskOwnerId,
         message: newMessage,
         timestamp: Date.now(),
       };
 
       try {
-        await push(messageRef, newMessageObj); // Send besked til den rigtige chat
-        setNewMessage(""); // Reset inputfelt
+        await push(messageRef, newMessageObj); // Send besked til den rigtige opgave
+        setNewMessage(""); // Nulstil inputfelt
       } catch (error) {
         setError("Fejl ved afsendelse af besked.");
         console.error(error);
       }
     } else {
-      console.warn(
-        "Besked kan ikke være tom eller brugeren kan ikke være ukendt!"
-      );
+      console.warn("Besked kan ikke være tom!");
     }
   };
 
@@ -149,7 +153,9 @@ export default function Chat({ userId }) {
           >
             <img
               src={
-                msg.senderId === userId ? profileImage : "/default-user.webp"
+                msg.senderId === userId
+                  ? profileImage // Dit eget billede
+                  : taskOwnerProfileImage // Opgaveejers billede
               }
               alt="Brugerbillede"
               className="message-user-image"
