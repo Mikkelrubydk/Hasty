@@ -1,4 +1,4 @@
-// Dette komponent er programmeret af Mikkel
+// Dette komponent er programmeret af Mikkel og Newroz
 
 import {
   createUserWithEmailAndPassword,

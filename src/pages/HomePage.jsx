@@ -1,4 +1,4 @@
-// Dette komponent er programmeret af Mikkel
+// Dette komponent er programmeret af Mikkel, Anders og Newroz
 
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -8,19 +8,19 @@ import LoadingScreen from "../components/LoadingScreen";
 export default function HomePage({ setActiveClass }) {
   const [tasks, setTasks] = useState([]);
   const database = getDatabase();
-  const [activeIcon, setActiveIcon] = useState(0); // Set the default active icon to the first category
+  const [activeIcon, setActiveIcon] = useState(0); // Indstil det aktive ikon til den første kategori som standard
   const [filteredTasks, setFilteredTasks] = useState([]);
-  const [loading, setLoading] = useState(true); // Loading state
+  const [loading, setLoading] = useState(true); // Indlæsningsstatus
 
-  // Loading task from database when the component is loading
+  // Henter opgaver fra databasen, når komponentet indlæses
   useEffect(() => {
     const tasksRef = ref(database, "tasks");
 
-    // Set loading to true before fetching data
+    // Sætter loading til true, før data hentes
     setLoading(true);
 
-    // Retrieves data from Firebase
-    // Map data to an array with unique IDs for each task
+    // Henter data fra Firebase
+    // Mapper data til et array med unikke ID'er for hver opgave
     onValue(tasksRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
@@ -30,7 +30,7 @@ export default function HomePage({ setActiveClass }) {
         }));
         setTasks(tasksArray);
 
-        // Filter tasks for the "Håndværker" category
+        // Filtrerer opgaver for "Håndværker"-kategorien
         const initialCategory = categories[0].name; // "Håndværker"
         const initialFilteredTasks = tasksArray.filter(
           (task) => task.category === initialCategory
@@ -41,11 +41,11 @@ export default function HomePage({ setActiveClass }) {
         setFilteredTasks([]);
       }
 
-      // Set loading to false after data is fetched
+      // Sætter loading til false, efter data er hentet
       setLoading(false);
     });
 
-    // Cleanup function to reset tasks and filtered tasks on unmount
+    // Oprydningsfunktion til at nulstille tasks og filteredTasks ved unmount
     return () => {
       setTasks([]);
       setFilteredTasks([]);
@@ -53,7 +53,7 @@ export default function HomePage({ setActiveClass }) {
   }, [database]);
 
   const categories = [
-    // List of categories with fitting image.
+    // Liste over kategorier med tilhørende billede
     { name: "Håndværker", image: "/hammer.webp" },
     { name: "Havearbejde", image: "/pruning-shears.webp" },
     { name: "VVS", image: "/spanner.webp" },
@@ -74,7 +74,7 @@ export default function HomePage({ setActiveClass }) {
   const handleClick = (index) => {
     setActiveIcon(index);
 
-    // Filter tasks based on the selected category
+    // Filtrerer opgaver baseret på den valgte kategori
     const selectedCategory = categories[index].name;
     const newFilteredTasks = tasks.filter(
       (task) => task.category === selectedCategory
@@ -83,7 +83,7 @@ export default function HomePage({ setActiveClass }) {
   };
 
   if (loading) {
-    return <LoadingScreen />; // Loading screen
+    return <LoadingScreen />; // Viser indlæsningsskærm
   }
 
   return (
@@ -94,7 +94,7 @@ export default function HomePage({ setActiveClass }) {
           <Link to="/messages">
             <img
               src="/notifikation.svg"
-              alt="Notification icon"
+              alt="Notifikationsikon"
               className="notification"
             />
           </Link>
@@ -105,8 +105,8 @@ export default function HomePage({ setActiveClass }) {
       </div>
       <div className="search-bar">
         <input type="text" placeholder="Søg her.."></input>
-        <img src="/search.webp" alt="Search icon" />
-        <img src="/filter.webp" alt="Filter icon" />
+        <img src="/search.webp" alt="Søgeikon" />
+        <img src="/filter.webp" alt="Filterikon" />
       </div>
 
       <div className="task-container">
@@ -126,7 +126,7 @@ export default function HomePage({ setActiveClass }) {
               <div className="task-item">
                 <div>
                   {task.picture ? (
-                    <img src={task.picture} alt="Uploaded" />
+                    <img src={task.picture} alt="Uploadet billede" />
                   ) : (
                     <p>Intet billede uploadet</p>
                   )}
@@ -180,7 +180,7 @@ export default function HomePage({ setActiveClass }) {
                 <div className="task-item">
                   <div>
                     {task.picture ? (
-                      <img src={task.picture} alt="Uploaded" />
+                      <img src={task.picture} alt="Uploadet billede" />
                     ) : (
                       <p>Intet billede uploadet</p>
                     )}
