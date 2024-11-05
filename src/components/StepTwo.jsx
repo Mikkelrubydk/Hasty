@@ -1,3 +1,5 @@
+// Dette komponent er programmeret af Anders og Mikkel
+
 export default function StepTwo({ taskData, handleInputChange }) {
   return (
     <section className="step2section">

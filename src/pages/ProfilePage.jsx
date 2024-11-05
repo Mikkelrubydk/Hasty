@@ -1,3 +1,5 @@
+// Dette komponent er programmeret af Anders og Mikkel
+
 import React, { useEffect, useState } from "react";
 import { getAuth, signOut } from "firebase/auth";
 import { getDatabase, ref, get, set } from "firebase/database";

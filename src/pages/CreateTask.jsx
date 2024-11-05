@@ -1,3 +1,5 @@
+// Dette komponent er programmeret af Anders og Mikkel
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getDatabase, ref, set, push } from "firebase/database";

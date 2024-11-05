@@ -1,3 +1,5 @@
+// Dette komponent er programmeret af Mikkel
+
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { Link } from "react-router-dom";

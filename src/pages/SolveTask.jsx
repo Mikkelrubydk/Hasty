@@ -1,3 +1,5 @@
+// Dette komponent er programmeret af Anders og Mikkel
+
 import { useEffect, useState } from "react";
 import { getDatabase, ref, onValue } from "firebase/database"; // Importer Firebase-funktioner
 import { Link } from "react-router-dom";

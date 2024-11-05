@@ -1,3 +1,5 @@
+// Dette komponent er programmeret af Mikkel
+
 import React, { useEffect, useState } from "react";
 import "../App.css";
 

@@ -1,3 +1,5 @@
+// Dette komponent er programmeret af Anders, Newroz og Mikkel
+
 import { useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";

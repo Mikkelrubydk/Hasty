@@ -1,3 +1,5 @@
+// Dette komponent er programmeret af Anders og Mikkel
+
 import React, { useEffect, useState } from "react";
 import { Navigate, useParams, useNavigate } from "react-router-dom"; // Import useNavigate
 import { getAuth } from "firebase/auth";

@@ -1,3 +1,5 @@
+// Dette komponent er programmeret af Mikkel
+
 const StarRating = ({ rating, reviews }) => {
   const totalStars = 5;
 

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+// Dette komponent er programmeret af Anders og Mikkel
 
 export default function StepFour({ taskData, handleInputChange }) {
   return (

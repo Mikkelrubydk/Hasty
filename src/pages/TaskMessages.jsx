@@ -1,3 +1,5 @@
+// Dette komponent er programmeret af Mikkel
+
 import { useEffect, useState } from "react";
 import { getDatabase, ref, onValue } from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";

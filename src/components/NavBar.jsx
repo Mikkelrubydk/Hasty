@@ -1,3 +1,5 @@
+// Dette komponent er programmeret af Mikkel
+
 import { Link } from "react-router-dom";
 
 export default function NavBar({ activeClass, setActiveClass }) {

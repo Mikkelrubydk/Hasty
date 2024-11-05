@@ -1,3 +1,5 @@
+// Dette komponent er programmeret af Anders og Mikkel
+
 import { useState } from "react";
 
 // Kategorier med ikoner

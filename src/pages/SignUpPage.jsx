@@ -1,3 +1,5 @@
+// Dette komponent er programmeret af Mikkel
+
 import {
   createUserWithEmailAndPassword,
   getAuth,

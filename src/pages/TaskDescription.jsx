@@ -1,3 +1,5 @@
+// Dette komponent er programmeret af Anders og Mikkel
+
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { getDatabase, ref, get } from "firebase/database";
@@ -110,7 +112,7 @@ export default function TaskDescription() {
         <button onClick={() => alert("Du har budt på denne opgave")}>
           Byd på opgaven
         </button>
-        <Link to={`/tasks/${taskId}/chat`}>
+        <Link to={`/tasks/${taskId}/chat`} className="link">
           <button>Send besked</button>
         </Link>
       </div>

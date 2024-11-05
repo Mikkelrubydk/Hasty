@@ -1,4 +1,4 @@
-import { useState } from "react";
+// Dette komponent er programmeret af Anders og Mikkel
 
 export default function StepFive({
   taskData,

@@ -1,3 +1,5 @@
+// Dette komponent er programmeret af Mikkel
+
 import { useEffect, useState } from "react";
 import { getDatabase, ref, push, onValue, get } from "firebase/database";
 import { useParams, useNavigate } from "react-router-dom";
@@ -52,6 +54,7 @@ export default function Chat({ userId }) {
         setError("Fejl ved hentning af opgave data.");
         console.error(error);
       }
+      setLoading(false);
     };
 
     const fetchUserData = async () => {
