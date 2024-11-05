@@ -2,20 +2,22 @@ import React, { useEffect, useState } from "react";
 import { getAuth, signOut } from "firebase/auth";
 import { getDatabase, ref, get, set } from "firebase/database";
 import placeholderImage from "/default-user.webp";
-import turtleImage from "/turtle.png"; // Image for Turtle
-import elephantImage from "/elephant.png"; // Image for Elephant
-import catImage from "/cat.png"; // Image for Cat
-import dogImage from "/dog.png"; // Image for Dog
-import hareImage from "/hare.png"; // Image for Hare
+import turtleImage from "/turtle.png";
+import elephantImage from "/elephant.png";
+import catImage from "/cat.png";
+import dogImage from "/dog.png";
+import hareImage from "/hare.png";
 import LoadingScreen from "../components/LoadingScreen";
 import StarRating from "../components/StarRating";
 import { Link, Navigate } from "react-router-dom";
 
 export default function ProfilePage() {
+  // Firebase hentning af brugere
   const auth = getAuth();
   const user = auth.currentUser;
   const database = getDatabase();
 
+  // useStates
   const [name, setName] = useState("");
   const [profileImage, setProfileImage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -23,11 +25,11 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(true);
   const [creationDate, setCreationDate] = useState("");
   const [profileDescription, setProfileDescription] = useState("");
-  const [isEditing, setIsEditing] = useState(false); // State for editing mode
+  const [isEditing, setIsEditing] = useState(false);
   const [completedTasks, setCompletedTasks] = useState(0);
   const [rank, setRank] = useState("");
   const [rankImage, setRankImage] = useState("");
-  const [rankDescriptionVisible, setRankDescriptionVisible] = useState(false); // New state for rank description visibility
+  const [rankDescriptionVisible, setRankDescriptionVisible] = useState(false);
   const [rankDescription, setRankDescription] = useState("");
 
   const rankImages = {
@@ -40,11 +42,11 @@ export default function ProfilePage() {
 
   const rankDescriptions = {
     Skilpadde:
-      "Du er skilpadde rank, stadig begynder. Udfør flere opgaver for at stige i rank",
+      "Du er skilpadde-rank, stadig begynder. Udfør flere opgaver for at stige i rank",
     Elefant:
-      "Du på vej opad, nu elefant rank! Udfør flere opgaver for at stige i rank",
-    Kat: "Du er rank kat!  Fortsæt med at udføre opgaver for at nå næste niveau",
-    Hund: "Du er rank hund, du er der næsten! Udfør flere opgaver for at komme i højeste rank",
+      "Du på vej opad, nu elefant-rank! Udfør flere opgaver for at stige i rank",
+    Kat: "Tillykke du har opnået katte-rank!  Fortsæt med at udføre opgaver for at nå næste niveau",
+    Hund: "Tillykke du har opnået hunde-rank, du er der næsten! Udfør flere opgaver for at komme i højeste rank",
     Hare: "Tillykke du er nu en ægte Hasty-Hare",
   };
 

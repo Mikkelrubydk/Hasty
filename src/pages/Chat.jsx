@@ -66,7 +66,7 @@ export default function Chat({ userId }) {
         if (userSnapshot.exists()) {
           const userData = userSnapshot.val();
           setUserName(userData.name);
-          setProfileImage(userData.profileImage || "/default-user.webp"); // Sæt dit profilbillede
+          setProfileImage(userData.profileImage || "/default-user.webp");
         } else {
           setError("Brugeren findes ikke.");
         }
@@ -74,7 +74,7 @@ export default function Chat({ userId }) {
         setError("Fejl ved hentning af brugerens data.");
         console.error(error);
       } finally {
-        setLoading(false); // Sørg for at loading er false efter forsøg på at hente brugerdata
+        setLoading(false); // Sørg for at loading er false efter færdig indlæsning af brugerdata
       }
     };
 

@@ -61,9 +61,7 @@ export default function CreateTask({ setActiveClass }) {
       !location ||
       !picture
     ) {
-      alert(
-        `Alle felter skal udfyldes. ${!title} ${!description} ${!category} ${!price} ${!date} ${!location} ${!picture}`
-      );
+      alert(`Alle felter skal udfyldes.`);
       return false;
     }
     return true;
