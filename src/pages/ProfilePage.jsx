@@ -165,7 +165,7 @@ export default function ProfilePage() {
 
   useEffect(() => {
     const calculateRank = (tasksCompleted) => {
-      if (tasksCompleted <= 5) return "Skildpadde";
+      if (tasksCompleted <= 5) return "Skilpadde";
       if (tasksCompleted <= 10) return "Elefant";
       if (tasksCompleted <= 15) return "Kat";
       if (tasksCompleted <= 20) return "Hund";
