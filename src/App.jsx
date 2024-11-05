@@ -1,7 +1,11 @@
-// Dette komponent er programmeret af Anders, Newroz og Mikkel
-
 import { useEffect, useState } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import HomePage from "./pages/HomePage";
 import CreateTask from "./pages/CreateTask";
@@ -19,6 +23,8 @@ import TaskMessages from "./pages/TaskMessages";
 
 export default function App() {
   const auth = getAuth();
+  const navigate = useNavigate();
+  const location = useLocation(); // Tilføj location for at få adgang til nuværende rute
   const [isAuth, setIsAuth] = useState(
     () => localStorage.getItem("isAuth") === "true"
   );
@@ -33,6 +39,14 @@ export default function App() {
         setIsAuth(true);
         setUserId(user.uid);
         localStorage.setItem("isAuth", "true");
+
+        // Omdiriger kun, hvis brugeren er på login- eller signup-siden
+        if (
+          location.pathname === "/sign-in" ||
+          location.pathname === "/sign-up"
+        ) {
+          navigate("/");
+        }
       } else {
         setIsAuth(false);
         setUserId(null);
@@ -41,7 +55,7 @@ export default function App() {
     });
 
     return () => unsubscribe();
-  }, [auth]);
+  }, [auth, navigate, location]);
 
   useEffect(() => {
     localStorage.setItem("activeClass", activeClass);
@@ -74,7 +88,7 @@ export default function App() {
           path="/profile"
           element={<ProfilePage setActiveClass={setActiveClass} />}
         />
-        <Route path="*" element="/" />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </>
   );
