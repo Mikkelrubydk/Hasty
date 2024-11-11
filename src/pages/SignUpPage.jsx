@@ -1,3 +1,5 @@
+import Logo from "../../public/logo.svg";
+
 // Dette komponent er programmeret af Mikkel og Newroz
 
 import {
@@ -77,7 +79,7 @@ export default function SignUpPage() {
   return (
     <section className="login-form">
       <form onSubmit={handleSignUp}>
-        <img src="logo.svg" className="logo" alt="Hasty Logo" />
+        <img src={Logo} className="logo" alt="Hasty Logo" />
         <input
           type="text"
           value={name}
