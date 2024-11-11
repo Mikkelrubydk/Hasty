@@ -186,7 +186,7 @@ export default function ProfilePage() {
     <section className="profile-wrapper">
       <Link to="/messages">
         <div className="chat-button">
-          <img src="/chat.webp" alt="Chat ikon" />
+          <img src="./chat.webp" alt="Chat ikon" />
         </div>
       </Link>
       <div className="profile-page">

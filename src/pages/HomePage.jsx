@@ -54,21 +54,21 @@ export default function HomePage({ setActiveClass }) {
 
   const categories = [
     // Liste over kategorier med tilhørende billede
-    { name: "Håndværker", image: "/hammer.webp" },
-    { name: "Havearbejde", image: "/pruning-shears.webp" },
-    { name: "VVS", image: "/spanner.webp" },
-    { name: "Flytning", image: "/box.webp" },
-    { name: "Rengøring", image: "/cleaning.webp" },
-    { name: "Servering", image: "/serving-dish.webp" },
-    { name: "Mekaniker", image: "/gears.webp" },
-    { name: "Cykel", image: "/wheel.webp" },
-    { name: "Maling", image: "/paint-brush.webp" },
-    { name: "Tech", image: "/laptop.webp" },
-    { name: "EL-arbejde", image: "/wire.webp" },
-    { name: "Begivenhed", image: "/event.webp" },
-    { name: "Levering", image: "/laptop.webp" },
-    { name: "Vinduer", image: "/window.webp" },
-    { name: "Andet", image: "/question.webp" },
+    { name: "Håndværker", image: "./hammer.webp" },
+    { name: "Havearbejde", image: "./pruning-shears.webp" },
+    { name: "VVS", image: "./spanner.webp" },
+    { name: "Flytning", image: "./box.webp" },
+    { name: "Rengøring", image: "./cleaning.webp" },
+    { name: "Servering", image: "./serving-dish.webp" },
+    { name: "Mekaniker", image: "./gears.webp" },
+    { name: "Cykel", image: "./wheel.webp" },
+    { name: "Maling", image: "./paint-brush.webp" },
+    { name: "Tech", image: "./laptop.webp" },
+    { name: "EL-arbejde", image: "./wire.webp" },
+    { name: "Begivenhed", image: "./event.webp" },
+    { name: "Levering", image: "./laptop.webp" },
+    { name: "Vinduer", image: "./window.webp" },
+    { name: "Andet", image: "./question.webp" },
   ];
 
   const handleClick = (index) => {
