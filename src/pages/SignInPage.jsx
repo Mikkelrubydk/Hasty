@@ -39,7 +39,7 @@ export default function SignInPage() {
   return (
     <section className="login-form">
       <form onSubmit={signIn}>
-        <img src="logo.svg" className="logo" alt="Hasty Logo" />
+        <img src="./logo.png" className="logo" alt="Hasty Logo" />
         <input type="email" name="mail" placeholder="Mail" required />
         <input type="password" name="password" placeholder="Kodeord" required />
         <p className="text-error">{errorMessage}</p>
