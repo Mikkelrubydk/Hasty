@@ -4,21 +4,22 @@ import { useState } from "react";
 
 // Kategorier med ikoner
 const categories = [
-  { name: "Håndværker", image: "/hammer.webp" },
-  { name: "Havearbejde", image: "/pruning-shears.webp" },
-  { name: "VVS", image: "/spanner.webp" },
-  { name: "Flytning", image: "/box.webp" },
-  { name: "Rengøring", image: "/cleaning.webp" },
-  { name: "Servering", image: "/serving-dish.webp" },
-  { name: "Mekaniker", image: "/gears.webp" },
-  { name: "Cykel", image: "/wheel.webp" },
-  { name: "Maling", image: "/paint-brush.webp" },
-  { name: "Tech", image: "/laptop.webp" },
-  { name: "EL-arbejde", image: "/wire.webp" },
-  { name: "Begivenhed", image: "/event.webp" },
-  { name: "Levering", image: "/shipped.webp" },
-  { name: "Vinduer", image: "/window.webp" },
-  { name: "Andet", image: "/question.webp" },
+  // Liste over kategorier med tilhørende billede
+  { name: "Håndværker", image: "./hammer.webp" },
+  { name: "Havearbejde", image: "./pruning-shears.webp" },
+  { name: "VVS", image: "./spanner.webp" },
+  { name: "Flytning", image: "./box.webp" },
+  { name: "Rengøring", image: "./cleaning.webp" },
+  { name: "Servering", image: "./serving-dish.webp" },
+  { name: "Mekaniker", image: "./gears.webp" },
+  { name: "Cykel", image: "./wheel.webp" },
+  { name: "Maling", image: "./paint-brush.webp" },
+  { name: "Tech", image: "./laptop.webp" },
+  { name: "EL-arbejde", image: "./wire.webp" },
+  { name: "Begivenhed", image: "./event.webp" },
+  { name: "Levering", image: "./laptop.webp" },
+  { name: "Vinduer", image: "./window.webp" },
+  { name: "Andet", image: "./question.webp" },
 ];
 
 export default function StepOne({ handleCategoryChange }) {
