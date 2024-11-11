@@ -24,7 +24,7 @@ import TaskMessages from "./pages/TaskMessages";
 export default function App() {
   const auth = getAuth();
   const navigate = useNavigate();
-  const location = useLocation(); // Tilføj location for at få adgang til nuværende rute
+  const location = useLocation(); // Nuværende rute
   const [isAuth, setIsAuth] = useState(
     () => localStorage.getItem("isAuth") === "true"
   );
