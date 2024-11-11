@@ -4,11 +4,9 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx"; // Ensure App.jsx is also in the src folder
 import "./index.css";
 
-const basename = import.meta.env.MODE === "development" ? "/" : "/Hasty/";
-
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter basename={basename}>
+    <BrowserRouter basename={import.meta.env.DEV ? "/" : "/Hasty/"}>
       <App />
     </BrowserRouter>
   </StrictMode>
