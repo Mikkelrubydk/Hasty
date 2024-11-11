@@ -66,7 +66,7 @@ export default function TaskDescription() {
     <main className="taskdescription">
       <div className="back-button" onClick={() => navigate(-1)}>
         <img
-          src="/tilbagepil.svg"
+          src="./tilbagepil.svg"
           alt="Tilbage"
           className="back-button-image"
         />
@@ -99,11 +99,11 @@ export default function TaskDescription() {
 
       <div className="pris-dato">
         <div className="pris-dato1">
-          <img src="/money.webp" alt="Pris ikon" />
+          <img src="./money.webp" alt="Pris ikon" />
           <h3>{task.price ? `${task.price} kr.` : "Ingen pris angivet"}</h3>
         </div>
         <div className="pris-dato2">
-          <img src="/location.webp" alt="Placering ikon" />
+          <img src="./location.webp" alt="Placering ikon" />
           <h3>{task.location || "Ingen placering angivet"}</h3>
         </div>
       </div>

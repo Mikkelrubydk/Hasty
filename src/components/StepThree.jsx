@@ -51,7 +51,7 @@ export default function StepThree({ taskData, handleInputChange }) {
             className={`boks-stepthree ${activeIcon === 0 ? "active" : ""}`}
             onClick={() => setActiveIcon(0)}
           >
-            <img src="/haster.webp" alt="Fast clock icon" />
+            <img src="./haster.webp" alt="Fast clock icon" />
           </div>
           <p className="undertekst-stepthree">Hurtigst muligt</p>
         </div>
@@ -61,7 +61,7 @@ export default function StepThree({ taskData, handleInputChange }) {
             className={`boks-stepthree ${activeIcon === 1 ? "active" : ""}`}
             onClick={() => setActiveIcon(1)}
           >
-            <img src="/calender.webp" alt="Calender icon" />
+            <img src="./calender.webp" alt="Calender icon" />
           </div>
           <p className="undertekst-stepthree">Specifik dato</p>
         </div>
@@ -70,7 +70,7 @@ export default function StepThree({ taskData, handleInputChange }) {
       <div className="adresse-div">
         <h4>Adresse</h4>
         <div className="adresse-boks">
-          <img src="/location.webp" alt="Location pin icon" />
+          <img src="./location.webp" alt="Location pin icon" />
           <input
             type="text"
             placeholder="Skriv her"
@@ -83,7 +83,7 @@ export default function StepThree({ taskData, handleInputChange }) {
       <div className="dato-div">
         <h4>Vælg Dato</h4>
         <div className="dato-boks">
-          <img src="/calender.webp" alt="Calender icon" />
+          <img src="./calender.webp" alt="Calender icon" />
           <DatePicker
             selected={startDate}
             onChange={(date) => setStartDate(date)}

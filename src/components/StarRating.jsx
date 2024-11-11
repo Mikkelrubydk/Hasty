@@ -13,11 +13,11 @@ const StarRating = ({ rating, reviews }) => {
           <span key={index} className="star">
             {ratingValue <= rating ? (
               <span className="filled-star">
-                <img src="/filledstar.svg" alt="Udfyldt stjerne" />
+                <img src="./filledstar.svg" alt="Udfyldt stjerne" />
               </span>
             ) : (
               <span className="empty-star">
-                <img src="/emptystar.svg" alt="Tom stjerne" />
+                <img src="./emptystar.svg" alt="Tom stjerne" />
               </span>
             )}
           </span>

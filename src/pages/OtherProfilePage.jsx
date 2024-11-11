@@ -127,7 +127,7 @@ export default function OtherProfilePage() {
       <div className="back-button" onClick={() => navigate(-1)}>
         {" "}
         {/* Opdateret her */}
-        <img src="/tilbagepil.svg" alt="" className="back-button-image" />
+        <img src="./tilbagepil.svg" alt="" className="back-button-image" />
       </div>
       <div className="profile-page">
         {loading ? (

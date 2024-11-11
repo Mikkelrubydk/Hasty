@@ -90,7 +90,7 @@ export default function TaskMessages() {
     <main className="chatoversigt">
       <div className="back-button" onClick={() => navigate(-1)}>
         <img
-          src="/tilbagepil.svg"
+          src="./tilbagepil.svg"
           alt="Tilbage"
           className="back-button-image"
         />

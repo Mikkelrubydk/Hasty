@@ -90,10 +90,10 @@ export default function HomePage({ setActiveClass }) {
     <section className="homepage-container">
       <div>
         <figure>
-          <img src="/logo.svg" alt="Hasty logo" className="logo" />
+          <img src="./logo.svg" alt="Hasty logo" className="logo" />
           <Link to="/messages">
             <img
-              src="/notifikation.svg"
+              src="./notifikation.svg"
               alt="Notifikationsikon"
               className="notification"
             />
@@ -105,8 +105,8 @@ export default function HomePage({ setActiveClass }) {
       </div>
       <div className="search-bar">
         <input type="text" placeholder="Søg her.."></input>
-        <img src="/search.webp" alt="Søgeikon" />
-        <img src="/filter.webp" alt="Filterikon" />
+        <img src="./search.webp" alt="Søgeikon" />
+        <img src="./filter.webp" alt="Filterikon" />
       </div>
 
       <div className="task-container">
