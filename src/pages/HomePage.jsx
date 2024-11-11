@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getDatabase, ref, onValue } from "firebase/database";
 import LoadingScreen from "../components/LoadingScreen";
-import Logo from "/logo.svg";
 
 export default function HomePage({ setActiveClass }) {
   const [tasks, setTasks] = useState([]);
