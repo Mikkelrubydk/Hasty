@@ -175,7 +175,7 @@ export default function CreateTask({ setActiveClass }) {
       )}
       {step > 1 && (
         <button className="previousbtn" onClick={() => setStep(step - 1)}>
-          <img src="/tilbagepil.svg" alt="Tilbage Knap" />
+          <img src="./tilbagepil.svg" alt="Tilbage Knap" />
         </button>
       )}
       {step === totalSteps && (
