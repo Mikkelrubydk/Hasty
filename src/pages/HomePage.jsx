@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getDatabase, ref, onValue } from "firebase/database";
 import LoadingScreen from "../components/LoadingScreen";
-import Logo from "../../public/logo.svg";
+import Logo from "/logo.svg";
 
 export default function HomePage({ setActiveClass }) {
   const [tasks, setTasks] = useState([]);
@@ -91,7 +91,7 @@ export default function HomePage({ setActiveClass }) {
     <section className="homepage-container">
       <div>
         <figure>
-          <img src={Logo} alt="Hasty logo" className="logo" />
+          <img src="./logo.svg" alt="Hasty logo" className="logo" />
           <Link to="/messages">
             <img
               src="./notifikation.svg"
